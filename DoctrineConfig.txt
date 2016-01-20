@@ -1,0 +1,93 @@
+https://github.com/doctrine/DoctrineORMModule
+
+-----------------------------------------------------------------------------------------------------
+
+--> composer.phar require doctrine/doctrine-orm-module
+
+
+-----------------------------------------------------------------------------------------------------
+
+'doctrine' => array(
+        'driver' => array(
+            __NAMESPACE__ . '_driver' => array(
+                'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
+                'cache' => 'array',
+                'paths' => array(__DIR__ . '/../src/' . __NAMESPACE__ . '/Entity')
+            ),
+            'orm_default' => array(
+                'drivers' => array(
+                    __NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver'
+                )
+            )
+        )
+),
+
+
+-----------------------------------------------------------------------------------------------------
+
+	return array(
+    'doctrine' => array(
+        'connection' => array(           
+            'orm_default' => array(
+                'driverClass' => 'Doctrine\DBAL\Driver\PDOMySql\Driver',
+                'params' => array(
+                    'host'     => 'localhost',
+                    'port'     => '3306',
+                    'user'     => 'root',
+                    'password' => '',
+                    'dbname'   => '',
+                )
+            )
+        )
+    ),
+	'authentication' => array(
+            'orm_default' => array(
+                'object_manager' => 'Doctrine\ORM\EntityManager',
+                'identity_class' => 'Users\Entity\User',
+                'identity_property' => 'user_name',
+                'credential_property' => 'user_password',
+            ),
+        ),
+);
+
+
+-----------------------------------------------------------------------------------------------------
+
+'DoctrineModule',
+'DoctrineORMModule',
+
+-----------------------------------------------------------------------------------------------------
+
+
+public function getServiceConfig()
+    {
+        return array(
+            'factories' => array(
+                'Zend\Authentication\AuthenticationService' => function($serviceManager) {
+                    // If you are using DoctrineORMModule:
+                    return $serviceManager->get('doctrine.authenticationservice.orm_default');
+
+                    // If you are using DoctrineODMModule:
+                    return $serviceManager->get('doctrine.authenticationservice.odm_default');
+                }
+            )
+        );
+    }
+	
+	-----------------------------------------------------------------------------------------------------
+	
+	/*if(!$this->identity())
+        {            
+            $adapter = $this->getAuth()->getAdapter();
+            $adapter->setIdentityValue("fel486"); // Usuário
+            $adapter->setCredentialValue("felipe"); // Senha
+            
+            $success = $this->getAuth()->authenticate($adapter);
+            
+            if($success->isValid())
+            {
+                echo "success";
+                $this->auth->getStorage()->write($success->getIdentity());
+                return;
+            }
+        }*/
