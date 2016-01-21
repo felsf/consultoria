@@ -18,4 +18,11 @@ class IndexController extends AbstractActionController
     {
         return new ViewModel();
     }
+
+    public function ajaxAction()
+    {
+    	$this->layout('layout/ajax_layout');
+    	echo "Pergunta ID ".$this->params('id')." - Sua Resposta Foi: \"".$this->getRequest()->getPost('texto')."\"";
+    	return new ViewModel();
+    }
 }

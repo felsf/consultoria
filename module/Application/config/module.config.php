@@ -24,6 +24,18 @@ return array(
             // new controllers and actions without needing to create a new
             // module. Simply drop new controllers in, and you can access them
             // using the path /application/:controller/:action
+            'ajax' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/ajax/:id/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Index',
+                        'action'        => 'ajax',
+                    ),
+                ),
+            ),
+
             'application' => array(
                 'type'    => 'Literal',
                 'options' => array(
@@ -33,7 +45,8 @@ return array(
                         'controller'    => 'Index',
                         'action'        => 'index',
                     ),
-                ),
+                ),               
+
                 'may_terminate' => true,
                 'child_routes' => array(
                     'default' => array(

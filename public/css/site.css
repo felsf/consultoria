@@ -12,17 +12,43 @@ body
 {
 	color: white;
 	text-decoration: none;
-	font-size: 22px;
+	font-size: 14px;
 	font-family: 'Raleway', sans-serif;
+}
+
+.carousel-img
+{
+	max-height: 500px!important; 
+	width: 100%;
+}
+
+.news-font
+{
+	font-size: 14px;
+	font-family: 'Raleway', sans-serif;
+	word-wrap: break-word!important;
+	text-align: justify!important;
 }
 
 .topbar-item:hover
 {
-	color: #53DB85!important;
+	color: #2cbb0f!important;
 }
 
 .sidebar-item
 {
 	text-align: center; 
 	text-decoration: none!important;
+}
+
+@font-face {
+  font-family: 'Ailerons-Regular';
+  src: url("<?= $this->basePath('img/2'); ?>");
+  src: url('Ailerons-Regular.eot?#iefix') format('embedded-opentype'),
+       url('Ailerons-Regular.woff2') format('woff2'),
+       url('Ailerons-Regular.woff') format('woff'),
+       url('Ailerons-Regular.ttf') format('truetype'),
+       url('Ailerons-Regular.svg#Ailerons-Regular') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
