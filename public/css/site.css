@@ -1,3 +1,8 @@
+body
+{
+	background-color: #fff;
+}
+
 #topbar
 {
 	background-color: #219AC2;
@@ -8,4 +13,16 @@
 	color: white;
 	text-decoration: none;
 	font-size: 22px;
+	font-family: 'Raleway', sans-serif;
+}
+
+.topbar-item:hover
+{
+	color: #53DB85!important;
+}
+
+.sidebar-item
+{
+	text-align: center; 
+	text-decoration: none!important;
 }
