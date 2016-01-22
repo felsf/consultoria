@@ -89,3 +89,34 @@ body
   font-weight: normal;
   font-style: normal;
 }
+
+@font-face {
+  font-family: 'Vonique 92 Regular';
+  src: url('Vonique 92 Regular.eot');
+  src: url('Vonique 92 Regular.eot?#iefix') format('embedded-opentype'),
+       url('Vonique 92 Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Vonique92';
+  src: url('Vonique92.woff') format('woff'),
+       url('Vonique92.ttf') format('truetype'),
+       url('Vonique92.svg#Vonique92') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'CreativeType';
+  src: url('CreativeType.eot');
+  src: url('CreativeType.eot?#iefix') format('embedded-opentype'),
+       url('CreativeType.woff2') format('woff2'),
+       url('CreativeType.woff') format('woff'),
+       url('CreativeType.ttf') format('truetype'),
+       url('CreativeType.svg#CreativeType') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
