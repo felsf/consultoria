@@ -509,6 +509,7 @@ p {
   .lead {
     font-size: 21px;
   }
+   
 }
 
 small,
@@ -810,7 +811,7 @@ pre code {
 
 @media (min-width: 768px) {
   .container {
-    width: 750px;
+    width: 750px;    
   }
 }
 
@@ -822,8 +823,18 @@ pre code {
 
 @media (min-width: 1200px) {
   .container {
-    width: 1170px;
+    width: 1170px;    
   }
+}
+
+@media(max-width: 400px)
+{
+    .container
+    {
+      padding-top: 0!important;  
+      padding-left: 0!important;
+      text-align: center;
+    }
 }
 
 .row {
