@@ -81,6 +81,7 @@
                                                              
                                 <ul class="dropdown-menu">                                    
                                     <li><a href="<?php echo $this->url('users'); ?>">Controle de Usuários <span style="color: green" class="glyphicon glyphicon-user"></span></a></li>
+                                    <li><a href="<?php echo $this->url('news'); ?>">Controle de Notícias <span style="color: #3399ff" class="fa fa-newspaper-o"></span></a></li>
                                     <li><a href="<?php echo $this->url('users-logout'); ?>">Sair <span style="color: red" class="glyphicon glyphicon-remove"></span></a></li>
                                 </ul>
                             </span>
@@ -135,9 +136,7 @@
 
      <hr>      
     
-    <body onLoad="">
-        
-         <?= $this->content; ?> 
+    <body onLoad="">         
         
         <div class="col-md-2">           
             <div id="sidebar" role="navigation">           
@@ -147,9 +146,8 @@
             </div>         
         </div><!--/span-->
         
-         <div class="container-fluid">      
+               
       
-        
         
         <div class="col-md-7">   
             
@@ -157,60 +155,18 @@
             <?= $this->flashMessenger()->render('info', array('alert', 'alert-info')); ?>
             <?= $this->flashMessenger()->render('error', array('alert', 'alert-danger')); ?>
                   
-            <div class="news-title">Notícias Relacionadas a Direito Previdenciário</div>
-            
-            <div class="container-fluid news-container">                
-                <p>Postada em 21/01/2016 as 07:52pm <span class="glyphicon glyphicon-time"></span></p>
-                
-                <br>
-                
-                <div class="news-font">
-                    Anualmente a Receita Federal define, por meio de parâmetros, quais as Pessoas Físicas e Jurídicas que estarão sujeitas ao acompanhamento diferenciado da fiscalização fazendária. As regras estão em três normas, a saber: a) · Portaria RFB nº 641, de 11 de maio de 2015; b) Portaria RFB nº 1.754, de 24 de dezembro de 2015 (Pessoas Físicas Diferenciadas) e c) Portaria RFB nº 1.755, de 24 de dezembro de 2015 (Pessoas Jurídicas Diferenciadas). Read More »
-                </div> 
-            </div>            
-            <hr>               
+            <?php echo $this->content; ?>
 
-            <div class="news-title">Another News from Website</div>
-                <div class="container-fluid news-container">
-                        <p>Postada em 20/01/2016 as 11:52am <span class="glyphicon glyphicon-time"></span></p>                
-                <br>
+        </div>   
 
-                    <div class="news-font">
-                        Anualmente a Receita Federal define, por meio de parâmetros, quais as Pessoas Físicas e Jurídicas que estarão sujeitas ao acompanhamento diferenciado da fiscalização fazendária. As regras estão em três normas, a saber: a) · Portaria RFB nº 641, de 11 de maio de 2015; b) Portaria RFB nº 1.754, de 24 de dezembro de 2015 (Pessoas Físicas Diferenciadas) e c) Portaria RFB nº 1.755, de 24 de dezembro de 2015 (Pessoas Jurídicas Diferenciadas). Read More »
-                    </div>
-                </div>
-                
-            <br><br><br><br>
-            <hr>
-
-            <div class="container-fluid"> <!-- Perguntas e Respostas -->                       
-                <div class="panel" style="max-width: 400px;">
-                    <div class="panel-heading" style="background-color: #4a685c!important">
-                        <center>
-                            <div class="questions-title">Perguntas e Respostas <span class="glyphicon glyphicon-question-sign"></span></div>
-                        </center>
-                    </div>
-                    
-                    <div class="panel-body questions-body">
-                                    <p>O usuário Felipe <span class="glyphicon glyphicon-user"></span> fez uma pergunta <span class="glyphicon glyphicon-question-sign"></span> - Em: 20/01/2016 as 10:04pm <span class="glyphicon glyphicon-time"></span></b> - <a data-toggle="modal" data-target="#resposta" href="#">Visualizar Resposta</a> <span class="glyphicon glyphicon-ok"></span></p> 
-                                    <p>O usuário Welington <span class="glyphicon glyphicon-user"></span> fez uma pergunta <span class="glyphicon glyphicon-question-sign"></span> - Em: 21/01/2016 as 10:00pm <span class="glyphicon glyphicon-time"></span></b> - <a href="#">Visualizar Resposta</a> <span class="glyphicon glyphicon-ok"></span></p>
-                                    <p>O usuário Marcos <span class="glyphicon glyphicon-user"></span> fez uma pergunta <span class="glyphicon glyphicon-question-sign"></span> - Em: 21/01/2016 as 07:00am <span class="glyphicon glyphicon-time"></span></b> - <span style="color: red">Resposta Não Disponível</span> <span class="glyphicon glyphicon-remove"></span></p>
-                    </div>
-                    <div class="panel-footer"></div>
-                    </div>                        
-                </div>                        
-            </div>   
-
-        </div><!-- col-md-7 geral -->
-    
-   
-
-          <div class="col-md-3">         
+         <div class="col-md-3">         
               <div class="container-fluid">                   
                 <div id="sidebar" role="navigation">           
                   <ul class="nav nav-sidebar">
                     
-                        <li style="word-wrap: break-word!important; margin: 0" class="active"><a style="text-align: center; text-decoration: none!important; word-wrap: break-word" href="#">Patrocinadores</a></li>
+                        <li style="word-wrap: break-word!important; margin: 0" class="active">
+                            <a style="text-align: center; text-decoration: none!important; word-wrap: break-word" href="#">Patrocinadores</a>
+                         </li>
 
                         <li></li>                        
 
@@ -221,37 +177,9 @@
                   </ul>                
               </div>   
             </div>
-         </div>       
-          
-            
-    <div class="modal fade" id="resposta">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div style="float: right"><a href="#" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></div></a>
-                    <center><h2>Pergunta do Usuário <b>Felipe</b> <span class="glyphicon glyphicon-question-sign"></span>  </h2></center>
-                </div>
-                <div class="modal-body">
-                    <center><h3>Pergunta:</h3></center><hr>
-                    <p>TesteTesteTesteTesteTesteTesteTesteTesteTesteTesteTesteTesteTesteTesteTeste ?</p>
-                    <p>Autor: Felipe <span class="glyphicon glyphicon-user"></span> - Em: 20/01/2016 as 10:04h <span class="glyphicon glyphicon-time"></span></b></p> 
-                </div>
-                <div class="modal-footer">
-                    <center><label for="texto">Resposta: <textarea style="width: 500px; height: 200px" class="form-control" name="texto" id="texto"></textarea></label>
-                    <hr><button onClick="$.ajax({
-          type: 'POST',          
-          data: {texto: document.getElementById('texto').value},
-          url: '<?= $this->url("ajax", array("id" => 1)); ?>',
-          success: function(data) {
-            alert(data);
-          },
-
-          });" class="btn btn-lg btn-info">Responder <span class="glyphicon glyphicon-ok"></span></button></center>
-                </div>
-            </div>
-        </div>
-    </div>
-        
+         </div> 
+         
+         <br><br><br><br><br><br><br><br><br><br>
         
         
     </body> 

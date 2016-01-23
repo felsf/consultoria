@@ -50,6 +50,36 @@ return array(
                 ),
             ),
             
+            'news-view' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/news/view/:id/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'News',
+                        'action'        => 'view',
+                    ),
+                    'constraints' => array(
+                        'id' => '[0-9]+',
+                    ),
+                ),
+            ),
+            
+            'news-delete' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/news/delete/:id/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'News',
+                        'action'        => 'delete',
+                    ),
+                    'constraints' => array(
+                        'id' => '[0-9]+',
+                    ),
+                ),
+            ),
+            
             'news-create' => array(
                 'type'    => 'Literal',
                 'options' => array(
@@ -61,6 +91,22 @@ return array(
                     ),
                 ),
             ),
+            
+            'news-publish' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/news/publish/:id/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'News',
+                        'action'        => 'publish',
+                    ),
+                    'constraints' => array(
+                        'id' => '[0-9]+',
+                    ),
+                ),
+            ),
+            
             
             'users' => array(
                 'type'    => 'Literal',

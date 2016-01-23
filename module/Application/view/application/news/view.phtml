@@ -1,8 +1,15 @@
 <div class="panel">
-    <div class="panel-heading register-form-title">Postagem de Notícias <span class="fa fa-newspaper-o"></span></div>
+    <div class="panel-heading register-form-title">Visualizador de Notícias <span class="fa fa-newspaper-o"></span></div>
     <div class="panel-body register-form-body" >
         <center>        
             <?php echo $this->form()->openTag($newsForm); ?>
+            
+            <?php 
+            
+            $newsForm->setData(array('news-title' => $news->getNewsTitle(), 'news-content' => htmlspecialchars_decode($news->getNewsContent()), 'news-source' => $news->getNewsSource()));
+            
+            ?>
+            
             <?php echo $this->formrow($newsForm->get('news-title')); ?><hr>       
             <?php echo $this->formrow($newsForm->get('news-content')); ?><hr>
             <?php echo $this->formrow($newsForm->get('news-source')); ?><hr>

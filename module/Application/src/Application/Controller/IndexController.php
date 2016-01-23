@@ -12,12 +12,16 @@ namespace Application\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
+use Application\Entity\News;
+
 class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
+        $qb = $this->getEntityManager()->getRepository("Application\Entity\News")->createQueryBuilder('n');
+        $news = $qb->select()->where('n.newsPublished = 1')->orderBy('n.newsDate', 'DESC')->setMaxResults(3)->getQuery()->getResult();
         $this->layout('layout/home_layout.phtml');
-        return new ViewModel();
+        return new ViewModel(array('news' => $news));
     }
 
     public function ajaxAction()
