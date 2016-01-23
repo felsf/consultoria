@@ -37,10 +37,16 @@ body
 
 .questions-title
 {
-	background-color: #4a685c;
-	color: white;
-	font-size: 30px;
-	font-family: 'Segoe print', sans-serif;
+	background-color: #4a685c!important;
+	color: white!important;
+	font-size: 30px!important;
+	font-family: 'Segoe print', sans-serif!important;
+}
+
+.questions-body
+{
+	font-size: 12px; 
+	border: 2px solid black!important;
 }
 
 .news-font
@@ -76,6 +82,21 @@ body
 {
 	max-height: 800px!important; 
 	width: 100%;
+}
+
+.register-form-title
+{
+	background-color: #4a685c!important;
+	color: white!important;
+	font-size: 30px!important;
+	font-family: 'Segoe print', sans-serif!important;
+	text-align: center;
+}
+
+.register-form-body
+{
+	font-size: 12px; 
+	border: 2px solid black!important;
 }
 
 @font-face {

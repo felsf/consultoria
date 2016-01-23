@@ -22,6 +22,7 @@
                         ->prependStylesheet($this->basePath('css/style.css'))
                         ->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
                         ->prependStylesheet($this->basePath('css/site.css'))
+                        ->prependStylesheet($this->basePath("css/font-awesome.min.css"))
                         ->prependStylesheet($this->basePath('css/bootstrap.css')) ?>
 
         <!-- Scripts -->
@@ -74,8 +75,8 @@
 
     <hr>      
     
-    <body onLoad="">       
-          
+    <body onLoad="">
+        
         
         <div class="col-md-2">           
             <div id="sidebar" role="navigation">           
@@ -87,7 +88,11 @@
         
         <div class="col-md-7">  
             <div class="container-fluid">
-                <?= "2222222222222222222222222222222222222222222222222222222222222222" ?>
+                <?= $this->flashMessenger()->render('success', array('alert', 'alert-success')); ?>
+                <?= $this->flashMessenger()->render('info', array('alert', 'alert-info')); ?>
+                <?= $this->flashMessenger()->render('error', array('alert', 'alert-danger')); ?>
+                
+                <?= $this->content; ?>
             </div>
         </div><!-- col-md-7 geral -->
     

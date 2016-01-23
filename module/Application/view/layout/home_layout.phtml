@@ -22,6 +22,7 @@
                         ->prependStylesheet($this->basePath('css/style.css'))
                         ->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
                         ->prependStylesheet($this->basePath('css/site.css'))
+                        ->prependStylesheet($this->basePath("css/font-awesome.min.css"))
                         ->prependStylesheet($this->basePath('css/bootstrap.css')) ?>
 
         <!-- Scripts -->
@@ -130,7 +131,12 @@
       
         
         
-        <div class="col-md-7">         
+        <div class="col-md-7">   
+            
+            <?= $this->flashMessenger()->render('success', array('alert', 'alert-success')); ?>
+            <?= $this->flashMessenger()->render('info', array('alert', 'alert-info')); ?>
+            <?= $this->flashMessenger()->render('error', array('alert', 'alert-danger')); ?>
+                  
             <div class="news-title">Notícias Relacionadas a Direito Previdenciário</div>
             
             <div class="container-fluid news-container">                
@@ -165,7 +171,7 @@
                         </center>
                     </div>
                     
-                    <div class="panel-body" style="font-size: 12px; border: 2px solid black!important">
+                    <div class="panel-body questions-body">
                                     <p>O usuário Felipe <span class="glyphicon glyphicon-user"></span> fez uma pergunta <span class="glyphicon glyphicon-question-sign"></span> - Em: 20/01/2016 as 10:04pm <span class="glyphicon glyphicon-time"></span></b> - <a data-toggle="modal" data-target="#resposta" href="#">Visualizar Resposta</a> <span class="glyphicon glyphicon-ok"></span></p> 
                                     <p>O usuário Welington <span class="glyphicon glyphicon-user"></span> fez uma pergunta <span class="glyphicon glyphicon-question-sign"></span> - Em: 21/01/2016 as 10:00pm <span class="glyphicon glyphicon-time"></span></b> - <a href="#">Visualizar Resposta</a> <span class="glyphicon glyphicon-ok"></span></p>
                                     <p>O usuário Marcos <span class="glyphicon glyphicon-user"></span> fez uma pergunta <span class="glyphicon glyphicon-question-sign"></span> - Em: 21/01/2016 as 07:00am <span class="glyphicon glyphicon-time"></span></b> - <span style="color: red">Resposta Não Disponível</span> <span class="glyphicon glyphicon-remove"></span></p>

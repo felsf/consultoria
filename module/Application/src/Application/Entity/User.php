@@ -3,6 +3,9 @@
 namespace Application\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Zend\InputFilter\InputFilterAwareInterface;
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\InputFilterInterface;
 
 /**
  * User
@@ -10,8 +13,10 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="user_login_UNIQUE", columns={"user_login"}), @ORM\UniqueConstraint(name="user_email_UNIQUE", columns={"user_email"})})
  * @ORM\Entity
  */
-class User
+class User implements InputFilterAwareInterface
 {
+    private $inputFilter;
+    
     /**
      * @var integer
      *
@@ -69,9 +74,40 @@ class User
      * @ORM\Column(name="user_ip", type="string", length=45, nullable=false)
      */
     private $userIp;
- /**
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_profile", type="integer", nullable=true)
+     */
+    private $userProfile = '1';
+    /**
      * @return the $userId
      */
+    
+    //---------------------------------------------------------------------------------//  
+    
+    public function setInputFilter(InputFilterInterface $inputFilter)
+    {
+        $this->inputFilter = $inputFilter;
+    }
+    
+    public function getInputFilter()
+    {
+        if($this->inputFilter == null)
+        {
+            $inputFilter = new InputFilter();
+            $inputFilter->add(array('name' => 'user_login', 'required' => true, 'validators' => array(array('name' => 'StringLength', 'options' => array('min' => 6, 'max' => 20)))));
+            $inputFilter->add(array('name' => 'user_name', 'required' => true, 'validators' => array(array('name' => 'StringLength', 'options' => array('min' => 6, 'max' => 45)))));
+            $inputFilter->add(array('name' => 'user_password', 'required' => true, 'validators' => array(array('name' => 'StringLength', 'options' => array('min' => 6, 'max' => 25)))));
+            $inputFilter->add(array('name' => 'user_email', 'required' => true));
+            
+            $this->inputFilter = $inputFilter;
+        }
+        
+        return $this->inputFilter;
+    }
+    
     public function getUserId()
     {
         return $this->userId;
@@ -131,6 +167,14 @@ class User
     public function getUserIp()
     {
         return $this->userIp;
+    }
+
+ /**
+     * @return the $userProfile
+     */
+    public function getUserProfile()
+    {
+        return $this->userProfile;
     }
 
  /**
@@ -195,6 +239,14 @@ class User
     public function setUserIp($userIp)
     {
         $this->userIp = $userIp;
+    }
+
+ /**
+     * @param number $userProfile
+     */
+    public function setUserProfile($userProfile)
+    {
+        $this->userProfile = $userProfile;
     }
 
 

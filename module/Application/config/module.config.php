@@ -39,7 +39,7 @@ return array(
             'users' => array(
                 'type'    => 'Literal',
                 'options' => array(
-                    'route'    => '/users',
+                    'route'    => '/users/',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Application\Controller',
                         'controller'    => 'Users',
