@@ -116,7 +116,7 @@ class User implements InputFilterAwareInterface
  /**
      * @return the $userLogin
      */
-    public function getUserLogin()
+    public function getUserLlogin()
     {
         return $this->userLogin;
     }

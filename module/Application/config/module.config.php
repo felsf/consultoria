@@ -7,6 +7,8 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
+namespace  Application;
+
 return array(
     'router' => array(
         'routes' => array(
@@ -233,9 +235,9 @@ return array(
         'authentication' => array(
             'orm_default' => array(
                 'object_manager' => 'Doctrine\ORM\EntityManager',
-                'identity_class' => 'Users\Entity\User',
-                'identity_property' => 'user_login',
-                'credential_property' => 'user_password',
+                'identity_class' => 'Application\Entity\User',
+                'identity_property' => 'userLogin',
+                'credential_property' => 'userPassword',
             ),
         ),
     ),
