@@ -10,7 +10,7 @@ class UserLoginForm extends Form
         parent::__construct("UserLoginForm");
     
         $this->add(array('name' => 'user_login', 'type' => 'text', 'options' => array('label' => 'Login de Acesso',), 'attributes' => array('class' => 'form-control')));        
-        $this->add(array('name' => 'user_password', 'type' => 'password', 'options' => array('label' => 'Senha',), 'attributes' => array('class' => 'form-control')));        
+        $this->add(array('name' => 'user_password', 'type' => 'password', 'options' => array('label' => 'Senha',), 'attributes' => array('required' => true, 'class' => 'form-control')));        
     }
 }
 

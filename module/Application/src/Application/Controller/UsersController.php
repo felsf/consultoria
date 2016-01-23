@@ -7,6 +7,7 @@ use Zend\View\Model\ViewModel;
 use Zend\Mvc\MvcEvent;
 
 use Application\Form\UserRegisterForm;
+use Application\Form\UserEditForm;
 use Application\Form\UserLoginForm;
 
 use Application\Entity\User;
@@ -17,7 +18,7 @@ class UsersController extends AbstractActionController
     public function onDispatch(MvcEvent $e)
     {
         $logged_block = array('login', 'register');        
-       // if($this->identity() && in_array($e->getRouteMatch()->getParam("action"), $logged_block)) return $this->redirect()->toRoute('home');
+        if(!$this->identity() && !in_array($e->getRouteMatch()->getParam("action"), $logged_block)) return $this->redirect()->toRoute('home');
         return parent::onDispatch($e);              
     }
 
@@ -29,7 +30,37 @@ class UsersController extends AbstractActionController
     public function editAction()
     {
         $request = $this->getRequest();
-        return new ViewModel();
+        $editForm = new UserEditForm();        
+        $id = $this->params('id');
+        $qb = $this->getEntityManager()->getRepository("Application\Entity\User")->createQueryBuilder('u');
+        
+        if(isset($id))
+        {
+            $user = $qb->select()->where("u.userId = ".$id)->getQuery()->getResult();
+            $user = $user[0];
+            $editForm = new UserEditForm();
+            
+            if(empty($user)) return $this->redirect()->toRoute('users');
+            
+            if($request->isPost())
+            {                
+                $user->setUserLogin($request->getPost('user_login'));
+                $user->setUserName($request->getPost('user_name'));
+                $user->setUserEmail($request->getPost('user_email'));                
+                $user->setUserIp($request->getPost('user_ip'));                              
+                $user->setUserPassword( empty($request->getPost('user_password')) ? $user->getUserPassword() : md5($request->getPost('user_password')));                
+                $user->setUserProfile($request->getPost('user_profile'));
+                
+                $this->getEntityManager()->persist($user);
+                $this->getEntityManager()->flush();
+                $this->flashMessenger()->addInfoMessage("Cadastrado atualizado com sucesso, Usuário: ".$request->getPost('user_name'));            
+                
+                $this->redirect()->toRoute('users');
+            
+            }
+            
+            return new ViewModel(array('editForm' => $editForm, 'user' => $user, 'profiles' => $this->profiles));
+        }
     }
     
     public function registerAction() //$this->flashMessenger()->addSuccessMessage("Message");
@@ -54,7 +85,7 @@ class UsersController extends AbstractActionController
                 $this->getEntityManager()->persist($user);
                 $this->getEntityManager()->flush();            
                 $this->flashMessenger()->addInfoMessage("Seu cadastrado foi realizado com sucesso, ".$request->getPost('user_name'));
-                return $this->redirect()->toRoute('home');
+                return $this->redirect()->toRoute('users-login');
             }
             
             $this->flashMessenger()->addFlashMessage("Falha no Cadastro.");
@@ -80,6 +111,16 @@ class UsersController extends AbstractActionController
             $success = $authService->authenticate();
         
             if($success->isValid()) {
+                $qb = $this->getEntityManager()->getRepository("Application\Entity\User")->createQueryBuilder('u');
+                $user = $qb->select()->where("u.userLogin = '".$request->getPost('user_login')."'")->getQuery()->getResult();
+                $user = $user[0];
+                
+                $user->setUserLastLogin(new \DateTime('now'));
+                $user->setUserIp($_SERVER['REMOTE_ADDR']);
+                
+                $this->getEntityManager()->persist($user);
+                $this->getEntityManager()->flush();
+                
                 $this->flashMessenger()->addSuccessMessage("Autenticado com sucesso!");
                 $this->redirect()->toRoute('home');
             }
@@ -94,24 +135,83 @@ class UsersController extends AbstractActionController
         return new ViewModel(array('loginForm' => $loginForm));
     }
     
+    public function logoutAction()
+    {
+        if($this->identity())
+        {
+            $this->getServiceLocator()->get('doctrine.authenticationservice.orm_default')->getStorage()->clear();
+            $this->flashMessenger()->addSuccessMessage("Você saiu!");
+        }
+        
+        return $this->redirect()->toRoute('home');
+    }
+    
     public function deleteAction()
     {
         $request = $this->getRequest();
-        return new ViewModel();
+        $id = $this->params('id');
+        $qb = $this->getEntityManager()->getRepository("Application\Entity\User")->createQueryBuilder('u');
+        
+        if(isset($id))
+        {
+           $user = $qb->select()->where("u.userId = ".$id)->getQuery()->getResult();
+           $user = $user[0];
+           if(empty($user)) return $this->redirect()->toRoute('users');
+
+           $this->getEntityManager()->remove($user);
+           $this->getEntityManager()->flush();
+           
+           $this->flashMessenger()->addSuccessMessage("Usuário Apagado com sucesso: \"".$user->getUserName()."\"");
+           $this->redirect()->toRoute('users');
+           
+           return new ViewModel(array('user' => $user));
+        }       
     }
     
     public function blockAction()
     {
         $request = $this->getRequest();
-        return new ViewModel();
+        $id = $this->params('id');
+        $qb = $this->getEntityManager()->getRepository("Application\Entity\User")->createQueryBuilder('u');
+        
+        if(isset($id))
+        {
+           $user = $qb->select()->where("u.userId = ".$id)->getQuery()->getResult();
+           $user = $user[0];
+           if(empty($user) || $user->isUserBlocked()) return $this->redirect()->toRoute('users');
+           else $user->setUserBlocked(true);
+           
+           $this->getEntityManager()->persist($user);
+           $this->getEntityManager()->flush();
+           
+           $this->flashMessenger()->addSuccessMessage("Usuário Bloqueado com sucesso: \"".$user->getUserName()."\"");
+           $this->redirect()->toRoute('users');
+           
+           return new ViewModel(array('user' => $user));
+        }       
     }
     
     public function unblockAction()
     {
         $request = $this->getRequest();
-        return new ViewModel();
+        $id = $this->params('id');
+        $qb = $this->getEntityManager()->getRepository("Application\Entity\User")->createQueryBuilder('u');
+        
+        if(isset($id))
+        {
+           $user = $qb->select()->where("u.userId = ".$id)->getQuery()->getResult();
+           $user = $user[0];
+           if(empty($user) || !$user->isUserBlocked()) return $this->redirect()->toRoute('users');
+           else $user->setUserBlocked(false);
+           
+           $this->getEntityManager()->persist($user);
+           $this->getEntityManager()->flush();
+           
+           $this->flashMessenger()->addSuccessMessage("Usuário Desbloqueado com sucesso: \"".$user->getUserName()."\"");
+           $this->redirect()->toRoute('users');
+           
+           return new ViewModel(array('user' => $user));
+        }
     }
-
-
 }
 

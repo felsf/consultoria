@@ -81,9 +81,12 @@ class User implements InputFilterAwareInterface
      * @ORM\Column(name="user_profile", type="integer", nullable=true)
      */
     private $userProfile = '1';
-    /**
-     * @return the $userId
-     */
+    
+    /**     
+     *
+     * @ORM\Column(name="user_blocked", type="boolean", options={"default"=0})
+     */    
+    private $userBlocked = 0;
     
     //---------------------------------------------------------------------------------//  
     
@@ -99,7 +102,7 @@ class User implements InputFilterAwareInterface
             $inputFilter = new InputFilter();
             $inputFilter->add(array('name' => 'user_login', 'required' => true, 'validators' => array(array('name' => 'StringLength', 'options' => array('min' => 6, 'max' => 20)))));
             $inputFilter->add(array('name' => 'user_name', 'required' => true, 'validators' => array(array('name' => 'StringLength', 'options' => array('min' => 6, 'max' => 45)))));
-            $inputFilter->add(array('name' => 'user_password', 'required' => true, 'validators' => array(array('name' => 'StringLength', 'options' => array('min' => 6, 'max' => 25)))));
+            $inputFilter->add(array('name' => 'user_password', 'validators' => array(array('name' => 'StringLength', 'options' => array('min' => 6, 'max' => 25)))));
             $inputFilter->add(array('name' => 'user_email', 'required' => true));
             
             $this->inputFilter = $inputFilter;
@@ -116,7 +119,7 @@ class User implements InputFilterAwareInterface
  /**
      * @return the $userLogin
      */
-    public function getUserLlogin()
+    public function getUserLogin()
     {
         return $this->userLogin;
     }
@@ -248,7 +251,17 @@ class User implements InputFilterAwareInterface
     {
         $this->userProfile = $userProfile;
     }
-
+    
+    
+    public function setUserBlocked($blocked)
+    {
+        $this->userBlocked = $blocked;
+    }
+    
+    public function isUserBlocked() 
+    {
+        return $this->userBlocked;
+    }
 
 
 }

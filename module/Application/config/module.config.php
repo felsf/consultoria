@@ -62,6 +62,18 @@ return array(
                 ),
             ),
             
+            'users-logout' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/users/logout/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Users',
+                        'action'        => 'logout',
+                    ),
+                ),
+            ),
+            
             'users-register' => array(
                 'type'    => 'Literal',
                 'options' => array(
@@ -77,7 +89,7 @@ return array(
             'users-edit' => array(
                 'type'    => 'Segment',
                 'options' => array(
-                    'route'    => '/users/edit/:id',
+                    'route'    => '/users/edit/:id/',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Application\Controller',
                         'controller'    => 'Users',
@@ -92,7 +104,7 @@ return array(
             'users-delete' => array(
                 'type'    => 'Segment',
                 'options' => array(
-                    'route'    => '/users/delete/:id',
+                    'route'    => '/users/delete/:id/',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Application\Controller',
                         'controller'    => 'Users',
@@ -107,7 +119,7 @@ return array(
             'users-block' => array(
                 'type'    => 'Segment',
                 'options' => array(
-                    'route'    => '/users/block/:id',
+                    'route'    => '/users/block/:id/',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Application\Controller',
                         'controller'    => 'Users',
@@ -122,7 +134,7 @@ return array(
             'users-unblock' => array(
                 'type'    => 'Segment',
                 'options' => array(
-                    'route'    => '/users/unblock/:id',
+                    'route'    => '/users/unblock/:id/',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Application\Controller',
                         'controller'    => 'Users',

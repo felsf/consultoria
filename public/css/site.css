@@ -13,7 +13,7 @@ body
 
 .header-text
 {
-	font-family: 'TrajanPro-Regular', sans-serif;	
+		
 }
 
 #topbar
@@ -152,4 +152,15 @@ body
   font-weight: normal;
   font-style: normal;
 }
+
+@font-face {
+  font-family: 'TrajanPro-Original';
+  src: url('TrajanPro-Original.ttf') format('truetype');
+  font-weight: 
+
+normal;
+  font-style: normal;
+}
+
+
 
