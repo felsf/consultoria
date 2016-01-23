@@ -23,7 +23,7 @@
                             <td class="text-center"><?= $noticia->getNewsAuthor()->getUserName(); ?> <span class="glyphicon glyphicon-user"></span></td>
                             <td class="text-center"><?= $noticia->getNewsSource(); ?></td>
                             <td class="text-center">
-                                <a href="<?= $this->url('news-view', array('id' => $noticia->getNewsId())); ?>">
+                                <a href="<?= $this->url('news-edit', array('id' => $noticia->getNewsId())); ?>">
                                     <button class="btn"><span class="fa fa-newspaper-o"></span></button>
                                 </a>                                
                             </td> 

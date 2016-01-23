@@ -50,6 +50,18 @@ return array(
                 ),
             ),
             
+            'news-all' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/news/all/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'News',
+                        'action'        => 'all',
+                    ),
+                ),
+            ),
+            
             'news-view' => array(
                 'type'    => 'Segment',
                 'options' => array(
@@ -58,6 +70,21 @@ return array(
                         '__NAMESPACE__' => 'Application\Controller',
                         'controller'    => 'News',
                         'action'        => 'view',
+                    ),
+                    'constraints' => array(
+                        'id' => '[0-9]+',
+                    ),
+                ),
+            ),
+            
+            'news-edit' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/news/edit/:id/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'News',
+                        'action'        => 'edit',
                     ),
                     'constraints' => array(
                         'id' => '[0-9]+',

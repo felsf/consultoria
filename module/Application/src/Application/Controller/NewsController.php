@@ -14,7 +14,7 @@ class NewsController extends AbstractActionController
 {
     public function onDispatch(MvcEvent $e)
     {
-        $logged_block = array('view');
+        $logged_block = array('view', 'all');
         if(!$this->identity() && !in_array($e->getRouteMatch()->getParam("action"), $logged_block)) return $this->redirect()->toRoute('home');        
         return parent::onDispatch($e);
     }
@@ -26,7 +26,7 @@ class NewsController extends AbstractActionController
         foreach($news as $noticia)
         {
             $noticia->setNewsTitle(substr($noticia->getNewsTitle(), 0, 20).".....");
-            $noticia->setNewsSource(substr($noticia->getNewsSource(), 0, 15)."....");                
+            $noticia->setNewsSource(substr($noticia->getNewsSource(), 0, 10)."....");                
         }
         return new ViewModel(array('news' => $news));
     }
@@ -104,7 +104,7 @@ class NewsController extends AbstractActionController
         }
     }
     
-    public function viewAction()
+    public function editAction()
     {
         $id = $this->params('id');
         $request = $this->getRequest();
@@ -149,6 +149,30 @@ class NewsController extends AbstractActionController
         }              
         
         else return $this->redirect()->toRoute('news');
+    }
+    
+    public function viewAction()
+    {
+        $id = $this->params('id');
+        $request = $this->getRequest();
+        
+        if(isset($id))
+        {
+            $qb = $this->getEntityManager()->getRepository("Application\Entity\News")->createQueryBuilder('n');
+            $news = $qb->select()->where('n.newsId = '.$id)->getQuery()->getResult();
+        
+            if(empty($news)) return $this->redirect()->toRoute('news');
+            $news = $news[0];
+            
+            return new ViewModel(array('noticia' => $news));
+        }
+    }
+    
+    public function allAction()
+    {
+        $qb = $this->getEntityManager()->getRepository("Application\Entity\News")->createQueryBuilder('n');
+        $news = $qb->select()->where('n.newsPublished = 1')->orderBy('n.newsDate', 'DESC')->getQuery()->getResult();
+        return new ViewModel(array('news' => $news));
     }
     
     public function deleteAction()

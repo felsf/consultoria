@@ -1,30 +1,18 @@
-<div class="panel">
-    <div class="panel-heading register-form-title">Visualizador de Notícias <span class="fa fa-newspaper-o"></span></div>
-    <div class="panel-body register-form-body" >
-        <center>        
-            <?php echo $this->form()->openTag($newsForm); ?>
+    <div class="container-fluid">
+        <div class="news-title"><?= $noticia->getNewsTitle(); ?></div>
+        <div class="container-fluid news-container">                
+            <p>Postada em <?= $noticia->getNewsDate()->format('d/m/Y'); ?> as <?= $noticia->getNewsDate()->format('H:i'); ?> <span class="glyphicon glyphicon-time"></span> <?php if($noticia->getNewsEditDate() != null):?>|
+                Atualizado em <?= $noticia->getNewsEditDate()->format('d/m/Y'); ?> as <?= $noticia->getNewsEditDate()->format('H:i'); ?> <span style="color: green" class="glyphicon glyphicon-ok"></span>
+            <?php endif; ?></p>            
+            <br>
             
-            <?php 
+            <div class="news-font">
+                <?= htmlspecialchars_decode($noticia->getNewsContent()); ?>
+            </div>
             
-            $newsForm->setData(array('news-title' => $news->getNewsTitle(), 'news-content' => htmlspecialchars_decode($news->getNewsContent()), 'news-source' => $news->getNewsSource()));
-            
-            ?>
-            
-            <?php echo $this->formrow($newsForm->get('news-title')); ?><hr>       
-            <?php echo $this->formrow($newsForm->get('news-content')); ?><hr>
-            <?php echo $this->formrow($newsForm->get('news-source')); ?><hr>
-            
+            <div class="news-source">
+                <b>Fonte: <i><a href="<?= $noticia->getNewsSource(); ?>"><?= $noticia->getNewsSource(); ?></a></i></b>
+            </div>
             <hr>
-            
-            <button name="btn-publish" class="btn btn-lg btn-success">Publicar Notícia <span class="glyphicon glyphicon-share-alt"></span></button>
-            <button name="btn-save" class="btn btn-lg btn-warning">Salvar Rascunho <span class="glyphicon glyphicon-list-alt"></span></button>
-            
-            <?php echo $this->form()->closeTag(); ?>
-         </center>
-    </div>
-</div>
-
-<hr>
-
-<script type="text/javascript">CKEDITOR.replace('news-content');</script>
-
+         </div>
+     </div>
