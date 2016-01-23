@@ -35,6 +35,102 @@ return array(
                     ),
                 ),
             ),
+            
+            'users' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/users',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Users',
+                        'action'        => 'index',
+                    ),
+                ),
+            ),
+            
+            'users-login' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/users/login/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Users',
+                        'action'        => 'login',
+                    ),
+                ),
+            ),
+            
+            'users-register' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/users/register/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Users',
+                        'action'        => 'register',
+                    ),
+                ),
+            ),
+            
+            'users-edit' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/users/edit/:id',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Users',
+                        'action'        => 'edit',
+                    ),
+                    'constraints' => array(
+                        'id' => '[0-9]+',
+                    ),
+                ),
+            ),
+            
+            'users-delete' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/users/delete/:id',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Users',
+                        'action'        => 'delete',
+                    ),
+                    'constraints' => array(
+                        'id' => '[0-9]+',
+                    ),
+                ),
+            ),
+            
+            'users-block' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/users/block/:id',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Users',
+                        'action'        => 'block',
+                    ),
+                    'constraints' => array(
+                        'id' => '[0-9]+',
+                    ),
+                ),
+            ),
+            
+            'users-unblock' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/users/unblock/:id',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Users',
+                        'action'        => 'unblock',
+                    ),
+                    'constraints' => array(
+                        'id' => '[0-9]+',
+                    ),
+                ),
+            ),
 
             'application' => array(
                 'type'    => 'Literal',
@@ -86,7 +182,15 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Application\Controller\Index' => 'Application\Controller\IndexController'
+            'Application\Controller\Index' => 'Application\Controller\IndexController',
+            'Application\Controller\Users' => 'Application\Controller\UsersController',
+            'Application\Controller\Questions' => 'Application\Controller\QuestionsController',
+            'Application\Controller\Answers' => 'Application\Controller\AnswersController',
+            'Application\Controller\News' => 'Application\Controller\NewsController',
+            'Application\Controller\Comments' => 'Application\Controller\CommentsController',
+            'Application\Controller\Patrocinadores' => 'Application\Controller\PatrocinadoresController',
+            'Application\Controller\Images' => 'Application\Controller\ImagesController',
+            
         ),
     ),
     'view_manager' => array(
@@ -125,6 +229,14 @@ return array(
                     __NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver'
                 )
             )
-        )
-      ),
+        ),
+        'authentication' => array(
+            'orm_default' => array(
+                'object_manager' => 'Doctrine\ORM\EntityManager',
+                'identity_class' => 'Users\Entity\User',
+                'identity_property' => 'user_login',
+                'credential_property' => 'user_password',
+            ),
+        ),
+    ),
 );
