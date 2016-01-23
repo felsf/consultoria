@@ -84,6 +84,14 @@ body
 	width: 100%;
 }
 
+.standard-title
+{
+	color: black!important;
+	font-size: 30px!important;
+	font-family: 'Segoe print', sans-serif!important;
+	text-align: center;
+}
+
 .register-form-title
 {
 	background-color: #4a685c!important;

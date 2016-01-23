@@ -31,6 +31,7 @@
             ->prependFile($this->basePath('js/jquery.min.js'))
             ->prependFile($this->basePath('js/respond.min.js'), 'text/javascript', array('conditional' => 'lt IE 9',))
             ->prependFile($this->basePath('js/html5shiv.min.js'),   'text/javascript', array('conditional' => 'lt IE 9',))
+            ->prependFile($this->basePath('js/ckeditor/ckeditor.js'))
         ; ?>
 
         <div class="container-fluid header">
@@ -71,7 +72,19 @@
 
               <ul class="nav navbar-nav navbar-right">
                     <?php if($this->identity()): ?>
-                        <li><a href="#"><span class="glyphicon glyphicon-user"></span> <?= $this->identity()->getUserName(); ?> <span class="fa fa-caret-down"></span></a></li>
+                        <li>
+                            <span class="dropdown">
+                                <a href="#" style="text-decoration: none!important; color: white!important" class="dropdown-toggle" style="" data-toggle="dropdown">
+                                    <span class="glyphicon glyphicon-user"></span> 
+                                    <?= $this->identity()->getUserName(); ?> <span class="fa fa-caret-down"></span>
+                                </a>                            
+                                                             
+                                <ul class="dropdown-menu">                                    
+                                    <li><a href="<?php echo $this->url('users'); ?>">Controle de Usuários <span style="color: green" class="glyphicon glyphicon-user"></span></a></li>
+                                    <li><a href="<?php echo $this->url('users-logout'); ?>">Sair <span style="color: red" class="glyphicon glyphicon-remove"></span></a></li>
+                                </ul>
+                            </span>
+                        </li>
                     <?php endif; ?>
               </ul>
 

@@ -55,7 +55,12 @@ class News
      * @ORM\Column(name="news_source", type="text", length=65535, nullable=false)
      */
     private $newsSource;
-
+    
+    /**
+    * @ORM\Column(name="news_published", type="boolean", options={"default"=1})
+    */
+    private $newsPublished;
+    
     /**
      * @var \Application\Entity\User
      *

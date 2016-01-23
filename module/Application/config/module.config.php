@@ -38,6 +38,30 @@ return array(
                 ),
             ),
             
+            'news' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/news/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'News',
+                        'action'        => 'index',
+                    ),
+                ),
+            ),
+            
+            'news-create' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/news/create/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'News',
+                        'action'        => 'create',
+                    ),
+                ),
+            ),
+            
             'users' => array(
                 'type'    => 'Literal',
                 'options' => array(

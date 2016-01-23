@@ -24,7 +24,7 @@ class UsersController extends AbstractActionController
 
     public function indexAction()
     {              
-        return new ViewModel();
+        return new ViewModel(array('users' => $this->getEntityManager()->getRepository("Application\Entity\User")->createQueryBuilder('u')->select()->orderBy('u.userId', 'ASC')->getQuery()->getResult()));
     }
     
     public function editAction()
