@@ -62,6 +62,21 @@ return array(
                 ),
             ),
             
+            'comments-delete' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/comments/delete/:id/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Comments',
+                        'action'        => 'delete',
+                    ),
+                ),
+                'constraints' => array(
+                    'id' => '[0-9]+',
+                ),
+            ),
+            
             'news' => array(
                 'type'    => 'Literal',
                 'options' => array(

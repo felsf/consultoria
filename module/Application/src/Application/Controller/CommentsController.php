@@ -28,7 +28,7 @@ class CommentsController extends AbstractActionController
         
         foreach($comments as $comment)
         {
-            array_push($comentarios[$comment->getCommentNews()], $comment);
+            array_push($comentarios[$comment->getCommentNews()->getNewsId()], $comment);
         }
         
         
@@ -48,7 +48,7 @@ class CommentsController extends AbstractActionController
                 
                 if(empty($news)) echo "Você tentou comentar numa Notícia inexistente!";            
                 else 
-                {
+                {                    
                     $c = new Comment();
                     $c->setCommentAuthor($request->getPost('comment_author'));
                     $c->setCommentNews($news[0]);
@@ -59,12 +59,12 @@ class CommentsController extends AbstractActionController
                     $c->setCommentTitle("");                                
                 
                     $this->getEntityManager()->persist($c);
-                    $this->getEntityManager()->flush();                   
+                    $this->getEntityManager()->flush();   
                     
+                    $this->flashMessenger()->addInfoMessage("Comentário postado com sucesso!");
+                    $this->redirect()->toRoute('home');                    
                 } 
-            }       
-            
-            return $this->redirect()->toRoute('home');
+            }          
     }
 }
 

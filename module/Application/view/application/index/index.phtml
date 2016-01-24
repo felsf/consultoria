@@ -14,11 +14,6 @@ function toggle(element)
 	$(element).is(":visible") ? $(element).slideUp(500) : $(element).slideDown(500);
 }
 
-function comment(id)
-{
-	
-}
-
 </script>
 
 <div>
@@ -75,7 +70,7 @@ function comment(id)
                         
                             <?php foreach($comentarios[$noticia->getNewsId()] as $comment): ?>
                                 <p><span style="font-size: 20px" class="glyphicon glyphicon-user"></span> <?= $comment->getCommentAuthor();?> comentou:</p>                                
-                                <?= $comment->getCommentContent(); ?>                                
+                                <?= $comment->getCommentContent(); ?>p                                
                                 <hr>
                             <?php endforeach; ?>
                                                                  
