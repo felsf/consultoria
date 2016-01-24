@@ -23,6 +23,11 @@
                                     <button class="btn btn-danger"><span class="glyphicon glyphicon-comment"></span></button>
                                 </a>
                             </td>
+                            <td class="text-center">
+                                <a href="<?= $this->url('comments-delete', array('id' => $comment->getCommentId())); ?>">
+                                    <button class="btn btn-danger"><span class="glyphicon glyphicon-comment"></span></button>
+                                </a>
+                            </td>
                             
                         </tr>
                     <?php endforeach; ?>

@@ -40,10 +40,8 @@ class IndexController extends AbstractActionController
         return new ViewModel(array('news' => $news, 'comentarios' => $comentarios));
     }
 
-    public function ajaxAction()
+    public function banIpAction()
     {
-    	$this->layout('layout/ajax_layout');
-    	echo "Pergunta ID ".$this->params('id')." - Sua Resposta Foi: \"".$this->getRequest()->getPost('texto')."\"";
-    	return new ViewModel();
+        
     }
 }
