@@ -7,75 +7,90 @@
 <?php endif; ?>
 
 <script type="text/javascript">
+$('comments-container').hide();
+
+function toggle(element)
+{	
+	$(element).is(":visible") ? $(element).slideUp(500) : $(element).slideDown(500);
+}
+
 function comment(id)
 {
-    var text = document.getElementById("comment_content_"+id).value;
 	
-	$.ajax({
-        type: "POST",         
-        url: "<?= $this->url('comments-add'); ?>",
-        data: {comment_content: text, comment_news: id},
-        success: function(data) {
-            alert(data);
-        }
-    }); 
 }
+
 </script>
 
-<?php foreach($news as $noticia): ?>
-    <div class="modal fade" id="<?= 'news_'.$noticia->getNewsId(); ?>">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header comment-modal-header">
-                    Comentários da Notícia <b><?= $noticia->getNewsTitle() ?> <span style="color: #3399ff;" class="glyphicon glyphicon-comment"></span></b>
+<div>
+    <?php foreach($news as $noticia): ?>
+        <div class="container-fluid">
+            <div class="news-title"><?= $noticia->getNewsTitle(); ?></div>
+            <div class="container-fluid news-container">                
+                <p>Postada em <?= $noticia->getNewsDate()->format('d/m/Y'); ?> as <?= $noticia->getNewsDate()->format('H:i'); ?> <span class="glyphicon glyphicon-time"></span> <?php if($noticia->getNewsEditDate() != null):?>|
+                    Atualizado em <?= $noticia->getNewsEditDate()->format('d/m/Y'); ?> as <?= $noticia->getNewsEditDate()->format('H:i'); ?> <span style="color: green" class="glyphicon glyphicon-ok"></span>
+                <?php endif; ?></p>            
+                <br>
+                
+                <div class="news-font">
+                    <?= htmlspecialchars_decode($noticia->getNewsContent()); ?>
                 </div>
-                <div class="modal-body">
-                    <?php if(empty($comments)): ?>
-                    
-                    <?php else: ?>
-                        <?php foreach($comments as $comment): ?>
-                        <?php endforeach; ?>
-                    <?php endif; ?>               
+                
+                <div class="news-source">
+                    <b>Fonte: <i><a href="<?= $noticia->getNewsSource(); ?>"><?= $noticia->getNewsSource(); ?></a></i></b>
                 </div>
-                <div class="modal-footer">
-                    <center>
-                        <label>Digite seu Comentário abaixo<textarea style="min-width: 400px" class="form-control" id="<?= 'comment_content_'.$noticia->getNewsId(); ?>" name="<?= 'comment_content_'.$noticia->getNewsId(); ?>"  placeholder="digite aqui"></textarea></label>
-                        <hr>
-                        <button onClick="comment(<?= $noticia->getNewsId(); ?>)" class="btn btn-lg btn-info">Comentar <span class="glyphicon glyphicon-comment"></span></button>
-                    </center>
-                </div>
-            </div>
-        </div>
-    </div>
-<?php endforeach;?>
-
-<?php foreach($news as $noticia): ?>
-    <div class="container-fluid">
-        <div class="news-title"><?= $noticia->getNewsTitle(); ?></div>
-        <div class="container-fluid news-container">                
-            <p>Postada em <?= $noticia->getNewsDate()->format('d/m/Y'); ?> as <?= $noticia->getNewsDate()->format('H:i'); ?> <span class="glyphicon glyphicon-time"></span> <?php if($noticia->getNewsEditDate() != null):?>|
-                Atualizado em <?= $noticia->getNewsEditDate()->format('d/m/Y'); ?> as <?= $noticia->getNewsEditDate()->format('H:i'); ?> <span style="color: green" class="glyphicon glyphicon-ok"></span>
-            <?php endif; ?></p>            
-            <br>
-            
-            <div class="news-font">
-                <?= htmlspecialchars_decode($noticia->getNewsContent()); ?>
-            </div>
-            
-            <div class="news-source">
-                <b>Fonte: <i><a href="<?= $noticia->getNewsSource(); ?>"><?= $noticia->getNewsSource(); ?></a></i></b>
-            </div>
-            
-            <div>
-                <center>
-                    <a href="#" data-toggle="modal" data-target="<?= '#news_'.$noticia->getNewsId() ?>">
-                        Comentários() <span style="color: blue" class="glyphicon glyphicon-comment"></span>
-                    </a>
+                <br>
+                
+                <center>                    
+                        <button type="button" class="btn btn-info" onClick="toggle('<?= "#comment_panel_".$noticia->getNewsId(); ?>')">
+                            Comentários(<?php echo count($comentarios[$noticia->getNewsId()])?>) <span style="color: blue" class="glyphicon glyphicon-comment"></span>
+                        </button>
                 </center>
-            </div>
-            <hr>
-         </div>
-     </div> 
-<?php endforeach; ?>
+                
+                <hr>               
+                
+                
+                <div class="container-fluid comments-container form-group" id="<?= 'comment_panel_'.$noticia->getNewsId(); ?>">                   
+                        <center>
+                            <form class="panel" method="POST" action="<?= $this->url('comments-add'); ?>">
+                                <div class="register-form-title">Digite seu comentário abaixo</div>
+                                <div class="register-form-body">
+                                    <div>        
+                                        <input name="comment_news" type="hidden" value="<?= $noticia->getNewsId(); ?>">                            
+                                        <label>Digite seu nome                                
+                                            <input required="required" name="comment_author" type="text" class="form-control">
+                                        </label>                                        
+                                    </div>                                  
+                                    
+                                    <div>
+                                        <label>Digite seu comentário
+                                            <textarea name="comment_content" required="required" class="form-control"></textarea>
+                                        </label>                            
+                                    </div>
+                                    
+                                    <div><button type="submit" class="btn btn-primary">Comentar</button></div>
+                               </div>
+                            </form>
+                        </center>  
+                        <hr>                    
+                        
+                            <?php foreach($comentarios[$noticia->getNewsId()] as $comment): ?>
+                                <p><span style="font-size: 20px" class="glyphicon glyphicon-user"></span> <?= $comment->getCommentAuthor();?> comentou:</p>                                
+                                <?= $comment->getCommentContent(); ?>                                
+                                <hr>
+                            <?php endforeach; ?>
+                                                                 
+                </div>                
+                
+                <center>
+                    
+                </center>
+                
+                
+                <hr>                           
+                <br><br><br>
+             </div>         
+         </div> 
+    <?php endforeach; ?>
+</div>
 
    

@@ -33,7 +33,7 @@ class IndexController extends AbstractActionController
         
         foreach($comments as $comment)
         {
-            array_push($comentarios[$comment->getCommentNews()], $comment);
+            array_push($comentarios[$comment->getCommentNews()->getNewsId()], $comment);
         }       
         
         $this->layout('layout/home_layout.phtml');

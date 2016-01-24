@@ -38,30 +38,33 @@ class CommentsController extends AbstractActionController
     public function addAction()
     {
         $request = $this->getRequest();
-        $this->layout('layout/ajax_layout.phtml');
-        echo $request->getPost('comment_content');
-        /*$request = $this->getRequest();
-        
-        if($request->isPost())
-        {         
-            $news = $this->getEntityManager()->getRepository('Application\Entity\News')->createQueryBuilder('n')->select()->where('n.newsId = '.$request->getPost('newsId')->getQuery()->getResult());
+        $this->layout('layout/ajax_layout.phtml');              
             
-            if(empty($news)) echo "Você tentou comentar numa Notícia inexistente!";
-            else 
+            if($request->isPost())
             {
-                $c = new Comment();
-                $c->setCommentAuthorIp($_SERVER['REMOTE_ADDR']);
-                $c->setCommentContent($request->getPost('comment_content'));
-                $c->setCommentDate(new \DateTime('now'));
-                $c->setCommentNews($news[0]);
-                $c->setCommentTitle($request->getPost('comment_title'));            
-            
-                $this->getEntityManager()->persist($c);
-                $this->getEntityManager()->flush();
+                $id = $request->getPost('comment_news');                    
+                $qb = $this->getEntityManager()->getRepository('Application\Entity\News')->createQueryBuilder('n');           
+                $news = $qb->select()->where('n.newsId = '.$id)->getQuery()->getResult();
                 
-                echo "Comentário postado com sucesso!";
-            }
-        }*/
+                if(empty($news)) echo "Você tentou comentar numa Notícia inexistente!";            
+                else 
+                {
+                    $c = new Comment();
+                    $c->setCommentAuthor($request->getPost('comment_author'));
+                    $c->setCommentNews($news[0]);
+                    $c->setCommentAuthorIp($_SERVER['REMOTE_ADDR']);
+                    $c->setCommentContent($request->getPost('comment_content'));
+                    $c->setCommentDate(new \DateTime('now'));
+                    $c->setCommentNews($news[0]);
+                    $c->setCommentTitle("");                                
+                
+                    $this->getEntityManager()->persist($c);
+                    $this->getEntityManager()->flush();                   
+                    
+                } 
+            }       
+            
+            return $this->redirect()->toRoute('home');
     }
 }
 
