@@ -16,6 +16,12 @@ body
 		
 }
 
+.comment-modal-header
+{	
+	font-size: 14px;
+	font-family: 'Times new roman', sans-serif;
+}
+
 #topbar
 {
 	background-color: #219AC2;	

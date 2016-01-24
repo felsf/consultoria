@@ -38,6 +38,30 @@ return array(
                 ),
             ),
             
+            'comments' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/comments/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Comments',
+                        'action'        => 'index',
+                    ),
+                ),
+            ),
+            
+            'comments-add' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/comments/add/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Comments',
+                        'action'        => 'add',
+                    ),
+                ),
+            ),
+            
             'news' => array(
                 'type'    => 'Literal',
                 'options' => array(

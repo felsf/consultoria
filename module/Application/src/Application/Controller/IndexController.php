@@ -18,10 +18,26 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
-        $qb = $this->getEntityManager()->getRepository("Application\Entity\News")->createQueryBuilder('n');
-        $news = $qb->select()->where('n.newsPublished = 1')->orderBy('n.newsDate', 'DESC')->setMaxResults(3)->getQuery()->getResult();
+        $qb = $this->getEntityManager()->getRepository("Application\Entity\Comment")->createQueryBuilder('c');        
+        $nqb = $this->getEntityManager()->getRepository("Application\Entity\News")->createQueryBuilder('n');
+        
+        $comments = $qb->select()->orderBy('c.commentDate', 'DESC')->getQuery()->getResult();
+        $news = $nqb->select()->where('n.newsPublished = 1')->orderBy('n.newsDate', 'DESC')->setMaxResults(3)->getQuery()->getResult();
+        
+        $comentarios = array();
+        
+        foreach($news as $noticia)
+        {
+            if(!array_key_exists($noticia->getNewsId(), $comentarios)) $comentarios[$noticia->getNewsId()] = array();
+        }
+        
+        foreach($comments as $comment)
+        {
+            array_push($comentarios[$comment->getCommentNews()], $comment);
+        }       
+        
         $this->layout('layout/home_layout.phtml');
-        return new ViewModel(array('news' => $news));
+        return new ViewModel(array('news' => $news, 'comentarios' => $comentarios));
     }
 
     public function ajaxAction()

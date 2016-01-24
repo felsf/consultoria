@@ -72,7 +72,95 @@ class Comment
      * })
      */
     private $commentNews;
+    
+    ///
 
+    public function getCommentId()
+    {
+        return $this->commentId;
+    }
 
+    public function setCommentId(integer $commentId)
+    {
+        $this->commentId = $commentId;
+        return $this;
+    }
+
+    public function getCommentTitle()
+    {
+        return $this->commentTitle;
+    }
+
+    public function setCommentTitle($commentTitle)
+    {
+        $this->commentTitle = $commentTitle;
+        return $this;
+    }
+
+    public function getCommentContent()
+    {
+        return $this->commentContent;
+    }
+
+    public function setCommentContent($commentContent)
+    {
+        $this->commentContent = $commentContent;
+        return $this;
+    }
+
+    public function getCommentAuthor()
+    {
+        return $this->commentAuthor;
+    }
+
+    public function setCommentAuthor($commentAuthor)
+    {
+        $this->commentAuthor = $commentAuthor;
+        return $this;
+    }
+
+    public function getCommentAuthorIp()
+    {
+        return $this->commentAuthorIp;
+    }
+
+    public function setCommentAuthorIp($commentAuthorIp)
+    {
+        $this->commentAuthorIp = $commentAuthorIp;
+        return $this;
+    }
+
+    public function getCommentDate()
+    {
+        return $this->commentDate;
+    }
+
+    public function setCommentDate(\DateTime $commentDate)
+    {
+        $this->commentDate = $commentDate;
+        return $this;
+    }
+
+    public function getCommentEditDate()
+    {
+        return $this->commentEditDate;
+    }
+
+    public function setCommentEditDate(\DateTime $commentEditDate)
+    {
+        $this->commentEditDate = $commentEditDate;
+        return $this;
+    }
+
+    public function getCommentNews()
+    {
+        return $this->commentNews;
+    }
+
+    public function setCommentNews($commentNews)
+    {
+        $this->commentNews = $commentNews;
+        return $this;
+    }
+ 
 }
-

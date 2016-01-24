@@ -64,7 +64,7 @@
             <div class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
                     <li><a class="topbar-item" href="<?= $this->url('home'); ?>">Início <span class="glyphicon glyphicon-home"></span></a></li>
-                    <li><a class="topbar-item" href="#">Notícias <span class="glyphicon glyphicon-th-list"></span></a></li>
+                    <li><a class="topbar-item" href="<?= $this->url('news-all'); ?>">Notícias <span class="glyphicon glyphicon-th-list"></span></a></li>
                     <li><a class="topbar-item" href="#">Artigos e Eventos <span class="glyphicon glyphicon-book"></span></a></li>
                     <li><a class="topbar-item" href="#">Vídeos  <span class="glyphicon glyphicon-facetime-video"></span></a></li>
                     <li><a class="topbar-item" href="#">Currículo <span class="glyphicon glyphicon-file"></span></a></li>
@@ -72,7 +72,20 @@
 
               <ul class="nav navbar-nav navbar-right">
                     <?php if($this->identity()): ?>
-                        <li><a href="#"><span class="glyphicon glyphicon-user"></span> <?= $this->identity()->getUserName(); ?> <span class="fa fa-caret-down"></span></a></li>
+                        <li>
+                            <span class="dropdown">
+                                <a href="#" style="text-decoration: none!important; color: white!important" class="dropdown-toggle" style="" data-toggle="dropdown">
+                                    <span class="glyphicon glyphicon-user"></span> 
+                                    <?= $this->identity()->getUserName(); ?> <span class="fa fa-caret-down"></span>
+                                </a>                            
+                                                             
+                                <ul class="dropdown-menu">                                    
+                                    <li><a href="<?php echo $this->url('users'); ?>">Controle de Usuários <span style="color: green" class="glyphicon glyphicon-user"></span></a></li>
+                                    <li><a href="<?php echo $this->url('news'); ?>">Controle de Notícias <span style="color: #3399ff" class="fa fa-newspaper-o"></span></a></li>
+                                    <li><a href="<?php echo $this->url('users-logout'); ?>">Sair <span style="color: red" class="glyphicon glyphicon-remove"></span></a></li>
+                                </ul>
+                            </span>
+                        </li>
                     <?php endif; ?>
               </ul>
 
@@ -89,7 +102,7 @@
         <div class="col-md-2">           
             <div id="sidebar" role="navigation">           
                 <ul class="nav nav-sidebar">
-                  <li class="active"><a style="text-align: center; text-decoration: none!important" href="#">Artigos e Eventos</a></li>                  
+                  <li class="active"><a style="text-align: center; text-decoration: none!important" href="#">--</a></li>                  
                 </ul>                
             </div>         
         </div><!--/span-->      

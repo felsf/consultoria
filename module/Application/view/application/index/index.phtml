@@ -6,6 +6,49 @@
     </div>
 <?php endif; ?>
 
+<script type="text/javascript">
+function comment(id)
+{
+    var text = document.getElementById("comment_content_"+id).value;
+	
+	$.ajax({
+        type: "POST",         
+        url: "<?= $this->url('comments-add'); ?>",
+        data: {comment_content: text, comment_news: id},
+        success: function(data) {
+            alert(data);
+        }
+    }); 
+}
+</script>
+
+<?php foreach($news as $noticia): ?>
+    <div class="modal fade" id="<?= 'news_'.$noticia->getNewsId(); ?>">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header comment-modal-header">
+                    Comentários da Notícia <b><?= $noticia->getNewsTitle() ?> <span style="color: #3399ff;" class="glyphicon glyphicon-comment"></span></b>
+                </div>
+                <div class="modal-body">
+                    <?php if(empty($comments)): ?>
+                    
+                    <?php else: ?>
+                        <?php foreach($comments as $comment): ?>
+                        <?php endforeach; ?>
+                    <?php endif; ?>               
+                </div>
+                <div class="modal-footer">
+                    <center>
+                        <label>Digite seu Comentário abaixo<textarea style="min-width: 400px" class="form-control" id="<?= 'comment_content_'.$noticia->getNewsId(); ?>" name="<?= 'comment_content_'.$noticia->getNewsId(); ?>"  placeholder="digite aqui"></textarea></label>
+                        <hr>
+                        <button onClick="comment(<?= $noticia->getNewsId(); ?>)" class="btn btn-lg btn-info">Comentar <span class="glyphicon glyphicon-comment"></span></button>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endforeach;?>
+
 <?php foreach($news as $noticia): ?>
     <div class="container-fluid">
         <div class="news-title"><?= $noticia->getNewsTitle(); ?></div>
@@ -21,6 +64,14 @@
             
             <div class="news-source">
                 <b>Fonte: <i><a href="<?= $noticia->getNewsSource(); ?>"><?= $noticia->getNewsSource(); ?></a></i></b>
+            </div>
+            
+            <div>
+                <center>
+                    <a href="#" data-toggle="modal" data-target="<?= '#news_'.$noticia->getNewsId() ?>">
+                        Comentários() <span style="color: blue" class="glyphicon glyphicon-comment"></span>
+                    </a>
+                </center>
             </div>
             <hr>
          </div>
