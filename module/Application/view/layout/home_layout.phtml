@@ -108,9 +108,10 @@
         <!-- Wrapper for slides -->
            <div class="carousel-inner" role="listbox">
               <?php foreach($images as $image): ?>
-                <div class="item active">
-                  <img src="<?= $this->basePath('img/'.$image->getImageUrl()); ?>">
-                </div>               
+                <div class="<?= ($image == $images[0]) ? 'item active' : 'item'; ?>">
+                    <img src="<?= $this->basePath('img/'.$image->getImageUrl());?>" >
+                </div>                 
+              <?php endforeach; ?>              
            </div>
 
         <!-- Left and right controls -->
@@ -123,38 +124,7 @@
                 <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
               </a>
-</div>
-        <div class="">
-            <div id="myCarousel" class="carousel slide carousel-main" data-ride="carousel">
-              <!-- Indicators -->
-              <ol class="carousel-indicators">
-                <?php for($a = 0; $a < count($images); $a++): ?>
-                    <li data-target="#myCarousel" data-slide-to="<?= $a; ?>" class="<?= ($a == 0) ? 'active' : 'other' ?>"></li>          
-                <?php endfor; ?>
-              </ol>
-
-              <!-- Wrapper for slides -->
-              <div class="carousel-inner carousel-img" role="listbox">
-                <?php foreach($images as $image): ?>
-                    <div class="<?= ($image == $images[0]) ? 'item active' : 'item' ?>">
-                      <img class="img-responsive carousel-img" src="<?= $this->basePath('img/'.$image->getImageUrl()); ?>" alt="<?= $image->getImageTitle() ?>">    
-                    </div>                   
-                <?php endforeach; ?>
-              
-
-              <!-- Left and right controls -->
-              <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-              </a>
-              <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-              </a>
-            </div>
-        </div>
-
-        </div>
+</div>       
 
      <hr>      
     
