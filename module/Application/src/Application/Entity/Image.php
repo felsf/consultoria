@@ -43,5 +43,38 @@ class Image
     private $imageTitle;
 
 
-}
+    // ------------------------------------------ //
 
+    public function getImageId(){
+        return $this->imageId;
+    }
+
+    public function setImageId($imageId){
+        $this->imageId = $imageId;
+    }
+
+    public function getImageUrl(){
+        return $this->imageUrl;
+    }
+
+    public function setImageUrl($imageUrl){
+        $this->imageUrl = $imageUrl;
+    }
+
+    public function getImageActive(){
+        return $this->imageActive;
+    }
+
+    public function setImageActive($imageActive){
+        $this->imageActive = $imageActive;
+    }
+
+    public function getImageTitle(){
+        return $this->imageTitle;
+    }
+
+    public function setImageTitle($imageTitle){
+        $this->imageTitle = $imageTitle;
+    }
+
+}

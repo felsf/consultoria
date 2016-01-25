@@ -76,6 +76,42 @@ return array(
                     'id' => '[0-9]+',
                 ),
             ),
+
+            'images' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/images/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Images',
+                        'action'        => 'index',
+                    ),
+                ),
+            ),
+
+            'images-add' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/images/add/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Images',
+                        'action'        => 'add',
+                    ),
+                ),
+            ),
+
+            'images-gallery' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/images/gallery/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Images',
+                        'action'        => 'gallery',
+                    ),
+                ),
+            ),
             
             'news' => array(
                 'type'    => 'Literal',

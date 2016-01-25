@@ -26,6 +26,8 @@ class IndexController extends AbstractActionController
         
         $comentarios = array();
         
+        $images = $this->getEntityManager()->getRepository("Application\Entity\Image")->createQueryBuilder('i')->select()->where('i.imageActive = 1')->orderBy('i.imageId', 'ASC')->getQuery()->getResult();
+
         foreach($news as $noticia)
         {
             if(!array_key_exists($noticia->getNewsId(), $comentarios)) $comentarios[$noticia->getNewsId()] = array();
@@ -37,7 +39,8 @@ class IndexController extends AbstractActionController
         }       
         
         $this->layout('layout/home_layout.phtml');
-        return new ViewModel(array('news' => $news, 'comentarios' => $comentarios));
+        $this->layout()->images = $images;
+        return new ViewModel(array('news' => $news, 'comentarios' => $comentarios, 'images' => $images));
     }
 
     public function banIpAction()

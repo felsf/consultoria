@@ -158,20 +158,31 @@ class NewsController extends AbstractActionController
         
         if(isset($id))
         {
-            $qb = $this->getEntityManager()->getRepository("Application\Entity\News")->createQueryBuilder('n');
-            $news = $qb->select()->where('n.newsId = '.$id)->getQuery()->getResult();
+            $qb = $this->getEntityManager()->getRepository("Application\Entity\Comment")->createQueryBuilder('c');
+            $nqb = $this->getEntityManager()->getRepository("Application\Entity\News")->createQueryBuilder('n');
+            $news = $nqb->select()->where('n.newsId = '.$id)->getQuery()->getResult();
         
             if(empty($news)) return $this->redirect()->toRoute('news');
             $news = $news[0];
             
-            return new ViewModel(array('noticia' => $news));
+            $comments = $qb->select()->where('c.commentNews = '.$id)->orderBy('c.commentDate', 'DESC')->getQuery()->getResult();            
+        
+            $comentarios = array();        
+            $comentarios[$id] = array();            
+            
+            foreach($comments as $comment)
+            {
+                array_push($comentarios[$id], $comment);
+            }
+
+            return new ViewModel(array('noticia' => $news, 'comentarios' => $comentarios[$id]));
         }
     }
     
     public function allAction()
-    {
-        $qb = $this->getEntityManager()->getRepository("Application\Entity\News")->createQueryBuilder('n');
-        $news = $qb->select()->where('n.newsPublished = 1')->orderBy('n.newsDate', 'DESC')->getQuery()->getResult();
+    {   
+        $nqb = $this->getEntityManager()->getRepository("Application\Entity\News")->createQueryBuilder('n');    
+        $news = $nqb->select()->where('n.newsPublished = 1')->orderBy('n.newsDate', 'DESC')->getQuery()->getResult();
         return new ViewModel(array('news' => $news));
     }
     
