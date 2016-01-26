@@ -48,6 +48,86 @@ class Patrocinador
      * @ORM\Column(name="patrocinador_position", type="integer", nullable=false)
      */
     private $patrocinadorPosition;
+ /**
+     * @return the $patrocinadorId
+     */
+    public function getPatrocinadorId()
+    {
+        return $this->patrocinadorId;
+    }
+
+ /**
+     * @return the $patrocinadorName
+     */
+    public function getPatrocinadorName()
+    {
+        return $this->patrocinadorName;
+    }
+
+ /**
+     * @return the $patrocinadorImage
+     */
+    public function getPatrocinadorImage()
+    {
+        return $this->patrocinadorImage;
+    }
+
+ /**
+     * @return the $patrocinadorActive
+     */
+    public function getPatrocinadorActive()
+    {
+        return $this->patrocinadorActive;
+    }
+
+ /**
+     * @return the $patrocinadorPosition
+     */
+    public function getPatrocinadorPosition()
+    {
+        return $this->patrocinadorPosition;
+    }
+
+ /**
+     * @param number $patrocinadorId
+     */
+    public function setPatrocinadorId($patrocinadorId)
+    {
+        $this->patrocinadorId = $patrocinadorId;
+    }
+
+ /**
+     * @param string $patrocinadorName
+     */
+    public function setPatrocinadorName($patrocinadorName)
+    {
+        $this->patrocinadorName = $patrocinadorName;
+    }
+
+ /**
+     * @param string $patrocinadorImage
+     */
+    public function setPatrocinadorImage($patrocinadorImage)
+    {
+        $this->patrocinadorImage = $patrocinadorImage;
+    }
+
+ /**
+     * @param boolean $patrocinadorActive
+     */
+    public function setPatrocinadorActive($patrocinadorActive)
+    {
+        $this->patrocinadorActive = $patrocinadorActive;
+    }
+
+ /**
+     * @param number $patrocinadorPosition
+     */
+    public function setPatrocinadorPosition($patrocinadorPosition)
+    {
+        $this->patrocinadorPosition = $patrocinadorPosition;
+    }
+
 
 
 }

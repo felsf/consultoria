@@ -77,6 +77,66 @@ return array(
                 ),
             ),
 
+            'patrocinadores' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/patrocinadores/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Patrocinadores',
+                        'action'        => 'index',
+                    ),
+                ),
+            ),
+
+            'patrocinadores-add' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/patrocinadores/add/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Patrocinadores',
+                        'action'        => 'add',
+                    ),
+                ),
+            ),
+
+            'patrocinadores-toggle' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/patrocinadores/toggle/:id/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Patrocinadores',
+                        'action'        => 'toggle',
+                    ),
+                ),
+            ),
+
+            'patrocinadores-edit' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/patrocinadores/edit/:id/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Patrocinadores',
+                        'action'        => 'edit',
+                    ),
+                ),
+            ),
+
+            'patrocinadores-delete' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/patrocinadores/delete/:id/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Patrocinadores',
+                        'action'        => 'delete',
+                    ),
+                ),
+            ),
+
             'images' => array(
                 'type'    => 'Literal',
                 'options' => array(
@@ -88,6 +148,37 @@ return array(
                     ),
                 ),
             ),
+
+            'images-toggle' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/images/toggle/:id/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Images',
+                        'action'        => 'toggle',
+                    ),
+                ),
+                'constraints' => array(
+                    'id' => '[0-9]+',
+                ),
+            ),
+
+            'images-delete' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/images/delete/:id/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Images',
+                        'action'        => 'delete',
+                    ),
+                ),
+                'constraints' => array(
+                    'id' => '[0-9]+',
+                ),
+            ),
+
 
             'images-add' => array(
                 'type'    => 'Literal',

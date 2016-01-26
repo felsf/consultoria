@@ -1,5 +1,4 @@
 <?php echo $this->doctype(); ?>
-
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -48,6 +47,33 @@
 
     </head>        
     
+
+
+    <script type="text/javascript">
+        var ptr = Array();
+        var index = 0;
+
+        <?php foreach($patrocinadores as $ptr): ?> ptr.push("<?= $ptr->getPatrocinadorImage(); ?>"); <?php endforeach; ?>
+
+        console.log(ptr);
+
+        $(document).ready(function() {            
+            setInterval(function(){runPtr()}, 5000);
+        });
+
+        function runPtr()
+        {
+            index = (index+1) % ptr.length;
+            $("#ptr").fadeOut(1500, function() {
+                $(this).attr({src: "<?= $this->basePath('img/'); ?>"+ptr[index]});
+                $(this).fadeIn(1000);
+            });
+            
+            console.log(index);
+        }
+
+    </script>
+
 
     <nav class="navbar navbar-default navbar-inverse" role="navigation" style="background-color: black; border-radius: 0px; ">
             <div class="container-fluid">
@@ -120,16 +146,18 @@
           <div class="col-md-3">         
               <div class="container-fluid">                   
                 <div id="sidebar" role="navigation">           
-                  <ul class="nav nav-sidebar">
-                    
+                  <ul class="nav nav-sidebar">                    
                         <li style="word-wrap: break-word!important; margin: 0" class="active"><a style="text-align: center; text-decoration: none!important; word-wrap: break-word" href="#">Patrocinadores</a></li>
-
-                        <li></li>                        
-
-                        <li style="word-wrap: break-word!important; text-align: center!important;">
-                            <img id="banner" class="img-responsive" style="max-width: 300px;" src="">
+                        
+                        <li style="text-align: center!important">
+                                <center>
+                                    <img name="ptr" id="ptr" class="img-responsive" style="max-width: 200px; max-height: 200px;" src="<?= $this->basePath('img/'.$patrocinadores[0]->getPatrocinadorImage()); ?>">
+                                </center>
                         </li>
-                    
+
+                        <?php foreach($patrocinadores as $ptr): ?>
+                            
+                        <?php endforeach; ?>
                   </ul>                
               </div>   
             </div>

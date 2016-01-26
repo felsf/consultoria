@@ -1,1 +1,86 @@
-Action "index", controller "Patrocinadores", module "Application".
+
+<div class="container-fluid">
+    <div class="panel">
+        <div class="panel-heading register-form-title">Gerenciador de Patrocinadores <span class="glyphicon glyphicon-bookmark"></span></div> 
+        
+        <div class="panel-body register-form-body" >
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                	<th class="text-center">Nome</th>                	
+                    <th class="text-center">Url (caminho)</th>                                        
+                    <th class="text-center">Está disponível?</th>                    
+                    <th class="text-center">Alterar Disponibilidade</th>
+                    <th class="text-center">Visualizar imagem</th>
+                    <th class="text-center">Editar</th>
+                    <th class="text-center">Apagar</th>
+                    
+                    <?php if(empty($patrocinadores)): ?>
+                        <tr>
+                            <center>
+                                <h2>Sem patrocinadores no momento! <span class="glyphicon glyphicon-bookmark"></span></h2>
+                            </center>
+                        </tr>
+                    <?php endif; ?>
+
+                    <?php foreach($patrocinadores as $ptr): ?>
+                        <tr>                        
+                           	<td class="text-center"><?= $ptr->getPatrocinadorName(); ?></td>                           	
+                           	<td class="text-center"><?= $ptr->getPatrocinadorImage(); ?></td>
+                           	<td class="text-center">
+                           		<span style="<?= ($ptr->getPatrocinadorActive()) ? 'color: green' : 'color: red'; ?>" class="<?= ($ptr->getPatrocinadorActive()) ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-remove'?>"></span>                   		
+                           	</td>
+                           	<td class="text-center">
+                            	<a href="<?= $this->url('patrocinadores-toggle', array('id' => $ptr->getPatrocinadorId())); ?>">
+                            		<button class="btn btn-primary"><?= ($ptr->getPatrocinadorActive()) ? 'Desativar' : 'Ativar'; ?></button>
+                            	</a>
+                            </td>
+                            <td class="text-center">
+                                <a href="#" data-toggle="modal" data-target="<?= '#ptr'.$ptr->getPatrocinadorId(); ?>">
+                                    <span class="glyphicon glyphicon-bookmark"></span>
+                                </a>
+                            </td>
+                            <td class="text-center">
+                            	<a href="<?= $this->url('patrocinadores-edit', array('id' => $ptr->getPatrocinadorId())); ?>">
+                            		<button class="btn btn-primary">Editar <span class="glyphicon glyphicon-pencil"></span></button>
+                            	</a>
+                            </td>  
+                            <td class="text-center">
+                            	<a href="<?= $this->url('patrocinadores-delete', array('id' => $ptr->getPatrocinadorId())); ?>">
+                            		<button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
+                            	</a>
+                            </td>                           	
+                        </tr>
+                    <?php endforeach; ?>                    
+                </table>
+                <a href="<?= $this->url('patrocinadores-add'); ?>">
+                	<center>
+                		<button class="btn btn-lg btn-success">Cadastrar Patrocinador <span class="glyphicon glyphicon-bookmark"></span></button>
+                	</center>
+                </a>
+
+                <?php foreach($patrocinadores as $ptr): ?>
+                    <div class="modal fade" id="<?= 'ptr'.$ptr->getPatrocinadorId(); ?>">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header standard-title">
+                                    <a href="#" data-dismiss="modal">
+                                        <span style="float: right"><span class="glyphicon glyphicon-remove"></span></span>
+                                    </a>
+                                    <center>Patrocinador <?= $ptr->getPatrocinadorName(); ?> <span class="glyphicon glyphicon-bookmark"></span></center>
+                                </div>
+                                <div class="modal-body">
+                                    <center>
+                                        <img style="max-width: 300px" src="<?= $this->basePath('img/'.$ptr->getPatrocinadorImage()); ?>">
+                                    </center>
+                                </div>
+                                <div class="modal-footer">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+
+            </div>
+         </div>
+    </div>
+</div>

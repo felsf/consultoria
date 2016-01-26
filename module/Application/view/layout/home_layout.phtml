@@ -46,6 +46,30 @@
 
     </head>        
     
+    <script type="text/javascript">
+        var ptr = Array();
+        var index = 0;
+
+        <?php foreach($patrocinadores as $ptr): ?> ptr.push("<?= $ptr->getPatrocinadorImage(); ?>"); <?php endforeach; ?>
+
+        console.log(ptr);
+
+        $(document).ready(function() {            
+            setInterval(function(){runPtr()}, 5000);
+        });
+
+        function runPtr()
+        {
+            index = (index+1) % ptr.length;
+            $("#ptr").fadeOut(1500, function() {
+                $(this).attr({src: "<?= $this->basePath('img/'); ?>"+ptr[index]});
+                $(this).fadeIn(1000);
+            });
+            
+            console.log(index);
+        }
+
+    </script>
 
     <nav class="navbar navbar-default navbar-inverse" role="navigation" style="background-color: black; border-radius: 0px; ">
             <div class="container-fluid">
@@ -78,16 +102,22 @@
                                 </a>                            
                                                              
                                 <ul class="dropdown-menu">                                    
-                                    <li><a href="<?php echo $this->url('users'); ?>">Controle de Usuários <span style="color: green" class="glyphicon glyphicon-user"></span></a></li>
+                                    <li><a href="<?php echo $this->url('users'); ?>">Gerenciamento de Usuários <span style="color: green" class="glyphicon glyphicon-user"></span></a></li>
                                     
-                                    <li><a href="<?php echo $this->url('news'); ?>">Controle de Notícias <span style="color: #3399ff" class="fa fa-newspaper-o"></span></a></li>
+                                    <li><a href="<?php echo $this->url('news'); ?>">Gerenciamento de Notícias <span style="color: #3399ff" class="fa fa-newspaper-o"></span></a></li>
 
-                                    <li><a href="<?php echo $this->url('comments'); ?>">Controle de Comentários <span style="color: #21A3CF" class="glyphicon glyphicon-comment"></span></a></li>
+                                    <li><a href="<?php echo $this->url('comments'); ?>">Gerenciamento de Comentários <span style="color: #21A3CF" class="glyphicon glyphicon-comment"></span></a></li>
+
+                                    <li><a href="<?php echo $this->url('images'); ?>">Gerenciamento de Fotos <span style="color: #21A3CF" class="fa fa-file-image-o"></span></a></li>
+
+                                    <li><a href="<?php echo $this->url('patrocinadores'); ?>">Gerenciamento de Patrocinadores <span style="color: #21A3CF" class="glyphicon glyphicon-bookmark"></span></a></li>
                                     
                                     <li><a href="<?php echo $this->url('users-logout'); ?>">Sair <span style="color: red" class="glyphicon glyphicon-remove"></span></a></li>
                                 </ul>
                             </span>
                         </li>
+                    <?php else: ?>
+                        <li><a style="color: #fff!important" href="<?= $this->url('users-login') ?>">Login <span class="glyphicon glyphicon-user"></span></a></li>
                     <?php endif; ?>
               </ul>
 
@@ -95,7 +125,7 @@
           </div>
     </nav>
     
-    <div class="container-fluid" style="">
+    <div class="container-fluid">
          <div id="myCarousel" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
             <ol class="carousel-indicators">
@@ -106,10 +136,10 @@
             </ol>
 
         <!-- Wrapper for slides -->
-           <div class="carousel-inner" role="listbox">
+           <div class="carousel-inner" role="listbox" style="max-height: 766px!important; width: 100%!important">
               <?php foreach($images as $image): ?>
                 <div class="<?= ($image == $images[0]) ? 'item active' : 'item'; ?>">
-                    <img src="<?= $this->basePath('img/'.$image->getImageUrl());?>" >
+                    <img style="max-height: 766px!important; width: 100%!important" src="<?= $this->basePath('img/'.$image->getImageUrl());?>" >
                 </div>                 
               <?php endforeach; ?>              
            </div>
@@ -157,19 +187,19 @@
          <div class="col-md-3">         
               <div class="container-fluid">                   
                 <div id="sidebar" role="navigation">           
-                  <ul class="nav nav-sidebar">
-                    
-                        <li style="word-wrap: break-word!important; margin: 0" class="active">
-                            <a style="text-align: center; text-decoration: none!important; word-wrap: break-word" href="#">Patrocinadores</a>
-                         </li>
-
-                        <li></li>                        
-
-                        <li style="word-wrap: break-word!important; text-align: center!important;">
-                            <img id="banner" class="img-responsive" style="max-width: 300px;" src="">
+                 <ul class="nav nav-sidebar">                    
+                        <li style="word-wrap: break-word!important; margin: 0" class="active"><a style="text-align: center; text-decoration: none!important; word-wrap: break-word" href="#">Patrocinadores</a></li>
+                        
+                        <li style="text-align: center!important">
+                                <center>
+                                    <img name="ptr" id="ptr" class="img-responsive" style="max-width: 200px; max-height: 200px;" src="<?= $this->basePath('img/'.$patrocinadores[0]->getPatrocinadorImage()); ?>">
+                                </center>
                         </li>
-                    
-                  </ul>                
+
+                        <?php foreach($patrocinadores as $ptr): ?>
+                            
+                        <?php endforeach; ?>
+                  </ul>                 
               </div>   
             </div>
          </div> 

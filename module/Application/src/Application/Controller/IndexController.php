@@ -16,6 +16,11 @@ use Application\Entity\News;
 
 class IndexController extends AbstractActionController
 {
+    public function onDispatch(\Zend\Mvc\MvcEvent $e)
+    {
+        return parent::onDispatch($e);
+    }
+
     public function indexAction()
     {
         $qb = $this->getEntityManager()->getRepository("Application\Entity\Comment")->createQueryBuilder('c');        

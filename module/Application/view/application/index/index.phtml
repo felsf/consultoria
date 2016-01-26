@@ -71,8 +71,8 @@ function toggle(element)
                         <hr>                    
                         
                             <?php foreach($comentarios[$noticia->getNewsId()] as $comment): ?>
-                                <p><span style="font-size: 20px" class="glyphicon glyphicon-user"></span> <?= $comment->getCommentAuthor();?> comentou:</p>                                
-                                <?= $comment->getCommentContent(); ?>p                                
+                                <p><span style="font-size: 15px" class="glyphicon glyphicon-user"></span> <?= $comment->getCommentAuthor();?> comentou em <?= $comment->getCommentDate()->format('d/m/Y - H:i'); ?> <span class="glyphicon glyphicon-time"></span></p>                                
+                                <p><span style="font-size: 17px"><?= $comment->getCommentContent(); ?></span></p>
                                 <hr>
                             <?php endforeach; ?>
                                                                  

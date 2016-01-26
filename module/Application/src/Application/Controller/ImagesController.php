@@ -7,11 +7,22 @@ use Zend\View\Model\ViewModel;
 
 use Application\Entity\Image;
 
+use Zend\Mvc\MvcEvent;
+
 class ImagesController extends AbstractActionController
 {
+	public function onDispatch(MvcEvent $e)
+	{
+		$logged_block = array('gallery');        
+        if(!$this->identity() && !in_array($e->getRouteMatch()->getParam("action"), $logged_block)) return $this->redirect()->toRoute('home');
+		return parent::onDispatch($e);
+	}
+
     public function indexAction()
     {
-        return new ViewModel();
+    	$qb = $this->getEntityManager()->getRepository("Application\Entity\Image")->createQueryBuilder('i');
+    	$images = $qb->select()->orderBy('i.imageId', 'ASC')->getQuery()->getResult();
+        return new ViewModel(array('images' => $images));
     }
 
     public function addAction()
@@ -52,6 +63,50 @@ class ImagesController extends AbstractActionController
     	}
 
     	return new ViewModel();
+    }
+
+    public function toggleAction()
+    {
+    	$id = $this->params('id');
+        $request = $this->getRequest();        
+        if(isset($id))
+        {
+            $qb = $this->getEntityManager()->getRepository("Application\Entity\Image")->createQueryBuilder('i');
+            $image = $qb->select()->where('i.imageId = '.$id)->getQuery()->getResult();
+        
+            if(empty($image)) return $this->redirect()->toRoute('images');
+            $image = $image[0];
+
+            $image->setImageActive(!$image->getImageActive());
+
+            $this->flashMessenger()->addInfoMessage("Imagem ".($image->getImageActive() ? 'habilitada' : 'desabilitada').' com sucesso!');
+
+            $this->getEntityManager()->persist($image);
+            $this->getEntityManager()->flush();
+
+            return $this->redirect()->toRoute('images');
+        }
+    }
+
+    public function deleteAction()
+    {
+    	$id = $this->params('id');
+        $request = $this->getRequest();    
+
+        if(isset($id))
+        {
+            $qb = $this->getEntityManager()->getRepository("Application\Entity\Image")->createQueryBuilder('i');
+            $image = $qb->select()->where('i.imageId = '.$id)->getQuery()->getResult();
+        
+            if(empty($image)) return $this->redirect()->toRoute('images');
+            $image = $image[0];
+
+            $this->getEntityManager()->remove($image);
+            $this->getEntityManager()->flush();
+
+            $this->flashMessenger()->addErrorMessage("Imagem \"".$image->getImageTitle()."\" apagada com sucesso!");
+            return $this->redirect()->toRoute('images');
+        }
     }
 
     public function galleryAction()

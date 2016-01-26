@@ -8,6 +8,7 @@ use Zend\View\Model\ViewModel;
 use Application\Entity\Comment;
 use Application\Entity\News;
 
+use Zend\Mvc\MvcEvent;
 
 class CommentsController extends AbstractActionController
 {
