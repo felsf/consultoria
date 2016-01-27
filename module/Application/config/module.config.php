@@ -300,7 +300,72 @@ return array(
                 ),
             ),
             
-            
+            'questions' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/questions/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Questions',
+                        'action'        => 'index',
+                    ),
+                ),
+            ),
+
+            'questions-add' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/questions/add/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Questions',
+                        'action'        => 'add',
+                    ),
+                ),
+            ),
+
+            'questions-list' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/questions/list/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Questions',
+                        'action'        => 'list',
+                    ),
+                ),
+            ),
+
+            'questions-reply' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/questions/reply/:id/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Questions',
+                        'action'        => 'reply',
+                    ),
+                    'constraints' => array(
+                        'id' => '[0-9]+',
+                    ),
+                ),
+            ),
+
+            'questions-delete' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/questions/delete/:id/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Questions',
+                        'action'        => 'delete',
+                    ),
+                    'constraints' => array(
+                        'id' => '[0-9]+',
+                    ),
+                ),
+            ),            
+                
             'users' => array(
                 'type'    => 'Literal',
                 'options' => array(

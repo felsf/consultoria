@@ -1,1 +1,19 @@
-Action "index", controller "Questions", module "Application".
+<div class="panel">
+	<div class="panel-heading register-form-title">Perguntas e Respostas <span class="glyphicon glyphicon-question-sign"></span></div>
+	<div class="panel-body register-form-body">
+		<?php if(empty($questions)): ?>
+			<center>
+				<h2>Sem perguntas no momento.</h2>
+			</center>
+		<?php endif; ?>
+		<?php foreach($questions as $question): ?>
+			<p>Pergunta feita por <b><?= $question[0]->getQuestionAuthor(); ?></b> em <?= $question[0]->getQuestionDate()->format('d/m/Y - H:i:s'); ?> <span class="glyphicon glyphicon-time"></span></p>
+			
+			<p><b>- <?= $question[0]->getQuestionTitle(); ?></b></p>
+			<br>			
+			<p><span class="glyphicon glyphicon-arrow-right"></span> <?= $answers[$question[0]->getQuestionId()][0]->getAnswerContent(); ?></p>
+
+			<hr>
+		<?php endforeach; ?>
+	</div>
+</div>

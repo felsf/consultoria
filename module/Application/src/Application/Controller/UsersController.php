@@ -122,12 +122,12 @@ class UsersController extends AbstractActionController
                 $this->getEntityManager()->flush();
                 
                 $this->flashMessenger()->addSuccessMessage("Autenticado com sucesso!");
-                return $this->redirect()->toRoute('home');
+                $this->redirect()->toRoute('home');
             }
         
             else {
                 $this->flashMessenger()->addErrorMessage("Usuário ou Senha inválidos!");
-                return $this->redirect()->toRoute('users-login');
+                $this->redirect()->toRoute('users-login');
             }
         
         }

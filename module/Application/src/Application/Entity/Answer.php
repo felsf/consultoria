@@ -62,6 +62,102 @@ class Answer
      */
     private $answerQuestion;
 
+    ////////////////////////////////////////////////////////////
 
+ /**
+     * @return the $answerId
+     */
+    public function getAnswerId()
+    {
+        return $this->answerId;
+    }
+
+ /**
+     * @return the $answerContent
+     */
+    public function getAnswerContent()
+    {
+        return $this->answerContent;
+    }
+
+ /**
+     * @return the $answerDate
+     */
+    public function getAnswerDate()
+    {
+        return $this->answerDate;
+    }
+
+ /**
+     * @return the $answerEditDate
+     */
+    public function getAnswerEditDate()
+    {
+        return $this->answerEditDate;
+    }
+
+ /**
+     * @return the $answerAuthor
+     */
+    public function getAnswerAuthor()
+    {
+        return $this->answerAuthor;
+    }
+
+ /**
+     * @return the $answerQuestion
+     */
+    public function getAnswerQuestion()
+    {
+        return $this->answerQuestion;
+    }
+
+ /**
+     * @param number $answerId
+     */
+    public function setAnswerId($answerId)
+    {
+        $this->answerId = $answerId;
+    }
+
+ /**
+     * @param string $answerContent
+     */
+    public function setAnswerContent($answerContent)
+    {
+        $this->answerContent = $answerContent;
+    }
+
+ /**
+     * @param DateTime $answerDate
+     */
+    public function setAnswerDate($answerDate)
+    {
+        $this->answerDate = $answerDate;
+    }
+
+ /**
+     * @param DateTime $answerEditDate
+     */
+    public function setAnswerEditDate($answerEditDate)
+    {
+        $this->answerEditDate = $answerEditDate;
+    }
+
+ /**
+     * @param \Application\Entity\User $answerAuthor
+     */
+    public function setAnswerAuthor($answerAuthor)
+    {
+        $this->answerAuthor = $answerAuthor;
+    }
+
+ /**
+     * @param \Application\Entity\Question $answerQuestion
+     */
+    public function setAnswerQuestion($answerQuestion)
+    {
+        $this->answerQuestion = $answerQuestion;
+    }
 }
 

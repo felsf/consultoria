@@ -24,7 +24,7 @@ class Question
     /**
      * @var string
      *
-     * @ORM\Column(name="question_title", type="string", length=100, nullable=false)
+     * @ORM\Column(name="question_title", type="text", nullable=false)
      */
     private $questionTitle;
 
@@ -56,13 +56,105 @@ class Question
      */
     private $questionAuthorIp;
 
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="question_approved", type="boolean", nullable=false)
+    
+    ////////////////////////////////////////////////////////////    
+
+ /**
+     * @return the $questionId
      */
-    private $questionApproved = '0';
+    public function getQuestionId()
+    {
+        return $this->questionId;
+    }
+
+ /**
+     * @return the $questionTitle
+     */
+    public function getQuestionTitle()
+    {
+        return $this->questionTitle;
+    }
+
+ /**
+     * @return the $questionDate
+     */
+    public function getQuestionDate()
+    {
+        return $this->questionDate;
+    }
+
+ /**
+     * @return the $questionAuthor
+     */
+    public function getQuestionAuthor()
+    {
+        return $this->questionAuthor;
+    }
+
+ /**
+     * @return the $questionAuthorEmail
+     */
+    public function getQuestionAuthorEmail()
+    {
+        return $this->questionAuthorEmail;
+    }
+
+ /**
+     * @return the $questionAuthorIp
+     */
+    public function getQuestionAuthorIp()
+    {
+        return $this->questionAuthorIp;
+    }
 
 
+ /**
+     * @param number $questionId
+     */
+    public function setQuestionId($questionId)
+    {
+        $this->questionId = $questionId;
+    }
+
+ /**
+     * @param string $questionTitle
+     */
+    public function setQuestionTitle($questionTitle)
+    {
+        $this->questionTitle = $questionTitle;
+    }
+
+ /**
+     * @param DateTime $questionDate
+     */
+    public function setQuestionDate($questionDate)
+    {
+        $this->questionDate = $questionDate;
+    }
+
+ /**
+     * @param string $questionAuthor
+     */
+    public function setQuestionAuthor($questionAuthor)
+    {
+        $this->questionAuthor = $questionAuthor;
+    }
+
+ /**
+     * @param string $questionAuthorEmail
+     */
+    public function setQuestionAuthorEmail($questionAuthorEmail)
+    {
+        $this->questionAuthorEmail = $questionAuthorEmail;
+    }
+
+ /**
+     * @param string $questionAuthorIp
+     */
+    public function setQuestionAuthorIp($questionAuthorIp)
+    {
+        $this->questionAuthorIp = $questionAuthorIp;
+    }
+    
 }
 
