@@ -40,12 +40,11 @@ class QuestionsController extends AbstractActionController
     	}
 
         $trans = new SmtpTransport();
-        $options = new SmtpOptions(array('name' => 'smtp.google.com', 'host' => 'smtp.google.com', 'port' => 25, 'connection_class' => 'login', 'connection_config' => array('username' => 'fel3rd@gmail.com', 'password' => 'gigadramon')));
+        $options = new SmtpOptions(array('name' => 'smtp.live.com', 'host' => 'smtp.live.com', 'port' => 25, 'connection_class' => 'login', 'connection_config' => array('username' => 'email', 'password' => 'senha', 'ssl' => 'tls')));
         $msg = new Message();
 
-        $msg->addTo('fel486@live.com')->addFrom('fel3rd@gmail.com')->setSubject("Teste")->setBody("Assuntos diários")
+        $msg->addTo('destino')->addFrom('origem')->setSubject("Teste")->setBody("Assuntos diários")
         ;
-
 
         $trans->setOptions($options);
         $trans->send($msg);
