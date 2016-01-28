@@ -127,7 +127,7 @@ class UsersController extends AbstractActionController
         
             else {
                 $this->flashMessenger()->addErrorMessage("Usuário ou Senha inválidos!");
-                $this->redirect()->toRoute('users-login');
+                return $this->redirect()->toRoute('users-login');
             }
         
         }
