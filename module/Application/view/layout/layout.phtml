@@ -34,12 +34,9 @@
         ; ?>
 
         <div class="container-fluid header">
-            <div class="container" style="padding-top: 1.5%; padding-left: 5%;"> 
-                
-                <div style="font-family: Times New Roman; font-size: 45px; float: left; margin-top: 0;">              
-                </div> 
+            <div class="container" style="padding-top: 1.5%; padding-left: 20%;">              
                     
-                <div class="header-text" style="font-size: 50px; font-family: 'TrajanPro-Regular', sans-serif!important;">WELINGTON MAPURUNGA</div>
+                <div class="header-text" style="font-size: 50px; font-family: 'TrajanPro-Original', sans-serif!important;">WELINGTON MAPURUNGA</div>
 
                 <div class="header-text" style="font-size: 30px; font-family: 'TrajanPro-Original', sans-serif!important;">Consultoria Previdenciária Especializada</div>                         
             </div>
@@ -88,12 +85,26 @@
               </a>              
             </div>
             <div class="navbar-collapse collapse">
-              <ul class="nav navbar-nav">
+              <ul class="nav navbar-nav">                   
+
                     <li><a class="topbar-item" href="<?= $this->url('home'); ?>">Início <span class="glyphicon glyphicon-home"></span></a></li>
                     <li><a class="topbar-item" href="<?= $this->url('news-all'); ?>">Notícias <span class="glyphicon glyphicon-th-list"></span></a></li>
                     <li><a class="topbar-item" href="#">Artigos e Eventos <span class="glyphicon glyphicon-book"></span></a></li>
-                    <li><a class="topbar-item" href="#">Vídeos  <span class="glyphicon glyphicon-facetime-video"></span></a></li>
+                    <li><a class="topbar-item" href="#">Vídeos  <span class="glyphicon glyphicon-facetime-video"></span></a></li>    
                     <li><a class="topbar-item" href="#">Currículo <span class="glyphicon glyphicon-file"></span></a></li>
+
+                    <li>    
+                        <a href="#" data-toggle="dropdown" class="topbar-item">Fale com o Consultor 
+                        <span class="fa fa-user-plus"></span>
+                            <span class="dropdown">         
+                                <ul class="dropdown-menu">                                    
+                                    <li><a href="#">Perguntas e respostas <span style="color: #C0C43D" class="fa fa-question"></span></a></li>
+                                    <li><a href="#">Contato online <span style="color: orange" class="fa fa-signal"></span></a></li>
+                                </ul>
+                        </a>
+                            </span>
+                    </li>                 
+
               </ul> 
 
               <ul class="nav navbar-nav navbar-right">
@@ -106,12 +117,24 @@
                                 </a>                            
                                                              
                                 <ul class="dropdown-menu">                                    
-                                    <li><a href="<?php echo $this->url('users'); ?>">Controle de Usuários <span style="color: green" class="glyphicon glyphicon-user"></span></a></li>
-                                    <li><a href="<?php echo $this->url('news'); ?>">Controle de Notícias <span style="color: #3399ff" class="fa fa-newspaper-o"></span></a></li>
+                                    <li><a href="<?php echo $this->url('users'); ?>">Gerenciamento de Usuários <span style="color: green" class="glyphicon glyphicon-user"></span></a></li>
+                                    
+                                    <li><a href="<?php echo $this->url('news'); ?>">Gerenciamento de Notícias <span style="color: #3399ff" class="fa fa-newspaper-o"></span></a></li>
+
+                                    <li><a href="<?php echo $this->url('comments'); ?>">Gerenciamento de Comentários <span style="color: #21A3CF" class="glyphicon glyphicon-comment"></span></a></li>
+
+                                    <li><a href="<?php echo $this->url('images'); ?>">Gerenciamento de Fotos <span style="color: #21A3CF" class="fa fa-file-image-o"></span></a></li>
+
+                                    <li><a href="<?php echo $this->url('patrocinadores'); ?>">Gerenciamento de Patrocinadores <span style="color: #21A3CF" class="glyphicon glyphicon-bookmark"></span></a></li>
+
+                                    <li><a href="<?php echo $this->url('questions'); ?>">Perguntas e Respostas <span style="color: #21A3CF" class="glyphicon glyphicon-question-sign"></span></a></li>
+                                    
                                     <li><a href="<?php echo $this->url('users-logout'); ?>">Sair <span style="color: red" class="glyphicon glyphicon-remove"></span></a></li>
                                 </ul>
                             </span>
                         </li>
+                    <?php else: ?>
+                        <li><a style="color: #fff!important" href="<?= $this->url('users-login') ?>">Login <span class="glyphicon glyphicon-user"></span></a></li>
                     <?php endif; ?>
               </ul>
 

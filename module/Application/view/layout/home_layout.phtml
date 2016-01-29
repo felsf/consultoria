@@ -36,9 +36,9 @@
         ; ?>
 
         <div class="container-fluid header">
-            <div class="container-fluid" style="padding-top: 1.5%; padding-left: 5%;">              
+            <div class="container" style="padding-top: 1.5%; padding-left: 20%;">              
                     
-                <div class="header-text" style="font-size: 50px; font-family: 'TrajanPro-Regular', sans-serif!important;">WELINGTON MAPURUNGA</div>
+                <div class="header-text" style="font-size: 50px; font-family: 'TrajanPro-Original', sans-serif!important;">WELINGTON MAPURUNGA</div>
 
                 <div class="header-text" style="font-size: 30px; font-family: 'TrajanPro-Original', sans-serif!important;">Consultoria Previdenciária Especializada</div>                         
             </div>
@@ -84,12 +84,26 @@
               </a>              
             </div>
             <div class="navbar-collapse collapse">
-              <ul class="nav navbar-nav">
+              <ul class="nav navbar-nav">                   
+
                     <li><a class="topbar-item" href="<?= $this->url('home'); ?>">Início <span class="glyphicon glyphicon-home"></span></a></li>
                     <li><a class="topbar-item" href="<?= $this->url('news-all'); ?>">Notícias <span class="glyphicon glyphicon-th-list"></span></a></li>
                     <li><a class="topbar-item" href="#">Artigos e Eventos <span class="glyphicon glyphicon-book"></span></a></li>
-                    <li><a class="topbar-item" href="#">Vídeos  <span class="glyphicon glyphicon-facetime-video"></span></a></li>
+                    <li><a class="topbar-item" href="#">Vídeos  <span class="glyphicon glyphicon-facetime-video"></span></a></li>    
                     <li><a class="topbar-item" href="#">Currículo <span class="glyphicon glyphicon-file"></span></a></li>
+
+                    <li>    
+                        <a href="#" data-toggle="dropdown" class="topbar-item">Fale com o Consultor 
+                        <span class="fa fa-user-plus"></span>
+                            <span class="dropdown">         
+                                <ul class="dropdown-menu">                                    
+                                    <li><a href="#">Perguntas e respostas <span style="color: #C0C43D" class="fa fa-question"></span></a></li>
+                                    <li><a href="#">Contato online <span style="color: orange" class="fa fa-signal"></span></a></li>
+                                </ul>
+                        </a>
+                            </span>
+                    </li>                 
+
               </ul> 
 
               <ul class="nav navbar-nav navbar-right">
