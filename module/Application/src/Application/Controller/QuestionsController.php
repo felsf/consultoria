@@ -42,23 +42,34 @@ class QuestionsController extends AbstractActionController
         return new ViewModel(array('answers' => $a, 'questions' => $q));
     }
 
-    private function sendEmail()
+    private function sendEmail($destino, $subject, $body)
     {
+        $user = "";
+        $password = "";
+
         try
-        {
-            $trans = new SmtpTransport();
-            $options = new SmtpOptions(array('name' => 'smtp.live.com', 'host' => 'smtp.live.com', 'port' => 25, 'connection_class' => 'login', 'connection_config' => array('username' => 'email', 'password' => 'senha', 'ssl' => 'tls')));
-            $msg = new Message();
+        {   
+           $trans = new SmtpTransport();
+           $msg = new Message();
 
-            $msg->addTo('destino')->addFrom('origem')->setSubject("Teste")->setBody("Assuntos diários")
-            ;
+           $options = new SmtpOptions(
+                    array('name' => 'smtp.live.com', 'host' => 'smtp.live.com', 'port' => 587, 'connection_class' => 'login',
+                        'connection_config' => array('username' => $user, 'password' => $password, 'ssl' => 'tls')
+                    )
+                );
 
+           $msg->addFrom($user)
+               ->addTo($destino)
+               ->setsubject($subject);
+            $msg->setBody($body);
+            $msg->setEncoding("UTF-8");
+        
             $trans->setOptions($options);
             $trans->send($msg);
         }
         catch(Exception $e)
         {
-            
+            $this->flashMessenger()->addSuccessMessage("Falha ao enviar email");
         }
     }
 
@@ -117,17 +128,20 @@ class QuestionsController extends AbstractActionController
 
             if($request->isPost())
             {
+                $this->sendEmail($question->getQuestionAuthorEmail(), "Resposta à sua pergunta: ".$question->getQuestionTitle(), 
+                    "".$request->getPost("answer_content")."");                
+
             	$answer = new Answer();
             	$answer->setAnswerAuthor($this->identity());
             	$answer->setAnswerDate(new \DateTime('now'));
             	$answer->setAnswerContent($request->getPost("answer_content"));
-            	$answer->setAnswerQuestion($question);
+            	$answer->setAnswerQuestion($question);                
 
             	$this->getEntityManager()->persist($answer);
             	$this->getEntityManager()->flush();
 
             	$this->flashMessenger()->addSuccessMessage("Pergunta respondida com sucesso!");
-            	return $this->redirect()->toRoute('questions-list');
+            	return $this->redirect()->toRoute('questions');
             }
         }
 

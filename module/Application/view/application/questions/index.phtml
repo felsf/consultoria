@@ -6,26 +6,41 @@
 			<center>
 				<div style="font-family: Times New Roman; font-size: 25px;">
 					<p>Sem perguntas no momento.</p>
-					<hr>
-					
+				</div>
+			</center>
+		<?php endif; ?>
+		<?php foreach($questions as $question): ?>
+			<div style="text-align: left;">
+				<p>Pergunta feita por <b><?= $question[0]->getQuestionAuthor(); ?></b> em <?= $question[0]->getQuestionDate()->format('d/m/Y - H:i:s'); ?> <span class="glyphicon glyphicon-time"></span></p>
+				
+				<div class="modal fade" id="<?= 'qst_'.$question[0]->getQuestionId(); ?>">
+                        <div class="modal-dialog">
+                            <div class="modal-content" style="max-width: 800px">                              
+                                <div class="modal-body">
+                                    <center>
+                                        <div style="font-size: 18px">
+                                        	<?= $answers[$question[0]->getQuestionId()][0]->getAnswerContent(); ?>
+                                        </div>
+                                    </center>
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>
+                    <p style="font-size: 18px"><b>- <?= $question[0]->getQuestionTitle(); ?></b>
+					<a href="#" data-toggle="modal" data-target="<?= '#qst_'.$question[0]->getQuestionId(); ?>">Visualizar Resposta <span class="glyphicon glyphicon-share-alt"></span></a>
+				</p>
+				<br>			
+						
+			</div>
+			<hr>
+
+		<?php endforeach; ?>		
+			<hr>	
 					<p>
 						<a href="<?= $this->url('questions-add'); ?>">
 							<button class="btn btn-lg btn-primary">Faça uma pergunta <span class="glyphicon glyphicon-question-sign"></span></button>
 						</a>
 					</p>
-
-				</div>
-			</center>
-		<?php endif; ?>
-		<?php foreach($questions as $question): ?>
-			<p>Pergunta feita por <b><?= $question[0]->getQuestionAuthor(); ?></b> em <?= $question[0]->getQuestionDate()->format('d/m/Y - H:i:s'); ?> <span class="glyphicon glyphicon-time"></span></p>
-			
-			<p><b>- <?= $question[0]->getQuestionTitle(); ?></b></p>
-			<br>			
-			<p><span class="glyphicon glyphicon-arrow-right"></span> <?= $answers[$question[0]->getQuestionId()][0]->getAnswerContent(); ?></p>
-
-			<hr>
-		<?php endforeach; ?>
 	</div>
 </div>
 </center>

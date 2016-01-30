@@ -60,10 +60,11 @@
                 <div class="modal-header standard-title">
                     <center>
                         <p>Autor: <b><?= $question->getQuestionAuthor(); ?></b> <span class="glyphicon glyphicon-user"></span></p>
-                        <p>Email do Autor: <b><?= $question->getQuestionAuthorEmail(); ?></b> <span class="glyphicon glyphicon-envelope"></
+                        <p>Email do Autor: <b><?= $question->getQuestionAuthorEmail(); ?></b> <span class="glyphicon glyphicon-envelope"></span>
                     </center>
                 </div>
-                <div class="modal-body">                    
+                <div class="modal-body">
+                    <?= $question->getQuestionTitle(); ?>                    
                     <hr>
                         <?php if(empty($answers[$question->getQuestionId()])): ?>
                             <center><h2>Resposta não disponível</h2></center>
