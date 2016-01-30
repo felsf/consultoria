@@ -70,29 +70,20 @@ class CommentsController extends AbstractActionController
         $this->layout('layout/ajax_layout.phtml');              
             
             if($request->isPost())
-            {
-                $id = $request->getPost('comment_news');                    
-                $qb = $this->getEntityManager()->getRepository('Application\Entity\News')->createQueryBuilder('n');           
-                $news = $qb->select()->where('n.newsId = '.$id)->getQuery()->getResult();
-                
-                if(empty($news)) echo "Você tentou comentar numa Notícia inexistente!";            
-                else 
-                {                    
+            {                                                                   
                     $c = new Comment();
-                    $c->setCommentAuthor($request->getPost('comment_author'));
-                    $c->setCommentNews($news[0]);
+                    $c->setCommentAuthor($request->getPost('comment_author'));                    
                     $c->setCommentAuthorIp($_SERVER['REMOTE_ADDR']);
                     $c->setCommentContent($request->getPost('comment_content'));
-                    $c->setCommentDate(new \DateTime('now'));
-                    $c->setCommentNews($news[0]);
+                    $c->setCommentDate(new \DateTime('now'));                    
                     $c->setCommentTitle("");                                
                 
                     $this->getEntityManager()->persist($c);
                     $this->getEntityManager()->flush();   
                     
                     $this->flashMessenger()->addInfoMessage("Comentário postado com sucesso!");
-                    $this->redirect()->toRoute('home');                    
-                } 
+                    return $this->redirect()->toRoute('home');                    
+                 
             }          
     }
 }

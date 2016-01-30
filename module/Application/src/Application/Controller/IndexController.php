@@ -23,28 +23,16 @@ class IndexController extends AbstractActionController
 
     public function indexAction()
     {
-        $qb = $this->getEntityManager()->getRepository("Application\Entity\Comment")->createQueryBuilder('c');        
+        $qb = $this->getEntityManager()->getRepository("Application\Entity\Comment")->createQueryBuilder('c');                
         $nqb = $this->getEntityManager()->getRepository("Application\Entity\News")->createQueryBuilder('n');
-        
-        $comments = $qb->select()->orderBy('c.commentDate', 'DESC')->getQuery()->getResult();
-        $news = $nqb->select()->where('n.newsPublished = 1')->orderBy('n.newsDate', 'DESC')->setMaxResults(3)->getQuery()->getResult();
-        
-        $comentarios = array();
-        
-        $images = $this->getEntityManager()->getRepository("Application\Entity\Image")->createQueryBuilder('i')->select()->where('i.imageActive = 1')->orderBy('i.imageId', 'ASC')->getQuery()->getResult();
 
-        foreach($news as $noticia)
-        {
-            if(!array_key_exists($noticia->getNewsId(), $comentarios)) $comentarios[$noticia->getNewsId()] = array();
-        }
-        
-        foreach($comments as $comment)
-        {
-            array_push($comentarios[$comment->getCommentNews()->getNewsId()], $comment);
-        }       
-        
+        $comentarios = $qb->select()->orderBy('c.commentDate', 'DESC')->getQuery()->getResult();                
+        $images = $this->getEntityManager()->getRepository("Application\Entity\Image")->createQueryBuilder('i')->select()->where('i.imageActive = 1')->orderBy('i.imageId', 'ASC')->getQuery()->getResult();           
+        $news = $nqb->select()->where('n.newsPublished = 1')->orderBy('n.newsDate', 'DESC')->setMaxResults(3)->getQuery()->getResult();
+
         $this->layout('layout/home_layout.phtml');
         $this->layout()->images = $images;
+        
         return new ViewModel(array('news' => $news, 'comentarios' => $comentarios, 'images' => $images));
     }
 

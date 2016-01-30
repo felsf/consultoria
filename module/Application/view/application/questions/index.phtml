@@ -1,9 +1,20 @@
-<div class="panel">
+<center>
+<div class="panel" style="max-width: 600px">
 	<div class="panel-heading register-form-title">Perguntas e Respostas <span class="glyphicon glyphicon-question-sign"></span></div>
 	<div class="panel-body register-form-body">
 		<?php if(empty($questions)): ?>
 			<center>
-				<h2>Sem perguntas no momento.</h2>
+				<div style="font-family: Times New Roman; font-size: 25px;">
+					<p>Sem perguntas no momento.</p>
+					<hr>
+					
+					<p>
+						<a href="<?= $this->url('questions-add'); ?>">
+							<button class="btn btn-lg btn-primary">Faça uma pergunta <span class="glyphicon glyphicon-question-sign"></span></button>
+						</a>
+					</p>
+
+				</div>
 			</center>
 		<?php endif; ?>
 		<?php foreach($questions as $question): ?>
@@ -17,3 +28,4 @@
 		<?php endforeach; ?>
 	</div>
 </div>
+</center>

@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Comment
  *
- * @ORM\Table(name="comment", indexes={@ORM\Index(name="comment_news_idx", columns={"comment_news"})})
+ * @ORM\Table(name="comment")
  * @ORM\Entity
  */
 class Comment
@@ -61,17 +61,7 @@ class Comment
      *
      * @ORM\Column(name="comment_edit_date", type="datetime", nullable=true)
      */
-    private $commentEditDate;
-
-    /**
-     * @var \Application\Entity\News
-     *
-     * @ORM\ManyToOne(targetEntity="Application\Entity\News")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="comment_news", referencedColumnName="news_id")
-     * })
-     */
-    private $commentNews;
+    private $commentEditDate;   
     
     ///
 
@@ -151,16 +141,4 @@ class Comment
         $this->commentEditDate = $commentEditDate;
         return $this;
     }
-
-    public function getCommentNews()
-    {
-        return $this->commentNews;
-    }
-
-    public function setCommentNews($commentNews)
-    {
-        $this->commentNews = $commentNews;
-        return $this;
-    }
- 
 }

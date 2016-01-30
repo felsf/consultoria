@@ -37,19 +37,29 @@ class QuestionsController extends AbstractActionController
     		{
     			$q[$question->getQuestionId()] = array($question);
     		}
-    	}
-
-        $trans = new SmtpTransport();
-        $options = new SmtpOptions(array('name' => 'smtp.live.com', 'host' => 'smtp.live.com', 'port' => 25, 'connection_class' => 'login', 'connection_config' => array('username' => 'email', 'password' => 'senha', 'ssl' => 'tls')));
-        $msg = new Message();
-
-        $msg->addTo('destino')->addFrom('origem')->setSubject("Teste")->setBody("Assuntos diários")
-        ;
-
-        $trans->setOptions($options);
-        $trans->send($msg);
+    	}        
 
         return new ViewModel(array('answers' => $a, 'questions' => $q));
+    }
+
+    private function sendEmail()
+    {
+        try
+        {
+            $trans = new SmtpTransport();
+            $options = new SmtpOptions(array('name' => 'smtp.live.com', 'host' => 'smtp.live.com', 'port' => 25, 'connection_class' => 'login', 'connection_config' => array('username' => 'email', 'password' => 'senha', 'ssl' => 'tls')));
+            $msg = new Message();
+
+            $msg->addTo('destino')->addFrom('origem')->setSubject("Teste")->setBody("Assuntos diários")
+            ;
+
+            $trans->setOptions($options);
+            $trans->send($msg);
+        }
+        catch(Exception $e)
+        {
+            
+        }
     }
 
     public function addAction()
