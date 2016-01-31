@@ -13,12 +13,13 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
 use Application\Entity\News;
+use Application\Entity\Request;
 
 class IndexController extends AbstractActionController
 {
     public function onDispatch(\Zend\Mvc\MvcEvent $e)
     {
-        return parent::onDispatch($e);
+        return parent::onDispatch($e);    
     }
 
     public function indexAction()
@@ -34,6 +35,32 @@ class IndexController extends AbstractActionController
         $this->layout()->images = $images;
         
         return new ViewModel(array('news' => $news, 'comentarios' => $comentarios, 'images' => $images));
+    }
+
+    public function contactAction()
+    {
+        $request = $this->getRequest();
+
+        if($request->isPost())
+        {
+           $req = new Request();
+            $req->setRequestEmail($request->getPost('request_email'));
+            $req->setRequestContent($request->getPost('request_content'));
+
+            $this->getEntityManager()->persist($req);
+            $this->getEntityManager()->flush();
+
+            $this->flashMessenger()->addSuccessMessage("Solicitação registrada com sucesso. O consultor entrará em contato em breve!");
+            return $this->redirect()->toUrl('application');
+
+        }
+
+        return new ViewModel(array());
+    }
+
+    public function chatAction()
+    {
+        return new ViewModel(array());
     }
 
     public function banIpAction()

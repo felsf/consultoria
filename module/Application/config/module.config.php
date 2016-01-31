@@ -26,14 +26,27 @@ return array(
             // new controllers and actions without needing to create a new
             // module. Simply drop new controllers in, and you can access them
             // using the path /application/:controller/:action
-            'ajax' => array(
-                'type'    => 'Segment',
+           
+           'contact' => array(
+                'type'    => 'Literal',
                 'options' => array(
-                    'route'    => '/ajax/:id/',
+                    'route'    => '/contact/',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Application\Controller',
                         'controller'    => 'Index',
-                        'action'        => 'ajax',
+                        'action'        => 'contact',
+                    ),
+                ),
+            ),
+
+           'chat' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/chat/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Index',
+                        'action'        => 'chat',
                     ),
                 ),
             ),
