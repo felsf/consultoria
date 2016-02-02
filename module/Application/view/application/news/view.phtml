@@ -24,24 +24,18 @@ function toggle(element)
                 <div class="news-source">
                     <b>Fonte: <i><a href="<?= $noticia->getNewsSource(); ?>"><?= $noticia->getNewsSource(); ?></a></i></b>
                 </div>
-                <br>
+                <br>               
                 
-                <center>                    
-                        <button type="button" class="btn btn-info" onClick="toggle('<?= "#comment_panel_".$noticia->getNewsId(); ?>')">
-                            Comentários(<?php echo count($comentarios); ?>) <span style="color: blue" class="glyphicon glyphicon-comment"></span>
-                        </button>
-                </center>
                 
                 <hr>               
                 
                 
                 <div class="container-fluid comments-container form-group" id="<?= 'comment_panel_'.$noticia->getNewsId(); ?>">                   
                         <center>
-                            <form class="panel" method="POST" action="<?= $this->url('comments-add'); ?>">
-                                <div class="register-form-title">Digite seu comentário abaixo</div>
+                            <form style="max-width: 700px" class="panel" method="POST" action="<?= $this->url('comments-add'); ?>">
+                                <div class="register-form-title">Digite seu comentário abaixo <span class="glyphicon glyphicon-comment"></span></div>
                                 <div class="register-form-body">
-                                    <div>        
-                                        <input name="comment_news" type="hidden" value="<?= $noticia->getNewsId(); ?>">                            
+                                    <div>                                                                     
                                         <label>Digite seu nome                                
                                             <input required="required" name="comment_author" type="text" class="form-control">
                                         </label>                                        
@@ -49,19 +43,21 @@ function toggle(element)
                                     
                                     <div>
                                         <label>Digite seu comentário
-                                            <textarea name="comment_content" required="required" class="form-control"></textarea>
+                                            <textarea name="comment_content" required="required" 
+                                            class="form-control comment-input" style="min-width: 600px; min-height: 150px"></textarea>
                                         </label>                            
                                     </div>
-                                    
-                                    <div><button type="submit" class="btn btn-primary">Comentar</button></div>
+                                    <br>
+
+                                    <div><button type="submit" class="btn btn-comment">Comentar <span style="color: #fff" class="glyphicon glyphicon-comment"></span></button></div><br>
                                </div>
                             </form>
                         </center>  
                         <hr>                    
                         
                             <?php foreach($comentarios as $comment): ?>
-                                <p><span style="font-size: 20px" class="glyphicon glyphicon-user"></span> <?= $comment->getCommentAuthor();?> comentou:</p>                                
-                                <?= $comment->getCommentContent(); ?>                                
+                                <p><span style="font-size: 15px" class="glyphicon glyphicon-user"></span> <?= $comment->getCommentAuthor();?> comentou em <?= $comment->getCommentDate()->format('d/m/Y - H:i'); ?> <span class="glyphicon glyphicon-time"></span></p>                                
+                                <p><span style="font-size: 17px"><?= $comment->getCommentContent(); ?></span></p>
                                 <hr>
                             <?php endforeach; ?>
                                                                  
@@ -70,7 +66,7 @@ function toggle(element)
                 <center>
                     
                 </center>
-                
+</div>
                 
                 <hr>                           
                 <br><br><br>

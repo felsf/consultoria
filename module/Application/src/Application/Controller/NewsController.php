@@ -163,19 +163,11 @@ class NewsController extends AbstractActionController
             $news = $nqb->select()->where('n.newsId = '.$id)->getQuery()->getResult();
         
             if(empty($news)) return $this->redirect()->toRoute('news');
-            $news = $news[0];
+            $news = $news[0];         
             
-            $comments = $qb->select()->where('c.commentNews = '.$id)->orderBy('c.commentDate', 'DESC')->getQuery()->getResult();            
-        
-            $comentarios = array();        
-            $comentarios[$id] = array();            
-            
-            foreach($comments as $comment)
-            {
-                array_push($comentarios[$id], $comment);
-            }
+            $comentarios = $qb->select()->orderBy('c.commentDate', 'DESC')->getQuery()->getResult();
 
-            return new ViewModel(array('noticia' => $news, 'comentarios' => $comentarios[$id]));
+            return new ViewModel(array('noticia' => $news, 'comentarios' => $comentarios));
         }
     }
     

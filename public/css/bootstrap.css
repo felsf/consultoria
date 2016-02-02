@@ -844,7 +844,7 @@ pre code {
     .comment-input
     {
         min-width: 100px!important;
-        max-width: 300px!important;
+        max-width: 200px!important;
     }
 }
 

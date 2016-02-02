@@ -63,6 +63,18 @@ body
 	text-align: justify!important;
 }
 
+.btn-comment
+{
+	font-family: Times New Roman;
+	font-size: 18px;
+	background-color: #4a685c;
+}
+
+.btn-comment:hover
+{
+	color: #fff;
+}
+
 .news-title
 {
 	font-size: 25px;

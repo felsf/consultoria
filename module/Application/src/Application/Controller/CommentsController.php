@@ -6,7 +6,6 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
 use Application\Entity\Comment;
-use Application\Entity\News;
 
 use Zend\Mvc\MvcEvent;
 
@@ -21,26 +20,12 @@ class CommentsController extends AbstractActionController
 
     public function indexAction()
     {        
-        $qb = $this->getEntityManager()->getRepository("Application\Entity\Comment")->createQueryBuilder('c');
-        $nqb = $this->getEntityManager()->getRepository("Application\Entity\News")->createQueryBuilder('n');
+        $qb = $this->getEntityManager()->getRepository("Application\Entity\Comment")->createQueryBuilder('c');        
         
-        $comments = $qb->select()->orderBy('c.commentDate', 'DESC')->getQuery()->getResult();
-        $news = $nqb->select()->where('n.newsPublished = 1')->orderBy('n.newsId', 'ASC')->getQuery()->getResult();
-        
-        $comentarios = array();
-        
-        foreach($news as $noticia)
-        {
-            if(!array_key_exists($noticia->getNewsId(), $comentarios)) $comentarios[$noticia->getNewsId()] = array();           
-        }
-        
-        foreach($comments as $comment)
-        {
-            array_push($comentarios[$comment->getCommentNews()->getNewsId()], $comment);
-        }
+        $comments = $qb->select()->orderBy('c.commentDate', 'DESC')->getQuery()->getResult();               
         
         
-        return new ViewModel(array('comments' => $comments, 'comentarios' => $comentarios));
+        return new ViewModel(array('comments' => $comments));
     }
 
     public function deleteAction()
