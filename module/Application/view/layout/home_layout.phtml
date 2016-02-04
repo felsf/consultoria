@@ -119,23 +119,28 @@
                                 <a href="#" style="text-decoration: none!important; color: white!important" class="dropdown-toggle" style="" data-toggle="dropdown">
                                     <span class="glyphicon glyphicon-user"></span> 
                                     <?= $this->identity()->getUserName(); ?> <span class="fa fa-caret-down"></span>
-                                </a>                            
-                                                             
-                                <ul class="dropdown-menu">                                    
-                                    <li><a href="<?php echo $this->url('users'); ?>">Gerenciamento de Usuários <span style="color: green" class="glyphicon glyphicon-user"></span></a></li>
-                                    
-                                    <li><a href="<?php echo $this->url('news'); ?>">Gerenciamento de Notícias <span style="color: #3399ff" class="fa fa-newspaper-o"></span></a></li>
+                                </a>                                                           
+                                
+                                    <ul class="dropdown-menu">  
+                                        <?php if($this->identity()->getUserProfile() > 1): ?>                                                          
+                                            <li><a href="<?php echo $this->url('users'); ?>">Gerenciamento de Usuários <span style="color: green" class="glyphicon glyphicon-user"></span></a></li>
+                                            
+                                            <li><a href="<?php echo $this->url('news'); ?>">Gerenciamento de Notícias <span style="color: #3399ff" class="fa fa-newspaper-o"></span></a></li>
 
-                                    <li><a href="<?php echo $this->url('comments'); ?>">Gerenciamento de Comentários <span style="color: #21A3CF" class="glyphicon glyphicon-comment"></span></a></li>
+                                            <li><a href="<?php echo $this->url('comments'); ?>">Gerenciamento de Comentários <span style="color: #21A3CF" class="glyphicon glyphicon-comment"></span></a></li>
 
-                                    <li><a href="<?php echo $this->url('images'); ?>">Gerenciamento de Fotos <span style="color: #21A3CF" class="fa fa-file-image-o"></span></a></li>
+                                            <li><a href="<?php echo $this->url('images'); ?>">Gerenciamento de Fotos <span style="color: #21A3CF" class="fa fa-file-image-o"></span></a></li>
 
-                                    <li><a href="<?php echo $this->url('patrocinadores'); ?>">Gerenciamento de Patrocinadores <span style="color: #21A3CF" class="glyphicon glyphicon-bookmark"></span></a></li>
+                                            <li><a href="<?php echo $this->url('patrocinadores'); ?>">Gerenciamento de Patrocinadores <span style="color: #21A3CF" class="glyphicon glyphicon-bookmark"></span></a></li>
 
-                                    <li><a href="<?php echo $this->url('questions'); ?>">Perguntas e Respostas <span style="color: #21A3CF" class="glyphicon glyphicon-question-sign"></span></a></li>
-                                    
-                                    <li><a href="<?php echo $this->url('users-logout'); ?>">Sair <span style="color: red" class="glyphicon glyphicon-remove"></span></a></li>
-                                </ul>
+                                            <li><a href="<?php echo $this->url('requests'); ?>">Solicitações (<?= $notReadRequests.' novas'; ?>) <span style="color: #21A3CF" class="glyphicon glyphicon-bookmark"></span></a></li>
+
+                                            <li><a href="<?php echo $this->url('questions'); ?>">Perguntas e Respostas <span style="color: #21A3CF" class="glyphicon glyphicon-question-sign"></span></a></li>
+                                        <?php endif; ?>
+
+                                        <li><a href="<?php echo $this->url('users-logout'); ?>">Sair <span style="color: red" class="glyphicon glyphicon-remove"></span></a></li>
+                                    </ul>
+                                
                             </span>
                         </li>
                     <?php else: ?>

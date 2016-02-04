@@ -36,7 +36,7 @@ class Request
 	protected $requestContent;
 
 	/**
-	* @ORM\Column(type="boolean", options={"default"=0}, nullable=true)
+	* @ORM\Column(type="boolean", nullable=true, options={"default"=0})
 	**/
 	protected $requestRead;
 
@@ -63,4 +63,7 @@ class Request
 	public function setRequestContent($requestContent){
 		$this->requestContent = $requestContent;
 	}
+
+	public function getRequestRead() {return $this->requestRead;}
+	public function setRequestRead($read) {$this->requestRead = $read;}
 }

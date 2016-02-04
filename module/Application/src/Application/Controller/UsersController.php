@@ -76,6 +76,7 @@ class UsersController extends AbstractActionController
             $user->setUserPassword(md5($request->getPost('user_password')));
             $user->setUserIp($_SERVER['REMOTE_ADDR']);
             $user->setUserRegisterDate(new \DateTime('now'));
+            $user->setUserProfile(1);
             
             $userRegisterForm->setInputFilter($user->getInputFilter());
             $userRegisterForm->setData($request->getPost());

@@ -1,0 +1,193 @@
+<?php echo $this->doctype(); ?>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <?php echo $this->headTitle('ZF2 '. $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?php echo $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+
+        <!-- Custom CSS -->
+        <link href="css/simple-sidebar.css" rel="stylesheet">        
+
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Limelight' rel='stylesheet' type='text/css'>
+
+        <!-- Le styles -->
+        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+                        ->prependStylesheet($this->basePath('css/style.css'))
+                        ->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
+                        ->prependStylesheet($this->basePath('css/site.css'))
+                        ->prependStylesheet($this->basePath("css/font-awesome.min.css"))
+                        ->prependStylesheet($this->basePath('css/bootstrap.css')) ?>
+
+        <!-- Scripts -->
+        <?php echo $this->headScript()
+            ->prependFile($this->basePath('js/bootstrap.min.js'))
+            ->prependFile($this->basePath('js/jquery.min.js'))
+            ->prependFile($this->basePath('js/respond.min.js'), 'text/javascript', array('conditional' => 'lt IE 9',))
+            ->prependFile($this->basePath('js/html5shiv.min.js'),   'text/javascript', array('conditional' => 'lt IE 9',))
+            ->prependFile($this->basePath('js/ckeditor/ckeditor.js'))
+        ; ?>
+
+        <div class="container-fluid header">
+            <div class="container" style="padding-top: 1.5%; padding-left: 20%;">              
+                    
+                <div class="header-text" style="font-size: 50px; font-family: 'TrajanPro-Original', sans-serif!important;">WELINGTON MAPURUNGA</div>
+
+                <div class="header-text" style="font-size: 30px; font-family: 'TrajanPro-Original', sans-serif!important;">Consultoria Previdenciária Especializada</div>                         
+            </div>
+        </div>
+
+    </head>        
+    
+
+
+    <script type="text/javascript">
+        var ptr = Array();
+        var index = 0;
+
+        <?php foreach($patrocinadores as $ptr): ?> ptr.push("<?= $ptr->getPatrocinadorImage(); ?>"); <?php endforeach; ?>
+
+        console.log(ptr);
+
+        $(document).ready(function() {            
+            setInterval(function(){runPtr()}, 5000);
+        });
+
+        function runPtr()
+        {
+            index = (index+1) % ptr.length;
+            $("#ptr").fadeOut(1500, function() {
+                $(this).attr({src: "<?= $this->basePath('img/'); ?>"+ptr[index]});
+                $(this).fadeIn(1000);
+            });
+            
+            console.log(index);
+        }
+
+    </script>
+
+
+    <nav class="navbar navbar-default navbar-inverse" role="navigation" style="background-color: black; border-radius: 0px; ">
+            <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">                
+              </a>              
+            </div>
+            <div class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">                   
+
+                    <li><a class="topbar-item" href="<?= $this->url('home'); ?>">Início <span class="glyphicon glyphicon-home"></span></a></li>
+                    <li><a class="topbar-item" href="<?= $this->url('news-all'); ?>">Notícias <span class="glyphicon glyphicon-th-list"></span></a></li>
+                    <li><a class="topbar-item" href="#">Artigos e Eventos <span class="glyphicon glyphicon-book"></span></a></li>
+                    <li><a class="topbar-item" href="#">Vídeos  <span class="glyphicon glyphicon-facetime-video"></span></a></li>    
+                    <li><a class="topbar-item" href="#">Currículo <span class="glyphicon glyphicon-file"></span></a></li>
+
+                    <li>    
+                        <a href="#" data-toggle="dropdown" class="topbar-item">Fale com o Consultor 
+                        <span class="fa fa-user-plus"></span>
+                            <span class="dropdown">         
+                                <ul class="dropdown-menu">                                    
+                                    <li><a href="<?= $this->url('questions'); ?>">Perguntas e respostas <span style="color: #C0C43D" class="fa fa-question"></span></a></li>
+                                    <li><a href="#">Contato online <span style="color: orange" class="fa fa-signal"></span></a></li>
+                                </ul>
+                        </a>
+                            </span>
+                    </li>                
+
+              </ul> 
+
+              <ul class="nav navbar-nav navbar-right">
+                    <?php if($this->identity()): ?>
+                        <li>
+                            <span class="dropdown">
+                                <a href="#" style="text-decoration: none!important; color: white!important" class="dropdown-toggle" style="" data-toggle="dropdown">
+                                    <span class="glyphicon glyphicon-user"></span> 
+                                    <?= $this->identity()->getUserName(); ?> <span class="fa fa-caret-down"></span>
+                                </a>                            
+                                                             
+                                <ul class="dropdown-menu">                                    
+                                    <li><a href="<?php echo $this->url('users'); ?>">Gerenciamento de Usuários <span style="color: green" class="glyphicon glyphicon-user"></span></a></li>
+                                    
+                                    <li><a href="<?php echo $this->url('news'); ?>">Gerenciamento de Notícias <span style="color: #3399ff" class="fa fa-newspaper-o"></span></a></li>
+
+                                    <li><a href="<?php echo $this->url('comments'); ?>">Gerenciamento de Comentários <span style="color: #21A3CF" class="glyphicon glyphicon-comment"></span></a></li>
+
+                                    <li><a href="<?php echo $this->url('images'); ?>">Gerenciamento de Fotos <span style="color: #21A3CF" class="fa fa-file-image-o"></span></a></li>
+
+                                    <li><a href="<?php echo $this->url('patrocinadores'); ?>">Gerenciamento de Patrocinadores <span style="color: #21A3CF" class="glyphicon glyphicon-bookmark"></span></a></li>
+
+                                    <li><a href="<?php echo $this->url('questions'); ?>">Perguntas e Respostas <span style="color: #21A3CF" class="glyphicon glyphicon-question-sign"></span></a></li>
+                                    
+                                    <li><a href="<?php echo $this->url('users-logout'); ?>">Sair <span style="color: red" class="glyphicon glyphicon-remove"></span></a></li>
+                                </ul>
+                            </span>
+                        </li>
+                    <?php else: ?>
+                        <li><a style="color: #fff!important" href="<?= $this->url('users-login') ?>">Login <span class="glyphicon glyphicon-user"></span></a></li>
+                    <?php endif; ?>
+              </ul>
+
+            </div>
+          </div>
+    </nav>    
+   
+
+    <hr>      
+    
+    <body onLoad="">
+        
+        
+        <div class="col-md-2">           
+            <div id="sidebar" role="navigation">           
+                <ul class="nav nav-sidebar">
+                  <li class="active"><a style="text-align: center; text-decoration: none!important" href="#">--</a></li>                  
+                </ul>                
+            </div>         
+        </div><!--/span-->      
+        
+        <div class="col-md-7">  
+            <div class="container-fluid">
+                <?= $this->flashMessenger()->render('success', array('alert', 'alert-success')); ?>
+                <?= $this->flashMessenger()->render('info', array('alert', 'alert-info')); ?>
+                <?= $this->flashMessenger()->render('error', array('alert', 'alert-danger')); ?>
+                
+                <?= $this->content; ?>
+            </div>
+        </div><!-- col-md-7 geral -->
+    
+          <div class="col-md-3">         
+              <div class="container-fluid">                   
+                <div id="sidebar" role="navigation">           
+                  <ul class="nav nav-sidebar">                    
+                        <li style="word-wrap: break-word!important; margin: 0" class="active"><a style="text-align: center; text-decoration: none!important; word-wrap: break-word" href="#">Patrocinadores</a></li>
+                        
+                        <li style="text-align: center!important">
+                                <center>
+                                    <img name="ptr" id="ptr" class="img-responsive" style="max-width: 200px; max-height: 200px;" src="<?= $this->basePath('img/'.$patrocinadores[0]->getPatrocinadorImage()); ?>">
+                                </center>
+                        </li>
+
+                        <?php foreach($patrocinadores as $ptr): ?>
+                            
+                        <?php endforeach; ?>
+                  </ul>                
+              </div>   
+            </div>
+         </div>  
+        
+    </body> 
+
+     
+
+</html>         

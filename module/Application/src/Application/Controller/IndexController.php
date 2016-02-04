@@ -39,23 +39,7 @@ class IndexController extends AbstractActionController
 
     public function contactAction()
     {
-        $request = $this->getRequest();
-
-        if($request->isPost())
-        {
-           $req = new Request();
-            $req->setRequestEmail($request->getPost('request_email'));
-            $req->setRequestContent($request->getPost('request_content'));
-
-            $this->getEntityManager()->persist($req);
-            $this->getEntityManager()->flush();
-
-            $this->flashMessenger()->addSuccessMessage("Solicitação registrada com sucesso. O consultor entrará em contato em breve!");
-            return $this->redirect()->toUrl('application');
-
-        }
-
-        return new ViewModel(array());
+        
     }
 
     public function chatAction()

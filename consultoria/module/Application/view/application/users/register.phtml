@@ -1,0 +1,15 @@
+<center>
+    <div class="panel" style="text-align: center">
+        <div class="panel-heading register-form-title">Cadastro no Sistema <span class="glyphicon glyphicon-user"></span></div>
+        <div class="panel-body register-form-body">    
+            <?= $this->form()->openTag($userRegisterForm); ?>
+            <div><?= $this->formrow($userRegisterForm->get('user_login')); ?></div>
+            <div><?= $this->formrow($userRegisterForm->get('user_name')); ?></div>
+            <div><?= $this->formrow($userRegisterForm->get('user_email')); ?></div>
+            <div><?= $this->formrow($userRegisterForm->get('user_password')); ?></div>
+            <br>
+            <div><button class="btn btn-lg btn-success">Cadastrar <span class="fa fa-user-plus"></span></button></div>
+            <?= $this->form()->closeTag(); ?>        
+        </div>
+    </div>
+</center>

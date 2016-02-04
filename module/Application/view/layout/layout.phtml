@@ -99,11 +99,12 @@
                             <span class="dropdown">         
                                 <ul class="dropdown-menu">                                    
                                     <li><a href="<?= $this->url('questions'); ?>">Perguntas e respostas <span style="color: #C0C43D" class="fa fa-question"></span></a></li>
-                                    <li><a href="#">Contato online <span style="color: orange" class="fa fa-signal"></span></a></li>
+                                    <li><a href="<?= $this->url('contact'); ?>">Contrate o Consultor <span style="color: orange" class="fa fa-thumbs-o-up"></span></a></li>
+                                    <li><a href="<?= $this->url('chat'); ?>">Contato online <span style="color: orange" class="fa fa-signal"></span></a></li>
                                 </ul>
                         </a>
                             </span>
-                    </li>                
+                    </li>                 
 
               </ul> 
 
@@ -115,24 +116,28 @@
                                     <span class="glyphicon glyphicon-user"></span> 
                                     <?= $this->identity()->getUserName(); ?> <span class="fa fa-caret-down"></span>
                                 </a>                            
-                                                             
-                                <ul class="dropdown-menu">                                    
-                                    <li><a href="<?php echo $this->url('users'); ?>">Gerenciamento de Usuários <span style="color: green" class="glyphicon glyphicon-user"></span></a></li>
-                                    
-                                    <li><a href="<?php echo $this->url('news'); ?>">Gerenciamento de Notícias <span style="color: #3399ff" class="fa fa-newspaper-o"></span></a></li>
+                                
+                                <?php if($this->identity()->getUserProfile() > 1): ?>                        
+                                    <ul class="dropdown-menu">                                    
+                                        <li><a href="<?php echo $this->url('users'); ?>">Gerenciamento de Usuários <span style="color: green" class="glyphicon glyphicon-user"></span></a></li>
+                                        
+                                        <li><a href="<?php echo $this->url('news'); ?>">Gerenciamento de Notícias <span style="color: #3399ff" class="fa fa-newspaper-o"></span></a></li>
 
-                                    <li><a href="<?php echo $this->url('comments'); ?>">Gerenciamento de Comentários <span style="color: #21A3CF" class="glyphicon glyphicon-comment"></span></a></li>
+                                        <li><a href="<?php echo $this->url('comments'); ?>">Gerenciamento de Comentários <span style="color: #21A3CF" class="glyphicon glyphicon-comment"></span></a></li>
 
-                                    <li><a href="<?php echo $this->url('images'); ?>">Gerenciamento de Fotos <span style="color: #21A3CF" class="fa fa-file-image-o"></span></a></li>
+                                        <li><a href="<?php echo $this->url('images'); ?>">Gerenciamento de Fotos <span style="color: #21A3CF" class="fa fa-file-image-o"></span></a></li>
 
-                                    <li><a href="<?php echo $this->url('patrocinadores'); ?>">Gerenciamento de Patrocinadores <span style="color: #21A3CF" class="glyphicon glyphicon-bookmark"></span></a></li>
+                                        <li><a href="<?php echo $this->url('patrocinadores'); ?>">Gerenciamento de Patrocinadores <span style="color: #21A3CF" class="glyphicon glyphicon-bookmark"></span></a></li>
 
-                                    <li><a href="<?php echo $this->url('questions'); ?>">Perguntas e Respostas <span style="color: #21A3CF" class="glyphicon glyphicon-question-sign"></span></a></li>
-                                    
-                                    <li><a href="<?php echo $this->url('users-logout'); ?>">Sair <span style="color: red" class="glyphicon glyphicon-remove"></span></a></li>
-                                </ul>
-                            </span>
-                        </li>
+                                        <li><a href="<?php echo $this->url('requests'); ?>">Solicitações (<?= $notReadRequests.' novas'; ?>) <span style="color: #21A3CF" class="glyphicon glyphicon-bookmark"></span></a></li>
+
+                                        <li><a href="<?php echo $this->url('questions'); ?>">Perguntas e Respostas <span style="color: #21A3CF" class="glyphicon glyphicon-question-sign"></span></a></li>
+                                        
+                                        <li><a href="<?php echo $this->url('users-logout'); ?>">Sair <span style="color: red" class="glyphicon glyphicon-remove"></span></a></li>
+                                    </ul>
+                                <?php endif; ?>
+                                </span>
+                            </li>
                     <?php else: ?>
                         <li><a style="color: #fff!important" href="<?= $this->url('users-login') ?>">Login <span class="glyphicon glyphicon-user"></span></a></li>
                     <?php endif; ?>

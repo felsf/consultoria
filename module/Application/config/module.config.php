@@ -26,15 +26,42 @@ return array(
             // new controllers and actions without needing to create a new
             // module. Simply drop new controllers in, and you can access them
             // using the path /application/:controller/:action
-           
+            
+           'requests' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/requests/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Requests',
+                        'action'        => 'index',
+                    ),
+                ),
+            ),
+
+           'requests-read' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/requests/read/:id/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Requests',
+                        'action'        => 'read',
+                    ),
+                ),
+                'constraints' => array(
+                    'id' => '[0-9]+',
+                ),
+            ),
+
            'contact' => array(
                 'type'    => 'Literal',
                 'options' => array(
                     'route'    => '/contact/',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Application\Controller',
-                        'controller'    => 'Index',
-                        'action'        => 'contact',
+                        'controller'    => 'Requests',
+                        'action'        => 'add',
                     ),
                 ),
             ),
@@ -545,6 +572,7 @@ return array(
             'Application\Controller\Comments' => 'Application\Controller\CommentsController',
             'Application\Controller\Patrocinadores' => 'Application\Controller\PatrocinadoresController',
             'Application\Controller\Images' => 'Application\Controller\ImagesController',
+            'Application\Controller\Requests' => 'Application\Controller\RequestsController',
             
         ),
     ),

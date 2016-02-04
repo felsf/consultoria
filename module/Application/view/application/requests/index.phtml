@@ -1,0 +1,34 @@
+<div class="container-fluid">
+	<center>
+	<div class="panel" style="max-width: 550px">
+		<div class="panel-heading register-form-title">Gerenciamento de Requisições <span class="fa fa-thumbs-o-up"></span></div>
+		<div class="panel-body register-form-body">			
+			<div class="table-responsive">
+				<table class="table table-bordered">
+					<th class="text-center">Email</th>
+					<th class="text-center">Solicitação</th>
+					<th class="text-center">Situação</th>
+					<th class="text-center">Marcar como lida</th>
+
+					<?php foreach($requests as $r): ?>
+						<tr>
+							<td class="text-center"><?= $r->getRequestEmail(); ?></td>
+							<td class="text-center"><?= $r->getRequestContent(); ?></td>
+							<td class="text-center">								
+								<b><?= ($r->getRequestRead()) ? "Visualizada" : "Não Visualizada" ?>
+								<span style="<?= ($r->getRequestRead()) ? 'color: green' : 'color: red'; ?>" class="<?= ($r->getRequestRead()) ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-remove'; ?>"></span>
+								</b>
+							</td>
+							<td class="text-center">
+								<a href="<?= $this->url('requests-read', array('id' => $r->getRequestId())); ?>">
+									<button class="btn btn-success"><span class="glyphicon glyphicon-ok"></span></button>
+								</a>
+							</td>
+						</tr>
+					<?php endforeach; ?>
+				</table>				
+			</div>
+		</div>
+	</div>
+	</center>
+</div>

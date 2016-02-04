@@ -1,0 +1,30 @@
+<div class="panel">
+    <div class="panel-heading register-form-title">Editor de Notícias <span class="fa fa-newspaper-o"></span></div>
+    <div class="panel-body register-form-body" >
+        <center>        
+            <?php echo $this->form()->openTag($newsForm); ?>
+            
+            <?php 
+            
+            $newsForm->setData(array('news-title' => $news->getNewsTitle(), 'news-content' => htmlspecialchars_decode($news->getNewsContent()), 'news-source' => $news->getNewsSource()));
+            
+            ?>
+            
+            <?php echo $this->formrow($newsForm->get('news-title')); ?><hr>       
+            <?php echo $this->formrow($newsForm->get('news-content')); ?><hr>
+            <?php echo $this->formrow($newsForm->get('news-source')); ?><hr>
+            
+            <hr>
+            
+            <button name="btn-publish" class="btn btn-lg btn-success">Publicar Notícia <span class="glyphicon glyphicon-share-alt"></span></button>
+            <button name="btn-save" class="btn btn-lg btn-warning">Salvar Rascunho <span class="glyphicon glyphicon-list-alt"></span></button>
+            
+            <?php echo $this->form()->closeTag(); ?>
+         </center>
+    </div>
+</div>
+
+<hr>
+
+<script type="text/javascript">CKEDITOR.replace('news-content');</script>
+

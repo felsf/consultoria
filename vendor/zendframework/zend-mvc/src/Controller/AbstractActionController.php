@@ -70,10 +70,15 @@ abstract class AbstractActionController extends AbstractController
      */
     public function onDispatch(MvcEvent $e)
     {
+        session_start();
+
         $qb = $this->getEntityManager()->getRepository("Application\Entity\Patrocinador")->createQueryBuilder('p');
         $patrocinadores = $qb->select()->where('p.patrocinadorActive = 1')->orderBy("p.patrocinadorPosition", "ASC")->getQuery()->getResult();
 
         $this->layout()->patrocinadores = $patrocinadores;
+        $this->layout()->notReadRequests = 
+            count($this->getEntityManager()->getRepository("Application\Entity\Request")->createQueryBuilder('r')->
+                select()->where('r.requestRead = 0')->getQuery()->getResult());
 
         $routeMatch = $e->getRouteMatch();
         if (!$routeMatch) {
