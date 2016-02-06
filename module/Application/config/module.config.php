@@ -72,8 +72,20 @@ return array(
                     'route'    => '/chat/',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Application\Controller',
-                        'controller'    => 'Index',
-                        'action'        => 'chat',
+                        'controller'    => 'Chat',
+                        'action'        => 'index',
+                    ),
+                ),
+            ),
+
+           'chat-start' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/chat/start/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Chat',
+                        'action'        => 'start',
                     ),
                 ),
             ),
@@ -573,6 +585,7 @@ return array(
             'Application\Controller\Patrocinadores' => 'Application\Controller\PatrocinadoresController',
             'Application\Controller\Images' => 'Application\Controller\ImagesController',
             'Application\Controller\Requests' => 'Application\Controller\RequestsController',
+            'Application\Controller\Chat' => 'Application\Controller\ChatController',
             
         ),
     ),
