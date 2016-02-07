@@ -1,1 +1,5 @@
-<button class="btn btn-lg" onClick="window.open('<?= $this->url("chat-start"); ?>', 'Chat Online', 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=no,width=500,height=500')">Iniciar Chat</button>
+<button class="btn btn-lg"
+<?php if(!$this->identity()): ?> 
+    onClick=" window.open('<?= $this->url("chat-start"); ?>', 'Chat Online', 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=no,width=500,height=500')"
+<?php endif; ?>>
+Iniciar Conversa</button>

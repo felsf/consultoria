@@ -14,6 +14,7 @@ class Message
      * 
      * @ORM\Id
      * @ORM\Column(type="integer", nullable=false)
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $messageId;
     
@@ -32,6 +33,40 @@ class Message
      * @ORM\Column(type="text", nullable=false)
      */
     private $messageContent;
+
+    public function getMessageId()
+    {
+        return $this->messageId;
+    }
+
+    public function setMessageId($messageId)
+    {
+        $this->messageId = $messageId;
+        return $this;
+    }
+
+    public function getChat()
+    {
+        return $this->chat;
+    }
+
+    public function setChat($chat)
+    {
+        $this->chat = $chat;
+        return $this;
+    }
+
+    public function getMessageContent()
+    {
+        return $this->messageContent;
+    }
+
+    public function setMessageContent($messageContent)
+    {
+        $this->messageContent = $messageContent;
+        return $this;
+    }
+ 
 }
 
 ?>

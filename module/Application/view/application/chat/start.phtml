@@ -2,29 +2,45 @@
 	<?php if(isset($newChat)) echo "Você iniciou uma conversa com o Administrador. Chat #$newChat"; ?>
 	<hr>
 
-	<div>
-		<textarea class="form-control" id="chatscreen" name="chatscreen" readonly></textarea>
+	<div class="container">
+		<textarea class="form-control" cols="10" rows="15" id="chatscreen" name="chatscreen" readonly></textarea>
 	</div>
-	<div>
-		<input type="text" class="form-control" id="typemsg" name="typemsg" placeholder="digite aqui">
-	</div>
-	<div>
-		<button class="btn btn-primary" onClick="send()">Enviar</button>
-	</div>
+	<hr>
+	
+	<center>
+    	<div>
+    		<input type="text" style="max-width: 500px" class="form-control" id="typemsg" name="typemsg" placeholder="digite aqui">
+    	</div>
+    	<hr>
+    	<div>
+    		<button class="btn btn-primary" onClick="send()">Enviar</button>
+    	</div>
+    </center>
 
 </div>
 
 
 <script type="text/javascript">
+    var oldmsg = null;
+    var msgs = null;
+
+    $(document).ready(function() {
+        setInterval(function(){display()}, 1000);
+    });
+    
 	function send()
 	{
 		$.ajax({
 			type: "post",
 			url: "<?= $this->url('chat-send'); ?>",
-			datatype: "json",
-			data: {typemsg:(document.getElementById('typemsg').value)},
+			dataType: "json",
+			data: {typemsg: document.getElementById('typemsg').value, chatid: <?= $newChat; ?>},
 			success: function(data) {
-				alert(data);
+				rcv = JSON.stringify(data);
+				oldmsg = rcv[0];
+			},
+			error: function(xhr, status, error) {
+				
 			}
 		});
 	}
@@ -35,7 +51,26 @@
 			type: "POST",
 			url: "<?= $this->url('chat-display'); ?>",
 			datatype: "text/html",
+			data: {chatid: <?= $newChat; ?>},
+			success: function(data) {
+				document.getElementById("chatscreen").innerHTML = "";
+				msgs = JSON.parse(data);
+			    console.log(msgs[0]);
+			    
+				for(a = 0; a < msgs.length; a++)
+				{
+					document.getElementById("chatscreen").innerHTML += msgs[a];
+					document.getElementById("chatscreen").innerHTML += "&#013;&#010;";	
+				}
+					
+			}
 		});
 	}
+
+    function mdel()
+    {
+        
+    }
+	
 </script>
 

@@ -69,8 +69,7 @@ abstract class AbstractActionController extends AbstractController
      * @throws Exception\DomainException
      */
     public function onDispatch(MvcEvent $e)
-    {
-        session_start();
+    {       
 
         $qb = $this->getEntityManager()->getRepository("Application\Entity\Patrocinador")->createQueryBuilder('p');
         $patrocinadores = $qb->select()->where('p.patrocinadorActive = 1')->orderBy("p.patrocinadorPosition", "ASC")->getQuery()->getResult();
