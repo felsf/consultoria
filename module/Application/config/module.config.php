@@ -90,6 +90,30 @@ return array(
                 ),
             ),
             
+            'chat-send' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/chat/send/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Chat',
+                        'action'        => 'send',
+                    ),
+                ),
+            ),
+
+            'chat-display' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/chat/display/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Chat',
+                        'action'        => 'display',
+                    ),
+                ),
+            ),
+
             'comments' => array(
                 'type'    => 'Literal',
                 'options' => array(
