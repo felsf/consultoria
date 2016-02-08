@@ -77,6 +77,19 @@ return array(
                     ),
                 ),
             ),
+            
+            'chat-welcome' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/chat/welcome/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Chat',
+                        'action'        => 'welcome',
+                    ),
+                ),
+            ),
+            
 
            'chat-start' => array(
                 'type'    => 'Literal',

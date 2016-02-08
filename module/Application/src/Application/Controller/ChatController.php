@@ -11,32 +11,43 @@ use Application\Entity\Chat;
 class ChatController extends AbstractActionController 
 {	
     public function indexAction()
-    {    	
+    {   
+        if($this->identity()) return $this->redirect()->toRoute('home'); 	
     	return new ViewModel();
     }
 
     public function startAction()
     {
         $this->layout('layout/chat_layout.phtml');
-        $qb = $this->getEntityManager()->getRepository("Application\Entity\Chat")->createQueryBuilder('c');
+        $request = $this->getRequest();
         
-        $newChat = rand(1, 1000000);
-        $chat = $qb->select()->where('c.chatId = '.$newChat)->getQuery()->getResult();
-
-        while(!empty($chat))
+        if($request->isPost())
         {
+            $qb = $this->getEntityManager()->getRepository("Application\Entity\Chat")->createQueryBuilder('c');
+            
             $newChat = rand(1, 1000000);
             $chat = $qb->select()->where('c.chatId = '.$newChat)->getQuery()->getResult();
-        }     
-        
-        $chat = new Chat();
-        $chat->setChatId($newChat);
-        $chat->setChatActive(1);
-        
-        $this->getEntityManager()->persist($chat);
-        $this->getEntityManager()->flush();        
-
-        return new ViewModel(array('newChat' => $newChat));
+    
+            while(!empty($chat))
+            {
+                $newChat = rand(1, 1000000);
+                $chat = $qb->select()->where('c.chatId = '.$newChat)->getQuery()->getResult();
+            }     
+            
+            $chat = new Chat();
+            $chat->setChatId($newChat);
+            $chat->setChatActive(1);
+            
+            $this->getEntityManager()->persist($chat);
+            $this->getEntityManager()->flush();        
+    
+            return new ViewModel(array('newChat' => $newChat, 'username' => $request->getPost('username')));
+        }
+    }
+    
+    public function welcomeAction()
+    {
+        $this->layout('layout/chat_layout.phtml');
     }
     
     public function sendAction()

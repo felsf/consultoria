@@ -59,7 +59,7 @@
 			    
 				for(a = 0; a < msgs.length; a++)
 				{
-					document.getElementById("chatscreen").innerHTML += msgs[a];
+					document.getElementById("chatscreen").innerHTML += "<?= $username.": "?>"+msgs[a];
 					document.getElementById("chatscreen").innerHTML += "&#013;&#010;";	
 				}
 					

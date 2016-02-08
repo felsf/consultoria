@@ -1,0 +1,11 @@
+<center>Para iniciar uma conversa com o Consultor, digite seu nome abaixo e pressione o botão <span style="color: green" class="glyphicon glyphicon-ok"></span>
+<hr>
+
+<form action="<?= $this->url('chat-start'); ?>" method="POST">
+    <div><input type="text" name="username" placeholder="Digite seu nome" required="required"></div>
+    <hr>
+    
+    <button class="btn btn-primary">Conversar <span class="glyphicon glyphicon-user"></span></button>
+    
+</form>    
+</center>

@@ -1,5 +1,13 @@
-<button class="btn btn-lg"
-<?php if(!$this->identity()): ?> 
-    onClick=" window.open('<?= $this->url("chat-start"); ?>', 'Chat Online', 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=no,width=500,height=500')"
-<?php endif; ?>>
-Iniciar Conversa</button>
+<div class="container-fluid">
+	<div class="panel">
+		<div class="panel-heading register-form-title">Conversar online com o Consultor <span class="fa fa-signal"></span></div>
+		<div class="panel-body register-form-body">
+		    <center>          
+                    <button class="btn btn-lg btn-success" onClick=" window.open('<?= $this->url("chat-welcome"); ?>', 'Chat Online', 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=no,width=500,height=500')">
+                    Iniciar Conversa <span class="glyphicon glyphicon-ok"></span></button>
+                </form>
+            </center>
+        </div>
+     </div>
+</div>  
+ 
