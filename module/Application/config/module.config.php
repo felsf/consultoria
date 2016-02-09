@@ -66,6 +66,72 @@ return array(
                 ),
             ),
 
+           'videos' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/videos/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Videos',
+                        'action'        => 'index',
+                    ),
+                ),
+            ),
+
+           'videos-list' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/videos/list/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Videos',
+                        'action'        => 'list',
+                    ),
+                ),
+            ),
+
+           'videos-add' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/videos/add/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Videos',
+                        'action'        => 'add',
+                    ),
+                ),
+            ),
+
+           'videos-delete' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/videos/delete/:id/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Videos',
+                        'action'        => 'delete',
+                    ),
+                ),
+                'constraints' => array(
+                    'id' => '[0-9]+',
+                ),
+            ),
+
+           'videos-toggle' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/videos/toggle/:id/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Videos',
+                        'action'        => 'toggle',
+                    ),
+                ),
+                'constraints' => array(
+                    'id' => '[0-9]+',
+                ),
+            ),
+
            'chat' => array(
                 'type'    => 'Literal',
                 'options' => array(
@@ -623,6 +689,7 @@ return array(
             'Application\Controller\Images' => 'Application\Controller\ImagesController',
             'Application\Controller\Requests' => 'Application\Controller\RequestsController',
             'Application\Controller\Chat' => 'Application\Controller\ChatController',
+            'Application\Controller\Videos' => 'Application\Controller\VideosController',
             
         ),
     ),
