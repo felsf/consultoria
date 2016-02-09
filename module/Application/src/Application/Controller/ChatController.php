@@ -37,6 +37,7 @@ class ChatController extends AbstractActionController
             $chat = new Chat();
             $chat->setChatId($newChat);
             $chat->setChatActive(1);
+            $chat->setChatCreated(new \DateTime('now'));
             
             $this->getEntityManager()->persist($chat);
             $this->getEntityManager()->flush();        
@@ -63,6 +64,7 @@ class ChatController extends AbstractActionController
             $msg = new Message();
             $msg->setChat($chat[0]);
             $msg->setMessageContent($request->getPost('typemsg'));
+            $msg->setMessageDate(new \DateTime('now'));
             $this->getEntityManager()->persist($msg);
             $this->getEntityManager()->flush();           
                   

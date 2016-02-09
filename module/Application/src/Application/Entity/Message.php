@@ -33,7 +33,13 @@ class Message
      * @ORM\Column(type="text", nullable=false)
      */
     private $messageContent;
-
+    
+    /**
+     *
+     * @ORM\Column(type="datetime", nullable=false)
+     */
+    private $messageDate;
+    
     public function getMessageId()
     {
         return $this->messageId;
@@ -66,6 +72,18 @@ class Message
         $this->messageContent = $messageContent;
         return $this;
     }
+
+    public function getMessageDate()
+    {
+        return $this->messageDate;
+    }
+
+    public function setMessageDate($messageDate)
+    {
+        $this->messageDate = $messageDate;
+        return $this;
+    }
+ 
  
 }
 

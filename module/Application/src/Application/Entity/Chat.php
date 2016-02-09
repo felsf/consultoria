@@ -23,6 +23,14 @@ class Chat
      */
     private $chatActive;
 
+    /**
+     * 
+     * @ORM\Column(type="datetime", nullable=false)
+     */
+    private $chatCreated;
+    
+    //-----------------------------------------//
+    
     public function getChatId()
     {
         return $this->chatId;
@@ -44,6 +52,18 @@ class Chat
         $this->chatActive = $chatActive;
         return $this;
     }
+
+    public function getChatCreated()
+    {
+        return $this->chatCreated;
+    }
+
+    public function setChatCreated($chatCreated)
+    {
+        $this->chatCreated = $chatCreated;
+        return $this;
+    }
+ 
  
 }
 
