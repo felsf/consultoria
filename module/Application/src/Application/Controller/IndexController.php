@@ -37,18 +37,5 @@ class IndexController extends AbstractActionController
         return new ViewModel(array('news' => $news, 'comentarios' => $comentarios, 'images' => $images));
     }
 
-    public function contactAction()
-    {
-        
-    }
-
-    public function chatAction()
-    {
-        return new ViewModel(array());
-    }
-
-    public function banIpAction()
-    {
-        
-    }
+      
 }

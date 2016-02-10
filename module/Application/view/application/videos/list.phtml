@@ -1,0 +1,30 @@
+<div class="container-fluid">
+    <div class="panel">
+        <div class="panel-heading register-form-title">Galeria de Vídeos <span class="glyphicon glyphicon-facetime-video"></span></div>     
+
+	    <div class="panel-body register-form-body">
+	    	<div class="table-responsive">
+	    		<table class="table table-bordered">
+	    			<th class="text-center">Título do Vídeo</th>
+	    			<th class="text-center">Link</th>
+	    			<th class="text-center">Ativar/Desativar</th>
+	    			<th class="text-center">Apagar</th>
+	    			
+	    			<?php foreach($videos as $video): ?>
+	    				<tr>
+	    					<td class="text-center"><?= $video->getVideoTitle(); ?></td>
+	    					<td class="text-center">
+	    						<a href="<?= $video->getVideoUrl(); ?>">	    							
+	    							<?= $video->getVideoUrl(); ?>	    							
+	    						</a>
+	    					</td>
+	    				</tr>
+	    			<?php endforeach; ?>
+
+	    		</table>
+	    	</div>
+	    </div>
+    </div>
+</div>
+
+        

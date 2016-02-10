@@ -9,6 +9,13 @@ use Application\Entity\Video;
 
 class VideosController extends AbstractActionController
 {
+    public function onDispatch(\Zend\Mvc\MvcEvent $e)
+    {
+        $logged_block = array('index');        
+        if(!$this->identity() && !in_array($e->getRouteMatch()->getParam("action"), $logged_block)) return $this->redirect()->toRoute('home');
+        return parent::onDispatch($e);
+    }
+
     public function indexAction()
     {
     	$qb = $this->getEntityManager()->getRepository("Application\Entity\Video")->createQueryBuilder('v');
@@ -55,6 +62,10 @@ class VideosController extends AbstractActionController
         
             if(empty($video)) return $this->redirect()->toRoute('videos-list');
             $video = $video[0];
+
+            $this->getEntityManager()->remove($video);
+            $this->getEntityManager()->flush();
+            return $this->redirect()->toRoute("videos-list");
         }
 
     	return new ViewModel();
@@ -71,7 +82,13 @@ class VideosController extends AbstractActionController
         
             if(empty($video)) return $this->redirect()->toRoute('videos-list');
             $video = $video[0];
+
+            $video->setVideoToggle(!$video->getVideoToggle());
+            $this->getEntityManager()->persist($video);
+            $this->getEntityManager()->flush();
+            return $this->redirect()->toRoute("videos-list");
         }
+
     	return new ViewModel();
     }
 

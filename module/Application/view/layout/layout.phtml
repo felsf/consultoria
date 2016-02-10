@@ -90,7 +90,7 @@
                     <li><a class="topbar-item" href="<?= $this->url('home'); ?>">Início <span class="glyphicon glyphicon-home"></span></a></li>
                     <li><a class="topbar-item" href="<?= $this->url('news-all'); ?>">Notícias <span class="glyphicon glyphicon-th-list"></span></a></li>
                     <li><a class="topbar-item" href="#">Artigos e Eventos <span class="glyphicon glyphicon-book"></span></a></li>
-                    <li><a class="topbar-item" href="#">Vídeos  <span class="glyphicon glyphicon-facetime-video"></span></a></li>    
+                    <li><a class="topbar-item" href="<?= $this->url('videos'); ?>">Vídeos  <span class="glyphicon glyphicon-facetime-video"></span></a></li>    
                     <li><a class="topbar-item" href="#">Currículo <span class="glyphicon glyphicon-file"></span></a></li>
 
                     <li>    
@@ -104,9 +104,8 @@
                                 </ul>
                         </a>
                             </span>
-                    </li>                 
-
-              </ul> 
+                    </li>
+                </ul>
 
               <ul class="nav navbar-nav navbar-right">
                     <?php if($this->identity()): ?>
