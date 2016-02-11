@@ -3,7 +3,17 @@
     <div class="panel-body register-form-body" >
         <center>        
             <?php echo $this->form()->openTag($newsForm); ?>
-            <?php echo $this->formrow($newsForm->get('news-title')); ?><hr>       
+            <?php echo $this->formrow($newsForm->get('news-title')); ?><hr>
+            
+            <label>Selecione o Tipo
+                <select name="news-type" class="form-control">
+                    <option value="0">Notícia</option>
+                    <option value="1">Artigo</option>
+                    <option value="2">Evento</option>
+                </select>       
+            </label>
+
+            <hr>
             <?php echo $this->formrow($newsForm->get('news-content')); ?><hr>
             <?php echo $this->formrow($newsForm->get('news-source')); ?><hr>
             

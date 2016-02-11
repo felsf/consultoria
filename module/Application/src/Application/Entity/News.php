@@ -50,9 +50,14 @@ class News
     private $newsEditDate;
 
     /**
+    * @ORM\Column(name="news_type", type="integer", nullable=false, options={"default"=0})
+    **/
+    private $newsType = 0;
+
+    /**
      * @var string
      *
-     * @ORM\Column(name="news_source", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="news_source", type="text", length=65535, nullable=true)
      */
     private $newsSource;
     
@@ -201,7 +206,15 @@ class News
         $this->newsAuthor = $newsAuthor;
     }
     
-    
+    public function getNewsType()
+    {
+        return $this->newsType;        
+    }
+
+    public function setNewsType($type)
+    {
+        $this->newsType = $type;
+    }
 
 
 }

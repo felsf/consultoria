@@ -10,6 +10,14 @@ use Application\Form\NewsCreateForm;
 use Application\Entity\News;
 use Zend\Mvc\MvcEvent;
 
+/**
+* @NewsType: 
+*
+*    0 = Notícia
+*    1 = Artigo
+*    2 = Evento
+**/
+
 class NewsController extends AbstractActionController
 {
     public function onDispatch(MvcEvent $e)
@@ -45,7 +53,8 @@ class NewsController extends AbstractActionController
             $news->setNewsDate(new \DateTime('now'));
             $news->setNewsTitle($request->getPost('news-title'));
             $news->setNewsSource($request->getPost('news-source'));            
-            
+            $news->setNewsType($request->getPost('news-type'));
+
             if(isset($request->getPost()['btn-publish'])) // Publica Diretamente
             {
                 $news->setNewsPublished(true);
@@ -174,7 +183,7 @@ class NewsController extends AbstractActionController
     public function allAction()
     {   
         $nqb = $this->getEntityManager()->getRepository("Application\Entity\News")->createQueryBuilder('n');    
-        $news = $nqb->select()->where('n.newsPublished = 1')->orderBy('n.newsDate', 'DESC')->getQuery()->getResult();
+        $news = $nqb->select()->where('n.newsPublished = 1')->andWhere('n.newsType = 0')->orderBy('n.newsDate', 'DESC')->getQuery()->getResult();
         return new ViewModel(array('news' => $news));
     }
     

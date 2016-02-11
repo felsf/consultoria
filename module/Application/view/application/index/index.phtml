@@ -43,8 +43,11 @@ function toggle(element)
     <?php endforeach; ?>
 
     <div class="container-fluid comments-container form-group" id="<?= 'comment_panel_'.$noticia->getNewsId(); ?>">                   
-                        <center>
-                            <form style="max-width: 700px" class="panel" method="POST" action="<?= $this->url('comments-add'); ?>">
+                        
+                            <form style="max-width: 600px" class="panel" method="POST" action="<?= $this->url('comments-add'); ?>">
+
+                                <center>
+                                
                                 <div class="register-form-title">Digite seu comentário abaixo <span class="glyphicon glyphicon-comment"></span></div>
                                 <div class="register-form-body">
                                     <div>                                                                     
@@ -56,7 +59,7 @@ function toggle(element)
                                     <div>
                                         <label>Digite seu comentário
                                             <textarea name="comment_content" required="required" 
-                                            class="form-control comment-input" style="min-width: 600px; min-height: 150px"></textarea>
+                                            class="form-control comment-input" style="min-width: 400px; min-height: 150px"></textarea>
                                         </label>                            
                                     </div>
                                     <br>
@@ -68,8 +71,8 @@ function toggle(element)
                         <hr>                    
                         
                             <?php foreach($comentarios as $comment): ?>
-                                <p><span style="font-size: 15px" class="glyphicon glyphicon-user"></span> <?= $comment->getCommentAuthor();?> comentou em <?= $comment->getCommentDate()->format('d/m/Y - H:i'); ?> <span class="glyphicon glyphicon-time"></span></p>                                
-                                <p><span style="font-size: 17px"><?= $comment->getCommentContent(); ?></span></p>
+                                <p><span class="glyphicon glyphicon-user comment-author"></span> <?= $comment->getCommentAuthor();?> comentou em <?= $comment->getCommentDate()->format('d/m/Y - H:i'); ?> <span class="glyphicon glyphicon-time"></span></p>                                
+                                <p><span class="comment"><?= $comment->getCommentContent(); ?></span></p>
                                 <hr>
                             <?php endforeach; ?>
                                                                  

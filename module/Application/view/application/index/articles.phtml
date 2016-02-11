@@ -1,0 +1,70 @@
+<center>
+	<div class="panel" style="max-width: 500px!important">
+	        <div class="panel-heading register-form-title">Artigos <span class="fa fa-newspaper-o"></span></div>         
+	        <div class="panel-body register-form-body">
+	        	<div class="table-responsive">
+		        	<?php if(empty($articles)): ?>
+		        			<p class="standard-title">Sem Artigos no Momento! </p>
+		        	<?php else: ?>
+		        			
+		        			<table class="table table-striped table-bordered">
+	                    		<th class="text-center">Título do Artigo</th>
+	                    		<th class="text-center">Data de Postagem</th>                    
+	                    		<th class="text-center">Visualizar Artigo</th>
+
+	                    		<?php foreach($articles as $article): ?>
+	                    			<tr>
+	                    				<td class="text-center"><?= $article->getNewsTitle(); ?></td>
+	                    				<td class="text-center"><?= $article->getNewsDate()->format('d/m/Y - H:i'); ?></td>
+	                    				<td class="text-center">
+                                			<a href="<?= $this->url('news-view', array('id' => $article->getNewsId())); ?>">
+                                    			<button class="btn"><span class="fa fa-newspaper-o"></span></button>
+                                			</a>
+                                		</td>                                                            
+	                    			</tr>
+	                    		<?php endforeach; ?>
+	                		</table>
+
+		        	<?php endif; ?>		        	
+	                
+	            </div>
+	        </div>
+	</div>
+</center>
+
+<hr>
+
+<center>
+	<div class="panel" style="max-width: 500px!important">
+	        <div class="panel-heading register-form-title">Eventos <span class="glyphicon glyphicon-time"></span></div>         
+	        <div class="panel-body register-form-body">
+	        	<div class="table-responsive">
+		        	<?php if(empty($events)): ?>
+		        			<p class="standard-title">Sem Eventos no Momento! </p>
+		        	<?php else: ?>
+		        			
+		        			<table class="table table-striped table-bordered">
+	                    		<th class="text-center">Nome do Evento</th>
+	                    		<th class="text-center">Data de Postagem</th>                    
+	                    		<th class="text-center">Visualizar Evento</th>
+
+	                    		<?php foreach($events as $event): ?>
+	                    			<tr>
+	                    				<td class="text-center"><?= $event->getNewsTitle(); ?></td>
+	                    				<td class="text-center"><?= $event->getNewsDate()->format('d/m/Y - H:i'); ?></td>
+	                    				<td class="text-center">
+                                			<a href="<?= $this->url('news-view', array('id' => $event->getNewsId())); ?>">
+                                    			<button class="btn"><span class="fa fa-newspaper-o"></span></button>
+                                			</a>
+                                		</td>                                                            
+	                    			</tr>
+	                    		<?php endforeach; ?>
+
+	                		</table>
+	                		
+		        	<?php endif; ?>		        	
+	                
+	            </div>
+	        </div>
+	</div>
+</center>

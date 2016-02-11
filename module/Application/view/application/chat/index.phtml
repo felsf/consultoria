@@ -1,13 +1,18 @@
 <div class="container-fluid">
-	<div class="panel">
-		<div class="panel-heading register-form-title">Conversar online com o Consultor <span class="fa fa-signal"></span></div>
-		<div class="panel-body register-form-body">
-		    <center>          
-                    <button class="btn btn-lg btn-success" onClick=" window.open('<?= $this->url("chat-welcome"); ?>', 'Chat Online', 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=no,width=500,height=500')">
-                    Iniciar Conversa <span class="glyphicon glyphicon-ok"></span></button>
-                </form>
-            </center>
-        </div>
-     </div>
+    <center>
+    	<div class="panel" style="max-width: 500px">
+    		<div class="panel-heading register-form-title">Conversar online com o Consultor <span class="fa fa-signal"></span></div>
+    		<div class="panel-body register-form-body">
+    		    <center>     
+                        <p>O contato será realizado às <b>Segundas</b> e <b>Quartas-feiras</b> entre <b>20:00</b> e <b>22:00.</b></p>
+                        <hr>
+
+                        <button class="btn btn-success" onClick=" window.open('<?= $this->url("chat-welcome"); ?>', 'Chat Online', 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=no,width=500,height=500')">
+                        Iniciar Conversa <span class="glyphicon glyphicon-ok"></span></button>
+                    </form>
+                </center>
+            </div>
+         </div>
+     </center>
 </div>  
  

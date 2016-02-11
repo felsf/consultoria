@@ -54,6 +54,18 @@ return array(
                 ),
             ),
 
+           'articles' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/articles/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Index',
+                        'action'        => 'articles',
+                    ),
+                ),
+            ),           
+
            'contact' => array(
                 'type'    => 'Literal',
                 'options' => array(

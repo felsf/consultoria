@@ -1,7 +1,16 @@
-<div class="container-fluid">
+<div class="container-fluid">    
+    <span>
+        <h2>Tipo de Notícia:</h2>
+            <ul>
+                <li>0: Notícia</li>                
+                <li>1: Artigo</li>
+                <li>2: Evento</li>
+            </ul>
+    </span>
+    <hr>
+
     <div class="panel" style="max-width: 1200px!important">
-        <div class="panel-heading register-form-title">Gerenciador de Notícias <span class="fa fa-newspaper-o"></span></div> 
-        
+        <div class="panel-heading register-form-title">Gerenciador de Notícias <span class="fa fa-newspaper-o"></span></div>         
         <div class="panel-body register-form-body" >
             <div class="table-responsive">
                 <table class="table table-striped table-bordered">
@@ -10,6 +19,7 @@
                     <th class="text-center">Data de Edição</th>
                     <th class="text-center">Autor</th>
                     <th class="text-center">Fonte</th>
+                    <th class="text-center">Tipo</th>
                     <th class="text-center">Editar Notícia</th>
                     <th class="text-center">Situação</th>
                     <th class="text-center">Alterar Situação</th>
@@ -22,6 +32,7 @@
                             <td class="text-center"><?= ($noticia->getNewsEditDate() == null) ? "Sem edições!" : $noticia->getNewsEditDate()->format('d/m/Y - H:i:s'); ?></td>
                             <td class="text-center"><?= $noticia->getNewsAuthor()->getUserName(); ?> <span class="glyphicon glyphicon-user"></span></td>
                             <td class="text-center"><?= $noticia->getNewsSource(); ?></td>
+                            <td class="text-center"><?= $noticia->getNewsType(); ?></td>
                             <td class="text-center">
                                 <a href="<?= $this->url('news-edit', array('id' => $noticia->getNewsId())); ?>">
                                     <button class="btn"><span class="fa fa-newspaper-o"></span></button>

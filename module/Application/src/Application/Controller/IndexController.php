@@ -29,7 +29,7 @@ class IndexController extends AbstractActionController
 
         $comentarios = $qb->select()->orderBy('c.commentDate', 'DESC')->getQuery()->getResult();                
         $images = $this->getEntityManager()->getRepository("Application\Entity\Image")->createQueryBuilder('i')->select()->where('i.imageActive = 1')->orderBy('i.imageId', 'ASC')->getQuery()->getResult();           
-        $news = $nqb->select()->where('n.newsPublished = 1')->orderBy('n.newsDate', 'DESC')->setMaxResults(3)->getQuery()->getResult();
+        $news = $nqb->select()->where('n.newsPublished = 1')->andWhere('n.newsType = 0')->orderBy('n.newsDate', 'DESC')->setMaxResults(3)->getQuery()->getResult();
 
         $this->layout('layout/home_layout.phtml');
         $this->layout()->images = $images;
@@ -37,5 +37,12 @@ class IndexController extends AbstractActionController
         return new ViewModel(array('news' => $news, 'comentarios' => $comentarios, 'images' => $images));
     }
 
+    public function articlesAction()
+    {
+        $nqb = $this->getEntityManager()->getRepository("Application\Entity\News")->createQueryBuilder('n');
+        $articles = $nqb->select()->where('n.newsType = 1')->andWhere('n.newsPublished = 1')->orderBy('n.newsDate', 'DESC')->getQuery()->getResult();
+        $events = $nqb->select()->where('n.newsType = 2')->andWhere('n.newsPublished = 1')->orderBy('n.newsDate', 'DESC')->getQuery()->getResult();
+        return new ViewModel(array('articles' => $articles, 'events' => $events));
+    }
       
 }
