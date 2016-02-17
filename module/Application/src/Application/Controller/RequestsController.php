@@ -25,6 +25,10 @@ class RequestsController extends AbstractActionController
     public function addAction()
     {
     	$request = $this->getRequest();
+        $qb = $this->getEntityManager()->getRepository("Application\Entity\System")->createQueryBuilder("s");
+        $system = $qb->select()->where("s.infoDescription = 'hiring'")->getQuery()->getResult();
+
+        if(!empty($system)) $system = $system[0];
 
         if($request->isPost())
         {
@@ -41,7 +45,7 @@ class RequestsController extends AbstractActionController
 
         }
 
-        return new ViewModel(array());
+        return new ViewModel(array('system' => $system));
     }
 
     public function readAction()

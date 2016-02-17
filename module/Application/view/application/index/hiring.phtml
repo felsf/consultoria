@@ -1,0 +1,19 @@
+<div class="panel">
+    <div class="panel-heading register-form-title">Editar descrição de consultoria </div>
+    <div class="panel-body register-form-body" >
+        <center>        
+            
+            <form action="" method="POST">
+                <textarea name="hiring-content" id="hiring-content" class="form-control"><?= htmlspecialchars_decode($system->getInfoContent()); ?></textarea>
+                <hr>            
+               
+                <button type="submit" name="btn-save" class="btn btn-lg btn-success">Salvar <span class="glyphicon glyphicon-ok"></span></button>            
+            </form>
+            
+         </center>
+    </div>
+</div>
+
+<hr>
+
+<script type="text/javascript">CKEDITOR.replace('hiring-content');</script>

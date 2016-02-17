@@ -64,7 +64,19 @@ return array(
                         'action'        => 'articles',
                     ),
                 ),
-            ),           
+            ),
+
+           'hiring-info' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/hiring/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Index',
+                        'action'        => 'hiring',
+                    ),
+                ),
+            ),                       
 
            'contact' => array(
                 'type'    => 'Literal',

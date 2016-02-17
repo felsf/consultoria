@@ -14,12 +14,15 @@ use Zend\View\Model\ViewModel;
 
 use Application\Entity\News;
 use Application\Entity\Request;
+use Application\Entity\System;
 
 class IndexController extends AbstractActionController
 {
     public function onDispatch(\Zend\Mvc\MvcEvent $e)
     {
-        return parent::onDispatch($e);    
+        $logged_block = array('index', 'articles');        
+        if(!$this->identity() && !in_array($e->getRouteMatch()->getParam("action"), $logged_block)) return $this->redirect()->toRoute('home');
+        return parent::onDispatch($e);      
     }
 
     public function indexAction()
@@ -45,4 +48,35 @@ class IndexController extends AbstractActionController
         return new ViewModel(array('articles' => $articles, 'events' => $events));
     }
       
+    public function hiringAction()
+    {
+        $request = $this->getRequest();
+        $qb = $this->getEntityManager()->getRepository("Application\Entity\System")->createQueryBuilder("s");
+        $system = $qb->select()->where("s.infoDescription = 'hiring'")->getQuery()->getResult();
+
+        if(!empty($system)) $system = $system[0];
+
+        if($request->isPost())
+        {
+            if(empty($system))
+            {
+                $system = new System();
+                $system->setInfoDescription("hiring");
+                $system->setInfoContent(htmlspecialchars($request->getPost('hiring-content')));
+                $this->getEntityManager()->persist($system);
+                $this->getEntityManager()->flush();                
+            }
+
+            else {               
+                $system->setInfoContent(htmlspecialchars($request->getPost('hiring-content')));
+                $this->getEntityManager()->persist($system);
+                $this->getEntityManager()->flush();      
+            }
+
+            $this->flashMessenger()->addSuccessMessage("Informação salva com sucesso!");                
+            return $this->redirect()->toRoute("home");
+        }
+
+        return new ViewModel(array('system' => $system));
+    }
 }
