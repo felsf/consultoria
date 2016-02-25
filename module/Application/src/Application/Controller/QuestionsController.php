@@ -13,10 +13,14 @@ use Zend\Mail\Message;
 use Zend\Mail\Transport\Smtp as SmtpTransport;
 use Zend\Mail\Transport\SmtpOptions;
 
+use Application\Entity\Email;
+
 class QuestionsController extends AbstractActionController
 {
     public function onDispatch(\Zend\Mvc\MvcEvent $e)
     {
+        $logged_block = array('index', 'add');
+        if(!$this->identity() && !in_array($e->getRouteMatch()->getParam("action"), $logged_block)) return $this->redirect()->toRoute('home');        
         return parent::onDispatch($e);
     }
 
@@ -48,22 +52,25 @@ class QuestionsController extends AbstractActionController
     }
 
     private function sendEmail($destino, $subject, $body)
-    {
-        $user = "";
-        $password = "";
+    {        
 
         try
         {   
            $trans = new SmtpTransport();
            $msg = new Message();
 
+           $qb = $this->getEntityManager()->getRepository("Application\Entity\Email")->createQueryBuilder('e');
+           $emails = $qb->select()->getQuery()->getResult();
+
+           $email = $emails[0];
+
            $options = new SmtpOptions(
-                    array('name' => 'smtp.live.com', 'host' => 'smtp.live.com', 'port' => 587, 'connection_class' => 'login',
-                        'connection_config' => array('username' => $user, 'password' => $password, 'ssl' => 'tls')
+                    array('name' => $email->getEmailSmtp(), 'host' => $email->getEmailSmtp(), 'port' => 587, 'connection_class' => 'login',
+                        'connection_config' => array('username' => $email->getEmailUsername(), 'password' => $email->getEmailPassword(), 'ssl' => 'tls')
                     )
                 );
 
-           $msg->addFrom($user)
+           $msg->addFrom($email->getEmailUsername())
                ->addTo($destino)
                ->setsubject($subject);
             $msg->setBody($body);
@@ -74,8 +81,10 @@ class QuestionsController extends AbstractActionController
         }
         catch(Exception $e)
         {
-            $this->flashMessenger()->addSuccessMessage("Falha ao enviar email");
+            $this->flashMessenger()->addErrorMessage("Falha ao enviar email");
         }
+
+        return $this->redirect()->toRoute("questions-list");
     }
 
     public function addAction()
@@ -133,8 +142,8 @@ class QuestionsController extends AbstractActionController
 
             if($request->isPost())
             {
-                $this->sendEmail($question->getQuestionAuthorEmail(), "Resposta à sua pergunta: ".$question->getQuestionTitle(), 
-                    "".$request->getPost("answer_content")."");                
+                $this->sendEmail($question->getQuestionAuthorEmail(), "Resposta à sua pergunta: ".$question->getQuestionTitle()." no Site de Welington Mapurunga.", 
+                    "".$request->getPost("answer_content")." | Link para visualizar respostas: http://www.welingtonmapurunga.com.br/consultoria/public/questions/");                
 
             	$answer = new Answer();
             	$answer->setAnswerAuthor($this->identity());

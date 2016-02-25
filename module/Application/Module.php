@@ -19,6 +19,8 @@ class Module
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
+        set_time_limit(120);
+        date_default_timezone_set('America/Fortaleza');
     }    
 
     public function getConfig()

@@ -39,6 +39,18 @@ return array(
                 ),
             ),
 
+           'email' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/email/edit/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Email',
+                        'action'        => 'edit',
+                    ),
+                ),                
+            ),
+
            'requests-read' => array(
                 'type'    => 'Segment',
                 'options' => array(
@@ -491,6 +503,18 @@ return array(
                 ),
             ),
 
+            'questions-list' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/questions/list/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Questions',
+                        'action'        => 'list',
+                    ),
+                ),
+            ),
+
             'questions-add' => array(
                 'type'    => 'Literal',
                 'options' => array(
@@ -714,6 +738,7 @@ return array(
             'Application\Controller\Requests' => 'Application\Controller\RequestsController',
             'Application\Controller\Chat' => 'Application\Controller\ChatController',
             'Application\Controller\Videos' => 'Application\Controller\VideosController',
+            'Application\Controller\Email' => 'Application\Controller\EmailController',
             
         ),
     ),

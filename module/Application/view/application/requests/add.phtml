@@ -1,5 +1,7 @@
 <div class="container-fluid">	
-		<?= htmlspecialchars_decode($system->getInfoContent()); ?>
+		<?php if($system != null): ?> 
+			<?= htmlspecialchars_decode($system->getInfoContent()); ?>
+		<?php endif; ?>
 	<hr>
 	<br>
 	<center>

@@ -19,6 +19,7 @@ class UsersController extends AbstractActionController
     {
         $logged_block = array('login', 'register');        
         if(!$this->identity() && !in_array($e->getRouteMatch()->getParam("action"), $logged_block)) return $this->redirect()->toRoute('home');
+        if($this->identity() && in_array($e->getRouteMatch()->getParam("action"), $logged_block)) return $this->redirect()->toRoute('home');
         return parent::onDispatch($e);              
     }
 

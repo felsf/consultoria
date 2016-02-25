@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <?php echo $this->headTitle('ZF2 '. $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
+        <?php echo $this->headTitle('Welington Mapurunga - Consultoria Previdenciária Especializada')->setAutoEscape(false) ?>
 
         <?php echo $this->headMeta()
             ->appendName('viewport', 'width=device-width, initial-scale=1.0')
@@ -17,7 +17,7 @@
         <link href='https://fonts.googleapis.com/css?family=Limelight' rel='stylesheet' type='text/css'>
 
         <!-- Le styles -->
-        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/wm.png'))
                         ->prependStylesheet($this->basePath('css/style.css'))
                         ->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
                         ->prependStylesheet($this->basePath('css/site.css'))
@@ -130,9 +130,11 @@
 
                                         <li><a href="<?php echo $this->url('requests'); ?>">Solicitações (<?= $notReadRequests.' novas'; ?>) <span style="color: #21A3CF" class="glyphicon glyphicon-bookmark"></span></a></li>
 
-                                        <li><a href="<?php echo $this->url('questions'); ?>">Perguntas e Respostas <span style="color: #21A3CF" class="glyphicon glyphicon-question-sign"></span></a></li>
+                                        <li><a href="<?php echo $this->url('questions-list'); ?>">Perguntas e Respostas <span style="color: #21A3CF" class="glyphicon glyphicon-question-sign"></span></a></li>
                                         
                                         <li><a href="<?php echo $this->url('hiring-info'); ?>">Editar Informação de Contrato <span style="color: #21A3CF" class="glyphicon glyphicon-question-sign"></span></a></li>
+
+                                        <li><a href="<?php echo $this->url('email'); ?>">Configurar Email <span style="color: #21A3CF" class="glyphicon glyphicon-question-sign"></span></a></li>
                                     <?php endif; ?>
                                         <li><a href="<?php echo $this->url('users-logout'); ?>">Sair <span style="color: red" class="glyphicon glyphicon-remove"></span></a></li>
                                     </ul>

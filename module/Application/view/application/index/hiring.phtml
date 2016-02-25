@@ -4,7 +4,7 @@
         <center>        
             
             <form action="" method="POST">
-                <textarea name="hiring-content" id="hiring-content" class="form-control"><?= htmlspecialchars_decode($system->getInfoContent()); ?></textarea>
+                <textarea name="hiring-content" id="hiring-content" class="form-control"><?php if($system != null): ?><?= htmlspecialchars_decode($system->getInfoContent()); ?><?php endif;?></textarea>
                 <hr>            
                
                 <button type="submit" name="btn-save" class="btn btn-lg btn-success">Salvar <span class="glyphicon glyphicon-ok"></span></button>            

@@ -1,0 +1,24 @@
+<h2>Este Email é o responsável por avisar os usuários quando determinada pergunta for respondida pelo Administrador!</h2>
+<hr>
+
+<form action="" method="POST">	
+	<div>
+		<label>Email
+			<input type="email" name="email_username" value="<?= $email->getEmailUsername(); ?>" class="form-control" placeholder="Email" required="required">
+		</label>
+	</div>
+	<div>
+		<label>Senha
+			<input type="password" name="email_password" value="<?= $email->getEmailPassword(); ?>" class="form-control" placeholder="Senha" required="required">
+		</label>
+	</div>
+	<div>
+		<label>Smtp (solicitar ao suporte)
+			<input type="text" name="email_smtp" value="<?= $email->getEmailSmtp(); ?>" class="form-control" placeholder="Smtp" required="required">
+		</label>
+	</div>
+	<hr>
+
+	<button type="submit" class="btn btn-primary">Atualizar <span class="glyphicon glyphicon-ok"></span></button>
+	<hr>
+</form>

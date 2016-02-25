@@ -11,7 +11,9 @@ class RequestsController extends AbstractActionController
 {
 	public function onDispatch(\Zend\Mvc\MvcEvent $e)
 	{
-		return parent::onDispatch($e);
+		$logged_block = array('index', 'add');
+        if(!$this->identity() && !in_array($e->getRouteMatch()->getParam("action"), $logged_block)) return $this->redirect()->toRoute('home');        
+        return parent::onDispatch($e);
 	}
 
     public function indexAction()
@@ -29,7 +31,8 @@ class RequestsController extends AbstractActionController
         $system = $qb->select()->where("s.infoDescription = 'hiring'")->getQuery()->getResult();
 
         if(!empty($system)) $system = $system[0];
-
+        else $system = null;
+        
         if($request->isPost())
         {
             $req = new Request();

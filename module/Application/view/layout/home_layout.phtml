@@ -3,7 +3,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <?php echo $this->headTitle('ZF2 '. $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
+        <?php echo $this->headTitle('Welington Mapurunga - Consultoria Previdenciária Especializada')->setAutoEscape(false) ?>
 
         <?php echo $this->headMeta()
             ->appendName('viewport', 'width=device-width, initial-scale=1.0')
@@ -18,7 +18,7 @@
         <link href='https://fonts.googleapis.com/css?family=Limelight' rel='stylesheet' type='text/css'>
 
         <!-- Le styles -->
-        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/wm.png'))
                         ->prependStylesheet($this->basePath('css/style.css'))
                         ->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
                         ->prependStylesheet($this->basePath('css/site.css'))
@@ -134,9 +134,11 @@
 
                                             <li><a href="<?php echo $this->url('requests'); ?>">Solicitações (<?= $notReadRequests.' novas'; ?>) <span style="color: #21A3CF" class="glyphicon glyphicon-bookmark"></span></a></li>
 
-                                            <li><a href="<?php echo $this->url('questions'); ?>">Perguntas e Respostas <span style="color: #21A3CF" class="glyphicon glyphicon-question-sign"></span></a></li>
+                                            <li><a href="<?php echo $this->url('questions-list'); ?>">Perguntas e Respostas <span style="color: #21A3CF" class="glyphicon glyphicon-question-sign"></span></a></li>
 
                                             <li><a href="<?php echo $this->url('hiring-info'); ?>">Editar Informação de Contrato <span style="color: #21A3CF" class="glyphicon glyphicon-question-sign"></span></a></li>
+
+                                            <li><a href="<?php echo $this->url('email'); ?>">Configurar Email <span style="color: #21A3CF" class="glyphicon glyphicon-question-sign"></span></a></li>
 
                                         <?php endif; ?>
 
@@ -154,7 +156,7 @@
           </div>
     </nav>
     
-    <div class="container-fluid">
+    <div class="container-fluid" id="MainContainer">
          <div id="myCarousel" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
             <ol class="carousel-indicators">
@@ -213,7 +215,7 @@
 
         </div>   
 
-         <div class="col-md-3">         
+         <div class="col-md-3" style="">         
               <div class="container-fluid">                   
                 <div id="sidebar" role="navigation">           
                  <ul class="nav nav-sidebar">                    
@@ -222,9 +224,11 @@
                         <?php if(!empty($patrocinadores)): ?>
 
                             <li style="text-align: center!important">
+                                <div style="">
                                     <center>
                                         <img name="ptr" id="ptr" class="img-responsive" style="max-width: 200px; max-height: 200px;" src="<?= $this->basePath('img/'.$patrocinadores[0]->getPatrocinadorImage()); ?>">
                                     </center>
+                                </div>
                             </li>
 
                         <?php endif; ?>                       
@@ -232,7 +236,7 @@
               </div>   
             </div>
          </div> 
-         
+    </div>    
          <br><br><br><br><br><br><br><br><br><br>
         
         
