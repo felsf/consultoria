@@ -39,6 +39,30 @@ return array(
                 ),
             ),
 
+           'curriculo' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/curriculo',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Curriculo',
+                        'action'        => 'index',
+                    ),
+                ),                
+            ),
+
+           'curriculo-edit' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/curriculo/edit/',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Curriculo',
+                        'action'        => 'edit',
+                    ),
+                ),                
+            ),
+
            'email' => array(
                 'type'    => 'Literal',
                 'options' => array(
@@ -179,6 +203,8 @@ return array(
                     ),
                 ),
             ),
+
+
             
             'chat-welcome' => array(
                 'type'    => 'Literal',
@@ -739,6 +765,7 @@ return array(
             'Application\Controller\Chat' => 'Application\Controller\ChatController',
             'Application\Controller\Videos' => 'Application\Controller\VideosController',
             'Application\Controller\Email' => 'Application\Controller\EmailController',
+            'Application\Controller\Curriculo' => 'Application\Controller\CurriculoController',
             
         ),
     ),
