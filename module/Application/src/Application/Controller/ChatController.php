@@ -10,6 +10,14 @@ use Application\Entity\Chat;
 
 class ChatController extends AbstractActionController 
 {	
+    public function onDispatch(\Zend\Mvc\MvcEvent $e)
+    {
+        //$logged_block = array('index');        
+        //if(!$this->identity() && !in_array($e->getRouteMatch()->getParam("action"), $logged_block)) return $this->redirect()->toRoute('home');
+        die("Em Manutenção.");
+        return parent::onDispatch($e);              
+    }
+
     public function indexAction()
     {   
         if($this->identity()) return $this->redirect()->toRoute('home'); 	

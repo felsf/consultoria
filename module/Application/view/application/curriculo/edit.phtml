@@ -1,0 +1,17 @@
+<div class="panel">
+    <div class="panel-heading register-form-title">Criação de Currículo <span class="fa fa-newspaper-o"></span></div>
+    <div class="panel-body register-form-body" >
+        <center>  
+            <form action="" method="POST">      
+                <textarea id="curriculo-content" name="curriculo-content"><?= htmlspecialchars_decode($curriculo->getCurriculoContent()); ?></textarea>
+            <hr>
+            <button type="submit" class="btn btn-primary">Salvar Currículo</button>
+            
+         </center>
+    </div>
+</div>
+
+<hr>
+
+<script type="text/javascript">CKEDITOR.replace('curriculo-content');</script>
+

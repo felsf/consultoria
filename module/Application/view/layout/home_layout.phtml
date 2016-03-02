@@ -95,7 +95,7 @@
                     <li><a class="topbar-item" href="<?= $this->url('news-all'); ?>">Notícias <span class="glyphicon glyphicon-th-list"></span></a></li>
                     <li><a class="topbar-item" href="<?= $this->url('articles'); ?>">Artigos e Eventos <span class="glyphicon glyphicon-book"></span></a></li>
                     <li><a class="topbar-item" href="<?= $this->url('videos'); ?>">Vídeos  <span class="glyphicon glyphicon-facetime-video"></span></a></li>    
-                    <li><a class="topbar-item" href="#">Currículo <span class="glyphicon glyphicon-file"></span></a></li>
+                    <li><a class="topbar-item" href="<?= $this->url('curriculo'); ?>">Currículo <span class="glyphicon glyphicon-file"></span></a></li>
 
                     <li>    
                         <a href="#" data-toggle="dropdown" class="topbar-item">Fale com o Consultor 
@@ -104,12 +104,12 @@
                                 <ul class="dropdown-menu">                                    
                                     <li><a href="<?= $this->url('questions'); ?>">Perguntas e respostas <span style="color: #C0C43D" class="fa fa-question"></span></a></li>
                                     <li><a href="<?= $this->url('chat'); ?>">Contato online <span style="color: orange" class="fa fa-signal"></span></a></li>
-                                    <li><a href="<?= $this->url('contact'); ?>">Contrate o Consultor <span style="color: orange" class="fa fa-thumbs-o-up"></span></a></li>                                 
+                                    <li><a href="<?= $this->url('contact'); ?>">Contrate o Consultor <span style="color: orange" class="fa fa-thumbs-o-up"></span></a></li>                         
                                 </ul>
                         </a>
                             </span>
                     </li>
-                </ul> 
+                </ul>
 
               <ul class="nav navbar-nav navbar-right">
                     <?php if($this->identity()): ?>
@@ -118,35 +118,33 @@
                                 <a href="#" style="text-decoration: none!important; color: white!important" class="dropdown-toggle" style="" data-toggle="dropdown">
                                     <span class="glyphicon glyphicon-user"></span> 
                                     <?= $this->identity()->getUserName(); ?> <span class="fa fa-caret-down"></span>
-                                </a>                                                           
+                                </a>                            
                                 
-                                    <ul class="dropdown-menu">  
-                                        <?php if($this->identity()->getUserProfile() > 1): ?>                                                          
-                                            <li><a href="<?php echo $this->url('users'); ?>">Gerenciamento de Usuários <span style="color: green" class="glyphicon glyphicon-user"></span></a></li>
-                                            
-                                            <li><a href="<?php echo $this->url('news'); ?>">Gerenciamento de Notícias <span style="color: #3399ff" class="fa fa-newspaper-o"></span></a></li>
+                                <?php if($this->identity()->getUserProfile() > 1): ?>                        
+                                    <ul class="dropdown-menu">                                    
+                                        <li><a href="<?php echo $this->url('users'); ?>">Gerenciamento de Usuários <span style="color: green" class="glyphicon glyphicon-user"></span></a></li>
+                                        
+                                        <li><a href="<?php echo $this->url('news'); ?>">Gerenciamento de Notícias <span style="color: #3399ff" class="fa fa-newspaper-o"></span></a></li>
 
-                                            <li><a href="<?php echo $this->url('comments'); ?>">Gerenciamento de Comentários <span style="color: #21A3CF" class="glyphicon glyphicon-comment"></span></a></li>
+                                        <li><a href="<?php echo $this->url('comments'); ?>">Gerenciamento de Comentários <span style="color: #21A3CF" class="glyphicon glyphicon-comment"></span></a></li>
 
-                                            <li><a href="<?php echo $this->url('images'); ?>">Gerenciamento de Fotos <span style="color: #21A3CF" class="fa fa-file-image-o"></span></a></li>
+                                        <li><a href="<?php echo $this->url('images'); ?>">Gerenciamento de Fotos <span style="color: #21A3CF" class="fa fa-file-image-o"></span></a></li>
 
-                                            <li><a href="<?php echo $this->url('patrocinadores'); ?>">Gerenciamento de Patrocinadores <span style="color: #21A3CF" class="glyphicon glyphicon-bookmark"></span></a></li>
+                                        <li><a href="<?php echo $this->url('patrocinadores'); ?>">Gerenciamento de Patrocinadores <span style="color: #21A3CF" class="glyphicon glyphicon-bookmark"></span></a></li>
 
-                                            <li><a href="<?php echo $this->url('requests'); ?>">Solicitações (<?= $notReadRequests.' novas'; ?>) <span style="color: #21A3CF" class="glyphicon glyphicon-bookmark"></span></a></li>
+                                        <li><a href="<?php echo $this->url('requests'); ?>">Solicitações (<?= $notReadRequests.' novas'; ?>) <span style="color: #21A3CF" class="glyphicon glyphicon-bookmark"></span></a></li>
 
-                                            <li><a href="<?php echo $this->url('questions-list'); ?>">Perguntas e Respostas <span style="color: #21A3CF" class="glyphicon glyphicon-question-sign"></span></a></li>
-
-                                            <li><a href="<?php echo $this->url('hiring-info'); ?>">Editar Informação de Contrato <span style="color: #21A3CF" class="glyphicon glyphicon-question-sign"></span></a></li>
-
-                                            <li><a href="<?php echo $this->url('email'); ?>">Configurar Email <span style="color: #21A3CF" class="glyphicon glyphicon-question-sign"></span></a></li>
-
-                                        <?php endif; ?>
-
+                                        <li><a href="<?php echo $this->url('questions-list'); ?>">Perguntas e Respostas <span style="color: #21A3CF" class="glyphicon glyphicon-question-sign"></span></a></li>
+                                        
+                                        <li><a href="<?php echo $this->url('hiring-info'); ?>">Editar Informação de Contrato </a></li>
+                                        <li><a href="<?php echo $this->url('curriculo-edit'); ?>">Editar Currículo </a></li>    
+                                        <li><a href="<?php echo $this->url('email'); ?>">Configurar Email </a></li>
+                                    <?php endif; ?>
                                         <li><a href="<?php echo $this->url('users-logout'); ?>">Sair <span style="color: red" class="glyphicon glyphicon-remove"></span></a></li>
                                     </ul>
                                 
-                            </span>
-                        </li>
+                                </span>
+                            </li>
                     <?php else: ?>
                         <li><a style="color: #fff!important" href="<?= $this->url('users-login') ?>">Login <span class="glyphicon glyphicon-user"></span></a></li>
                     <?php endif; ?>
@@ -226,7 +224,7 @@
                             <li style="text-align: center!important">
                                 <div style="">
                                     <center>
-                                        <img name="ptr" id="ptr" class="img-responsive" style="max-width: 200px; max-height: 200px;" src="<?= $this->basePath('img/'.$patrocinadores[0]->getPatrocinadorImage()); ?>">
+                                        <img name="ptr" id="ptr" class="img-responsive" style="min-width: 250px; min-height: 350px" src="<?= $this->basePath('img/'.$patrocinadores[0]->getPatrocinadorImage()); ?>">
                                     </center>
                                 </div>
                             </li>
